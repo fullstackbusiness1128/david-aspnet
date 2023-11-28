@@ -1,0 +1,59 @@
+﻿@model ValidatesView
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-page="@Model.ValidateListing.Options.Results.pageNumber" data-size="@Model.ValidateListing.Options.Results.pageSize" data-sortfield="@Model.ValidateListing.Options.Results.sortField" data-sortorder="@Model.ValidateListing.Options.Results.sortOrder" data-searchfield="@Model.ValidateListing.Options.Results.searchField" data-searchvalue="@Model.ValidateListing.Options.Results.searchValue">
+    <thead>
+        <tr>
+            <th class="tw-small">Id</th>
+            <th>User Details</th>
+            @if (Model.ValidateListing.Options.Results.searchValue == "Cards") { <th class="tw-medium">Masked PAN</th> } else { <th class="tw-medium">Category</th> } 
+            <th class="tw-medium">Document</th>
+            <th class="tw-small">Status</th>
+            @if (Model.ValidateListing.Options.Results.searchValue == "Cards") { <th class="tw-medium">Card Used On</th> } else { <th class="tw-medium">Category</th> } 
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ValidateListing.Items.Count > 0)
+        {
+            foreach (var item in Model.ValidateListing.Items)
+            {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.User.Firstname @item.User.Lastname<br />Phone: @item.User.PhoneNumber<br/>Email: @item.User.Email <br/><br/>Balance: @item.User.AccountBalance<br/>Deposited: @item.TotalDeposited<br/>Withdrawn: @item.TotalWithdrawn</td>
+                <td>@item.File.MaskedPan</td>
+                <td><a target="_blank" href="https://sdn.pngbet.com/@item.File.URL">View Document</a></td>
+                <td>
+                    <select id="Status_@item.Id" data-id="@item.Id">
+                        @if (item.File.Status == 1)
+                        {
+                            <option value="0">Pending</option>
+                            <option selected value="1">Approved</option>
+                            <option value="2">Declined</option>
+                        }
+                        else if (item.File.Status == 2)
+                        {
+                            <option value="0">Pending</option>
+                            <option value="1">Approved</option>
+                            <option selected value="2">Declined</option>
+                        }
+                        else
+                        {
+                            <option selected value="0">Pending</option>
+                            <option value="1">Approved</option>
+                            <option value="2">Declined</option>
+                        }
+                    </select>
+                </td>
+                <td>@DateTime.ParseExact(item.DateCreated.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</td>
+            </tr>
+            }
+        }
+        else
+        {
+        <tr>
+            <td colspan="3">No deposits were found</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.ValidateListing.Options.Results)

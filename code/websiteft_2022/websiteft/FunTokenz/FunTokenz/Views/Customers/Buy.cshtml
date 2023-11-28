@@ -1,0 +1,276 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Step 1";
+}
+
+@section Styles
+    {
+
+    <link href="~/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 0em;
+        }
+
+       
+
+        .breadcrumb-1 {
+            background: #F4F9FE;
+        }
+
+        .form-group.custom-bg {
+            background-color: #F4F5F7;
+            width: 100%;
+            align-items: center;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+    </style>
+}
+
+@model PurchaseForm
+
+
+
+<div class="container-fluid breadcrumb-1" style="margin-top: 8.1em">
+    <div class="row">
+        <p style="padding: 0.5em 0 0 1em"><a href="~/">Home</a> . <a href="~/customers/home">My Wallet</a> . Purchase Tokenz</p>
+    </div>
+</div>
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="inner_sec_info_wthree_agile">
+            <div class="help_full">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 col-xs-12 banner_bottom_grid help">
+                    <h2>Purchase New Tokens</h2>
+                    <p>Select your currency and the amount of tokens you wish to purchase. Purchased tokens are valid for 2 years to be used with our partners.</p>
+                    
+                    <form asp-controller="Customers" asp-action="Confirm" method="post">
+                        <div asp-validation-summary="All" class="text-danger text-left"></div>
+                        <div class="form-group custom-bg">
+                      
+                            <div class="row">
+                                <div class="col-md-5 col-sm-7">
+                                    <label>Choose Your Currency:<br /><br />1 PGK/FJD = 1 Fun Token</label>
+                                </div>
+                                <div class="col-md-7 col-sm-7">
+                                    <select asp-for="Currency" class="form-control pull-right" style="margin-top: 5px">
+                                        <option asp-for="Currency" value="PGK">PGK</option>
+                                        @*<option asp-for="Currency" value="FJD">FJD</option>*@
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group custom-bg">
+                           <div class="row">
+                               <div class="col-md-5 col-sm-5">
+                                   <label>How Many Fun Tokens: <sub><br />Minimum of: 20.00</sub></label>
+                               </div>
+
+                               <div class="col-md-7 col-sm-7">
+                                   <input type="text" class="form-control pull-right" asp-for="Amount" value="20.00" style="margin-top: 5px" />
+                               </div>
+                           </div>
+                           
+                        </div>
+                        <div class="text-left">
+                            <p>Enter in your mobile number or a friends if you wish to send your Fun Tokens to another person. Please ensure your phone number is entered correctly.</p>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 5px!important">
+                            <div class="col-md-3 col-sm-3 col-xs-3" style="padding: 0; padding-right: 5px; margin-top: 1em">
+                                <select asp-for="CountryCode" class="form-control" id="country_code">
+                                    @{
+                                        if (Context.Session.GetString("PhoneCode") == "+692")
+                                        {
+                                                                                                                                            <option selected value="+692">+692</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+692">+692</option>
+                                        }
+                                        if (Context.Session.GetString("PhoneCode") == "+691")
+                                        {
+                                                                                                                                            <option selected value="+691">+691</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+691">+691</option>
+                                        }
+                                        if (Context.Session.GetString("PhoneCode") == "+685")
+                                        {
+                                                                                                                                            <option selected value="+685">+685</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+685">+685</option>
+                                        }
+                                        if (Context.Session.GetString("PhoneCode") == "+680")
+                                        {
+                                                                                                                                            <option selected value="+680">+680</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+680">+680</option>
+                                        }
+                                        if (Context.Session.GetString("PhoneCode") == "+679")
+                                        {
+                                                                                                                                            <option selected value="+679">+679</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+679">+679</option>
+                                        }
+                                        if (Context.Session.GetString("PhoneCode") == "+678")
+                                        {
+                                                                                                                                            <option selected value="+678">+678</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+678">+678</option>
+                                        }
+                                        if (Context.Session.GetString("PhoneCode") == "+677")
+                                        {
+                                                                                                                                            <option selected value="+677">+677</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+677">+677</option>
+                                        }
+                                        if (Context.Session.GetString("PhoneCode") == "+676")
+                                        {
+                                                                                                                                            <option selected value="+676">+676</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+676">+676</option>
+                                        }
+                                        if (Context.Session.GetString("PhoneCode") == "+675")
+                                        {
+                                                                                                                                            <option selected value="+675">+675</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+675">+675</option>
+                                        }
+                                        if (Context.Session.GetString("PhoneCode") == "+674")
+                                        {
+                                                                                                                                            <option selected value="+674">+674</option>
+                                        }
+                                        else
+                                        {
+                                                                                                                                            <option value="+674">+674</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="col-md-9 col-sm-9 col-xs-9" style="padding: 0; margin-top: 1em; margin-bottom: 1em">
+                                @*<input type="text" placeholder="Phone Number" value="@Context.Session.GetString("PhoneNumber")" class="form-control">*@
+                                <select required asp-for="Phone" autocomplete="on" asp-for="Phone" class="form-control select-phone"> </select>
+                            </div>    
+                            
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0">
+                                
+                            </div>
+                        </div>
+
+                        <div class="justify-content-center">
+                            <img src="images/slide_swipe.svg" alt="">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-block btn-danger">REVIEW PURCHASE</button>
+                        </div>
+                        
+                    </form>
+
+                </div>
+                <div class="col-md-6 col-xs-12 banner_bottom_left">
+                    
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="@Context.Session.GetString("PhoneCode")" name="hidden_country_code"/>
+<input type="hidden" value="@Context.Session.GetString("PhoneNumber")" name="hidden_phonenumber" />
+
+
+@section Scripts 
+{
+    <script type="text/javascript" src="~/js/jquery-ui.js"></script>
+    <script>
+
+        var forgeryId = $('[name="__RequestVerificationToken"]').val();
+
+        function getPhonesByContryCode(country_code){
+            $.ajax({
+                url: "/customers/get_phones",
+                method: "POST",
+                data: JSON.stringify({
+                    country_code: country_code,
+                }),
+                contentType: 'application/json; charset=utf-8',
+                headers: {
+                    'RequestVerificationToken': forgeryId
+                },
+                beforeSend: function () {
+                    $('.fa-spinner').toggle().addClass("fa-spin").addClass("text-success");
+                },
+                success: function (users) {
+                    $('.select-phone').empty();
+                    if (users.length != 0) {
+                        $.each(users, function (i, user) {
+                            if ($("input[name='hidden_phonenumber']").val() === user.PhoneNumber)
+                                $('.select-phone').append($('<option selected>').val(user.PhoneNumber).text(user.PhoneNumber));
+                            else
+                                $('.select-phone').append($('<option>').val(user.PhoneNumber).text(user.PhoneNumber));
+
+                        });
+                    } else {
+                        $('.select-phone').append($('<option>').text("No Phonenumber"));
+                    }
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+        }
+
+       
+        $(document).ready(function(){
+
+            var code = $("input[name='hidden_country_code']").val();
+
+            getPhonesByContryCode(code);
+
+            $("#select-phone").autocomplete({
+                source: "",
+                minLength: 5
+
+            });
+
+            $("#country_code").change(function () {
+                getPhonesByContryCode($(this).val());
+            });
+        });
+
+    </script>
+
+}

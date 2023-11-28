@@ -1,0 +1,36 @@
+﻿@model BonusesView
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.BonusListing.Options.Results.pageSize" data-sortfield="@Model.BonusListing.Options.Results.sortField" data-sortorder="@Model.BonusListing.Options.Results.sortOrder" data-searchfield="@Model.BonusListing.Options.Results.searchField" data-searchvalue="@Model.BonusListing.Options.Results.searchValue">
+    <thead>
+        <tr>
+            <th class="btnsort" data-field="Name" data-order="asc">Bonus Name</th>
+            <th class="tw-medium">Bonus Type</th>
+            <th class="tw-large">Start Date</th>
+            <th class="tw-medium">End Date</th>
+            <th class="tw-large btnsort" data-field="Published" data-order="asc">Last Published</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.BonusListing.Bonus.Count > 0)
+        {
+            foreach (var item in Model.BonusListing.Bonus)
+            {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.BonusPool</td>
+            <td>@DateTime.ParseExact(item.StartDate.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</td>
+            <td>@DateTime.ParseExact(item.EndDate.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</td>
+            <td><a href="~/bonuses/details?bonus=@item.Id">@DateTime.ParseExact(item.DatetimeModified.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</a></td>
+        </tr>
+            }
+        }
+        else
+        {
+        <tr>
+            <td colspan="5">No bonuses were found</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.BonusListing.Options.Results)

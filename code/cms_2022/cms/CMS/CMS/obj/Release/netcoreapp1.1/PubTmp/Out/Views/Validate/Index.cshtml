@@ -1,0 +1,101 @@
+﻿@model ValidatesView
+
+@{
+    ViewData["Title"] = "Validations | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                Validations
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">
+                        <span class="sr-only">Loading...</span>
+                        Validations <i class="fas fa-spinner" aria-hidden="true"></i>
+                    </div>
+                    <span class="text-success">@TempData["SuccessMessage"]</span>
+                    <div class="float-right btn-toolbar">
+                        <div class="btn-group dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="info">25</span>&nbsp;<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu small">
+                                <li>
+                                    <a href="#">25</a>
+                                    <a href="#">50</a>
+                                    <a href="#">100</a>
+                                    <a href="#">200</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body resultspanel">
+                    @Html.Partial("_ValidateResults", Model)
+                </div>
+            </div>
+        </div>
+        <div class="col-3 pr-0">
+            <div class="panel panel-default">
+                <br />
+                @*<div class="panel-heading">
+                <div class="title">
+                    <i class="fa fa-download"></i> Export
+                </div>
+            </div>*@
+                <!-- /.panel-heading -->
+                @*<div class="panel-body">
+                <div class="input-group custom-search-form">
+                    <p><a class="btn btn-primary" href="#">CSV</a> <a class="btn btn-primary" href="#">XLSX</a> <a class="btn btn-primary" href="">PDF</a></p>
+                </div>
+            </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var endpoint = "/validate/UpdateResults";
+
+        InitActions(0);
+        function InitActions(x) {
+            if (x > 0) {
+                $("#results-table[data-page='" + x + "'] [id^='Status_']").change(function () {
+                    ToggleStatus($(this).data("id"), $(this).children("option:selected").val());
+                });
+            } else {
+                $("[id^='Status_']").change(function () {
+                    ToggleStatus($(this).data("id"), $(this).children("option:selected").val());
+                });
+            }
+        }
+
+        function ToggleStatus(id, value) {
+            var forgeryId = $('[name="__RequestVerificationToken"]').val();
+            var datax = { "Id": id, "Status": value };
+            $.ajax("/validate/ToggleStatus", {
+                method: "POST",
+                data: JSON.stringify(datax),
+                contentType: 'application/json; charset=utf-8',
+                headers: {
+                    'RequestVerificationToken': forgeryId
+                },
+                success: function (datax) {
+                },
+                error: function () {
+                }
+            });
+        }
+
+    </script>
+
+    @{ await Html.RenderPartialAsync("_ResultsScriptsPartialFilter"); }
+}

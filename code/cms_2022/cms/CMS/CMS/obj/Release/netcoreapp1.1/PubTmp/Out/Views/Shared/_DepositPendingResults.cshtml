@@ -1,0 +1,38 @@
+﻿@model DepositsPendingView
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.DepositPendingListing.Options.Results.pageSize" data-sortfield="@Model.DepositPendingListing.Options.Results.sortField" data-sortorder="@Model.DepositPendingListing.Options.Results.sortOrder" data-searchfield="@Model.DepositPendingListing.Options.Results.searchField" data-searchvalue="@Model.DepositPendingListing.Options.Results.searchValue">
+    <thead>
+        <tr>
+            <th class="tw-small">Id</th>
+            <th>User Id</th>
+            <th class="tw-large">Member Name</th>
+            <th class="tw-large btnsort" data-field="Created" data-order="asc">Date Created</th>
+            <th class="tw-medium btnsort" data-field="Value" data-order="asc">PGK Amount</th>
+            <th class="tw-medium btnsort" data-field="Value" data-order="asc">AUD Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.DepositPendingListing.DepositPendingItems.Count > 0)
+        {
+            foreach (var item in Model.DepositPendingListing.DepositPendingItems)
+            {
+            <tr>
+                <td><a href="~/deposits/detailspending?deposit=@item.Id">@item.Id</a></td>
+                <td>@item.UserId</td>
+                <td>@(item.Firstname + " " + item.Lastname)</td>
+                <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</td>
+                <td>@item.Value</td>
+                <td>@item.AmountToCharge</td>
+            </tr>
+            }
+        }
+        else
+        {
+        <tr>
+            <td colspan="3">No pending deposits were found</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.DepositPendingListing.Options.Results)

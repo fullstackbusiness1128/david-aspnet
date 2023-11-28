@@ -1,0 +1,89 @@
+﻿@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@section Styles
+    {
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 0em;
+        }
+
+        .breadcrumb-1 {
+            background: #F4F9FE;
+        }
+
+        .pastel-yellow {
+            background: rgba(255,255,0,0.3)!important;
+        }
+
+        .slim {
+        
+            padding: 40px 0px;
+        }
+
+        .hero {
+            display: block;
+            background: rgba(245,250,255,0.95);
+            
+        }
+
+        .hero .banner {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero .banner .statement {
+            display: flex;
+            max-width: 46%;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px 40px 0px 0px;
+        }
+    </style>
+}
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model GeneralView
+
+
+<div class="container-fluid breadcrumb-1" style="margin-top: 8.1em">
+    <div class="row">
+        <p style="padding: 0.5em 0 0 1em"><a href="~/">Home</a> . @Model.Title</p>
+    </div>
+</div>
+
+
+
+<div class="container-fluid hero slim pastel-yellow">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="statement">
+                    <h1>HELP US GROW</h1>
+                    <p>We're looking for resellers and businesses to help us expand. <br /> To become an authorised Reseller of Fun Tokenz express your interest with us below.</p>
+                </div>
+            </div>
+        </div>
+        <div class="art"></div>
+    </div>
+</div>
+
+
+<div class="container-fluid slim">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>@Model.Title</h2>
+            </div>
+        </div>
+    </div>
+    
+</div>

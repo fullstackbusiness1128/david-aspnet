@@ -1,0 +1,95 @@
+SQL2019-SSEI-Expr.exe
+dotnet-sdk-2.2.103-win-x64.exe
+
+
+NUPackage install need
+
+1. Install-Package Microsoft.Net.Compilers -Version 2.8.2
+
+2. cmd line : setx ASPNETCORE_ENVIRONMENT "Development"
+Microsoft.NET.Sdk.Web 
+
+
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 2.2.0
+
+AWS
+
+IAM Key: AKIARSOATELAKS62GK7I
+IAM Secret: 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
+Account: 108314960576
+
+
+==========================migration from model=========================
+enable-migrations
+add-migration InitialCreate
+update-database
+
+
+Cmdlet                      Description
+        --------------------------  ---------------------------------------------------
+        Add-Migration		    Adds a new migration.
+
+        Remove-Migration	    Removes the last migration.
+
+        Scaffold-DbContext	    Scaffolds a DbContext and entity type classes for a specified database.
+
+        Script-Migration	    Generates a SQL script from migrations.
+
+        Update-Database		    Updates the database to a specified migration.
+
+        Use-DbContext               Sets the default DbContext to use.
+
+
+
+
+=======================================================================
+
+
+Hi Andrii,
+As the application retrieves the Data connections from AWS SSM, I assume VS is unable to connect to migrate.
+You can connect to the Database Instance (AWS RDS MSSQL ) now directly with:
+alakrelstaging.clbtenv0fegq.eu-central-1.rds.amazonaws.com
+Port: 1433
+Username: Developer
+Password: kJCIqVR6rP2uslWzp4SP
+{
+  "ConnectionStrings": {
+    "XXX": "Server=alakrelstaging.clbtenv0fegq.eu-central-1.rds.amazonaws.com;Database=funtokenz;User Id=Developer;Password=kJCIqVR6rP2uslWzp4SP;Trusted_Connection=False;MultipleActiveResultSets=true"
+  }
+}
+
+
+============Get Sesstion inside view===================
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+HttpContextAccessor.HttpContext.Session.GetString("PhoneCode")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

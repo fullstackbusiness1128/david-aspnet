@@ -1,0 +1,119 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model UserViewModel
+
+<table class="table table-bordered table-hover table-striped" id="results-table" page="@Model.Results.Results.pageNumber" data-size="@Model.Results.Results.pageSize" data-sortfield="@Model.Results.Results.sortField" data-sortorder="@Model.Results.Results.sortOrder" data-searchfield="@Model.Results.Results.searchField" data-searchvalue="@Model.Results.Results.searchValue" data-groupby="@Model.Results.Filter.GroupBy" data-datefrom="@Model.Results.Filter.DateFrom" data-dateto="@Model.Results.Filter.DateTo" data-filtera="@Model.Results.Filter.FilterA" data-filterb="@Model.Results.Filter.FilterB" data-filterc="@Model.Results.Filter.FilterC" >
+    <thead>
+        <tr>
+            <th class="tw-large">Full Name</th>
+            <th>Email</th>
+            @if (Model.Results.Filter.FilterA == "R")
+            {
+                <th class="tw-medium">Approved</th>
+            }
+            
+            @if (Model.Results.Filter.FilterA == "R")
+            {
+                <th class="tw-medium">Balance</th>
+            }
+            <th class="tw-medium">Type</th>
+
+            @if (Model.Results.Filter.FilterA == "R")
+           {
+                <th class="tw-medium">Document</th>
+                <th class="tw-medium">Action</th>
+            }            
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Results.Results.totalResults > 0)
+        {
+            foreach (var user in Model.User)
+            {
+        <tr data-id="@user.Id">
+            <td><a href="~/activity/@user.Id">@user.Firstname @user.Lastname</a></td>
+            <td>@user.Email</td>
+            @if (user.Type == "R")
+            {
+                <td>
+                    <label class="switch">
+                        @if (user.ResellerApproved)
+                        {
+                            <input type="checkbox" checked id="Status_@user.Id" data-id="@user.Id">
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="Status_@user.Id" data-id="@user.Id">
+                        }
+
+                        <span class="slider round"></span>
+                    </label>
+                </td>
+            }
+            @if (user.Type == "R")
+            {
+                <td>@Html.Raw("K" + user.ResellerBalance.ToString("N"))</td>
+            }
+            @if (user.Type == "R")
+            {
+                <td>Reseller</td>
+            }
+            else if (user.Type == "M")
+            {
+                <td>Merchant</td>
+            }
+            else
+            {
+                <td>Customer</td>
+            }
+
+            @if (user.Type == "R")
+            {
+
+                <td>
+                    @if (!string.IsNullOrEmpty(user.DocumentFurl))
+                    {
+                        <a href="https://cdn.funtokenz.com/validate/@user.DocumentFurl" target="_blank">View</a>
+                    }
+                </td>
+
+                <td>
+                    @if (!string.IsNullOrEmpty(user.DocumentFurl))
+                    {
+                    <select name="document_status" id="DocumentStatus_@user.DocumentId" data-id="@user.DocumentId">
+                        @if (user.DocumentStatus == 1)
+                        {
+                        <option value="0">Pending</option>
+                        <option selected value="1">Approved</option>
+                        <option value="2">Declined</option>
+                        }
+                        else if (user.DocumentStatus == 2)
+                        {
+                        <option value="0">Pending</option>
+                        <option value="1">Approved</option>
+                        <option selected value="2">Declined</option>
+                        }
+                        else
+                        {
+                        <option selected value="0">Pending</option>
+                        <option value="1">Approved</option>
+                        <option value="2">Declined</option>
+                        }
+                    </select>
+                    }
+                </td>
+            }
+
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No users were found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.Results.Results)

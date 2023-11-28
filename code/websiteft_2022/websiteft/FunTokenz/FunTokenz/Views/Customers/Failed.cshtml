@@ -1,0 +1,34 @@
+﻿@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+
+@section Styles
+    {
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 8em;
+        }
+    </style>
+}
+
+@{
+    ViewData["Title"] = "Purchase Failed";
+}
+
+
+@model PurchaseForm
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="inner_sec_info_wthree_agile">
+            <div class="help_full">
+                <h2 class="text-center">Your Purchase Failed</h2>
+                <p class="text-center" style="font-size:1.2em;">We were unable to complete your purchase, <a href="~/customers/home">click here to try and purchase FunTokenz</a> once more.</p>
+            </div>
+        </div>
+    </div>
+</div>
+    

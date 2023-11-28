@@ -1,0 +1,13 @@
+﻿@model List<PNGLog>
+
+<td colspan="5">
+    <ul class="d-block w-100">
+        @foreach (var log in Model)
+        {
+            <li class="mw-100">
+                <p style="font-size:12px"><b>@log.Timestamp</b> <code>@log.Log</code></p>
+            </li>
+        }
+    </ul>
+</td>
+

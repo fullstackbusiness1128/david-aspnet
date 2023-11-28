@@ -1,0 +1,274 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using System.Globalization;
+@using Newtonsoft.Json;
+@using System.Security.Claims;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta name="description" content="Fun Tokenz are the perfect alternative to paying online without a credit card. This payment method helps you to maximise your online security." />
+    <meta name="keywords" content="fun tokenz, customers, resellers, merchants" />
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#e94859">
+
+    <title>@ViewData["Title"] - Fun Tokenz</title>
+    <!-- icon -->
+    <link rel="icon" href="~/images/fun-tokenz-logo.svg" sizes="any" type="image/svg+xml">
+
+     <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!--//tags -->
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/font-awesome.css" rel="stylesheet">
+    <!-- //for bootstrap working -->
+    <!-- libraries -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/custom.css" rel="stylesheet">
+
+    <style>
+        .span-badge {
+            font-size: 11pt;
+            background: #fdfdb2;
+            color: #625454;
+        }
+
+        li.active a {
+            background: #d9534f !important;
+        }
+
+        .validation-summary-errors ul {
+            list-style-type: none;
+        }
+
+        p[style="margin-top: 1em"] a {
+            color: #D9534F !important;
+        }
+
+        ul.navbar-nav li a {
+            font-weight: bold;
+            font-size: 13pt;
+            text-transform: inherit;
+        }
+
+        .footer h4{
+            font-weight: bold;
+        }
+
+    </style>
+
+    @RenderSection("Styles", required: false)
+
+</head>
+<body>
+
+    <div class="top_header" id="home">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="text-center" style="border-bottom: #f8f5f5 1px solid; padding: 5px">
+                <a href="~/resellers/join" style="font-size: 10pt" class="text-black">Become a FunTokenz Reseller</a>
+            </div>
+            <div class="nav_top_fx_w3ls_agileinfo">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                            aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="logo-w3layouts-agileits">
+                        <h1>
+                            <a class="navbar-brand text-center" href="~/">
+                                <img src="~/images/Fun-Tokenz-New-Full-Logo.svg" width="118" />
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div class="nav_right_top">
+                        @if (Context.User.Identity.IsAuthenticated == true)
+                        {
+                            <ul class="nav navbar-nav">
+                                @if (Context.Session.GetString("Type") == "C")
+                                {
+                                    <li><a href="~/customers/home">Welcome @Context.Session.GetString("FirstName")</a></li>
+
+                                    <li><a href="~/customers/home">My Tokens</a></li>
+
+                                    <li><a href="~/signout">Sign Out</a></li> 
+                                }
+                                else if (Context.Session.GetString("Type") == "R")
+                                {
+                                    <li>
+                                        @if (!string.IsNullOrEmpty(Context.Session.GetString("ResellerBalance")))
+                                        {
+                                            if (!string.IsNullOrEmpty(Context.Session.GetString("ResellerProfit")))
+                                            {
+                                                <a href="~/resellers/home">
+                                                    <span class="badge span-badge">@Context.Session.GetString("ResellerCurrency") @Context.Session.GetString("ResellerProfit")</span>
+                                                    Balance <span class="badge span-badge">@Context.Session.GetString("ResellerCurrency") @Context.Session.GetString("ResellerBalance")</span>
+                                                </a>
+
+                                            }
+                                            else
+                                            {
+
+                                                <span class="badge span-badge">@Context.Session.GetString("ResellerCurrency") @Context.Session.GetString("ResellerBalance")</span>
+
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            if (!string.IsNullOrEmpty(Context.Session.GetString("ResellerProfit")))
+                                            {
+                                                <a href="~/resellers/home">
+                                                    <span class="badge span-badge">@Context.Session.GetString("ResellerCurrency") @Context.Session.GetString("ResellerProfit")</span>
+                                                    Balance
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/resellers/home"><span class="badge span-badge">@Context.Session.GetString("ResellerProfit") 0.00</span> Balance <span class="badge span-badge">@Context.Session.GetString("ResellerCurrency") 0.00</span></a>
+                                            }
+
+                                        }
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="~/settings/home">Settings</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="~/signout">Sign Out</a>
+                                    </li>
+                                }
+                                else if (Context.Session.GetString("Type") == "M")
+                                {
+                                    <li>
+                                        <a href="~/merchants/home">Welcome @Context.Session.GetString("FirstName")</a>
+                                    </li>
+                                    <li>
+                                        <a href="~/signout">Sign Out</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="nav navbar-nav">
+                                <li><a href="~/customers/signin">Customers</a></li>
+                                <li><a href="~/resellers/signin">Resellers</a></li>
+                                <li><a href="~/merchants/join">Merchants</a></li>
+                            </ul>
+                        }
+
+                    </div>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- footer -->
+    <div class="footer">
+        <div class="footer_inner_info_w3ls_agileits text-center">
+            <div class="col-md-4 col-sm-12 col-xs-12 footer-left">
+                <h4 class="text-black"> WHAT WE'RE ABOUT</h4>
+                <p class="text-black text-justify">
+                    We're simplifying the payment industry for digital payments in emerging countries. <br />Fast, secure and
+                    instant payment solution for companies looking to extend their market reach.
+                </p>
+                <p>
+                    <a href="terms">Terms and Conditions</a>
+                </p>
+            </div>
+            <div class="col-md-8 footer-right">
+                <div class="sign-grds text-center">
+                    <div class="col-md-4 col-sm-6 col-xs-12 sign-gd">
+                        <h4 class="text-black">CUSTOMERS </h4>
+                        <ul>
+                            <li><a class="text-black" href="~/customers/join">Open a wallet</a></li>
+                            <li><a class="text-black" href="~/customers/signin">Top up wallet</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-12 sign-gd">
+                        <h4 class="text-black">RESELLERS</h4>
+                        <ul>
+                            <li><a class="text-black" href="~/resellers/join">Become a reseller</a></li>
+                            <li><a class="text-black" href="~/resellers/signin">Access your account</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 sign-gd-two">
+                        <h4 class="text-black">MERCHANTS</h4>
+                        <ul>
+                            <li><a class="text-black" href="~/merchants/join">Become a merchant</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <p class="copy-right"><a style="color: #0e2eec!important">Copyright © 2022 Fun Tokenz . All Rights Reserved</a></p>
+        </div>
+    </div>
+
+
+    @RenderSection("ScriptsTop", required: false)
+    <!-- //footer -->
+    <script type="text/javascript" src="~/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.js"></script>
+
+    <script>
+        $('ul.dropdown-menu li').hover(function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+        }, function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+        });
+    </script>
+
+    <!-- js -->
+    <!-- Smooth-Scrolling-JavaScript -->
+    <script type="text/javascript" src="~/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll, .navbar li a, .footer li a").click(function (event) {
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+
+    <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

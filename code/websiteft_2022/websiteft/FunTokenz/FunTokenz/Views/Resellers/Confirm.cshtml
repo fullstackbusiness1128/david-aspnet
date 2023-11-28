@@ -1,0 +1,169 @@
+﻿@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Step 2";
+}
+
+@model ResellerPurchaseForm
+
+@section Styles
+{
+    <link href="~/css/stripe.css" rel="stylesheet" type="text/css" media="all">
+
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 0em;
+        }
+
+        .breadcrumb-1 {
+            background: #F4F9FE;
+        }
+
+        .token-name {
+            background-color: #F4F5F7;
+            text-align: center;
+            width: 100%;
+            padding: 40px;
+        }
+
+        span.mobile {
+            background: #F4F5F7;
+            padding: 18px;
+            display: block;
+            width: auto;
+        }
+
+        .card-payment {
+            flex-direction: column;
+        }
+
+        .d-flex {
+            display: -ms-flexbox !important;
+            display: flex !important;
+        }
+
+        .example.example2 {
+            background-color: #fff;
+        }
+
+        .payment-form ul {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .payment-form ul li {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .example.example2 * {
+            font-family: Source Code Pro, Consolas, Menlo, monospace;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .btn-danger {
+            margin-top: 20px;
+            background-color: rgba(233,72,89,1);
+            text-align: center;
+            color: #fff;
+            padding: 15px;
+        }
+    </style>
+}
+
+
+
+@section ScriptsTop
+{
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript" src="~/js/stripemain.js" data-rel-js></script>
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/js/stripe.js" data-rel-js></script>
+}
+
+
+<div class="container-fluid breadcrumb-1" style="margin-top: 8.1em">
+    <div class="row">
+        <p style="padding: 0.5em 0 0 1em"><a href="~/">Home</a> . <a href="~/resellers/home">Resellers Home</a> . Reseller Bulk Purchase</p>
+    </div>
+</div>
+
+
+
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="inner_sec_info_wthree_agile">
+            <div class="help_full">
+                <div class="col-md-6 col-xs-12 banner_bottom_grid help">
+                    <h2 class="text-left w-100">Bulk Fun Tokenz Purchase</h2>
+                    <p class="my-3 page-mobile-title">Confirm your purchase of tokenz.</p>
+                    <div class="token-name mt-2 mt-md-3">
+                        <h3>@Model.Amount</h3>
+                        <span>in Fun Tokenz</span>
+                    </div>
+                    <p class="my-4 font-23">You will be charged <b>@Model.ChargeAmount AUD</b>  inc 2.50% surcharge</p>
+                    <div class="d-flex justify-content-center w-100 mb-4 only-mobile">
+                        <img src="images/slide_swipe.svg" alt="">
+                    </div>
+                    <p class="my-4 w-100 text-left">Upon purchase your tokens will be added to your Reselle Balance</p>
+
+                </div>
+                <div class="col-md-6 col-xs-12 banner_bottom_left">
+                    <div class="d-flex card-payment">
+                        <h3 class="text-left w-100">Enter your Card for Secure Payment</h3>
+                        <div class="payment-form">
+                            <form asp-controller="Resellers" asp-action="Charge" name="formToken" id="formToken" method="post" class="form-horizontal">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="stripeToken" id="stripeToken" value="" />
+                                <input type="hidden" name="Amount" id="Amount" value="@Model.ChargeAmount" />
+                            </form>
+                            <div class="cell example example2" id="example-2">
+                                <form asp-controller="Account" asp-action="XXX" method="post" class="form-horizontal">
+                                    @Html.AntiForgeryToken()
+                                    <ul>
+                                        <li>
+                                            <div id="example2-card-number" class="input empty"></div>
+                                            <label for="example2-card-number" data-tid="elements_examples.form.card_number_label">Card Number</label>
+                                            <div class="baseline"></div>
+                                        </li>
+                                        <li class="inline">
+                                            <div id="example2-card-expiry" class="input empty"></div>
+                                            <label for="example2-card-expiry" data-tid="elements_examples.form.card_expiry_label">Expiration</label>
+                                            <div class="baseline"></div>
+                                        </li>
+                                        <li class="inline">
+                                            <div id="example2-card-cvc" class="input empty"></div>
+                                            <label for="example2-card-cvc" data-tid="elements_examples.form.card_cvc_label">CVC</label>
+                                            <div class="baseline"></div>
+                                        </li>
+                                        <li>
+                                            <button type="submit" class="btn" data-tid="elements_examples.form.pay_button">Pay &amp; Complete Order</button>
+                                            <div class="error" role="alert">
+                                                <span class="message"></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="~/resellers/buy" class="btn btn-block btn-danger" style="margin-top: 8px">Or Go back</a>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

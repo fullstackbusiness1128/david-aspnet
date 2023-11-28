@@ -1,0 +1,66 @@
+﻿@model UserListing
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.Results.pageSize" data-sortfield="@Model.Results.sortField" data-sortorder="@Model.Results.sortOrder">
+    <thead>
+        <tr>
+            <th class="tw-medium btnsort" data-field="Firstname" data-order="asc">Full Name</th>
+            <th class="btnsort" data-field="Email" data-order="asc">Email</th>
+            <th class="tw-small btnsort" data-field="Level" data-order="asc">Level</th>
+            <th class="tw-small btnsort" data-field="Balance" data-order="asc">Balance</th>
+            <th class="tw-small btnsort" data-field="Turnover" data-order="asc">Turnover</th>
+            <th class="tw-small btnsort" data-field="Position" data-order="asc">Position</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.User != null && Model.User.Count > 0)
+        {
+            foreach (var item in Model.User)
+            {
+        <tr>
+            <td>
+                @{ if (!string.IsNullOrEmpty(item.Fullname))
+                    {
+                        @item.Fullname
+                    }
+                    else
+                    {
+                        @item.Firstname<text>&nbsp;</text>@item.Lastname
+                    }
+                }
+            </td>
+            <td><a href="~/users/details?Id=@item.Id">@item.Email</a></td>
+            <td>
+                @{
+                    if (item.Level == "1")
+                    {
+                        <text>Administrator</text>
+                    }
+                    else if (item.Level == "2")
+                    {
+                        <text>Manager</text>
+                    }
+                    else
+                    {
+                        <text>Member</text>
+                    }
+                }
+            </td><td>
+            
+            </td><td>
+            
+            </td><td>
+            
+            </td>
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">No users were found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.Results)

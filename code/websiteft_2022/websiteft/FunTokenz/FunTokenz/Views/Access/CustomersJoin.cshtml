@@ -1,0 +1,164 @@
+﻿@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@model JoinView
+
+@{
+    ViewData["Title"] = "Join";
+}
+
+@section Styles
+    {
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 7em;
+        }
+
+        .banner_bottom {
+            padding-bottom: 0;
+        }
+
+
+        .signin-form select {
+            background: none;
+            display: block;
+            width: 100%;
+            padding: 0.6em;
+            font-size: 1em;
+            margin: 0.5em 0;
+            outline: none;
+            color: #212121;
+            border: none;
+            border: 1px solid #ccc;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+        .banner_bottom {
+            background: #BFFFFA;
+        }
+    </style>
+}
+
+
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="row">
+            <div class="inner_sec_info_wthree_agile">
+                <div class="help_full">
+
+                    <div class="col-md-6 col-sm-6 banner_bottom_left">
+                        <h1>Pay & Play</h1>
+                        <p>
+                            Create a Fun Tokenz digital wallet for use with our Merchants anywhere, anytime. 
+                            It's simple and free to create a wallet with us, deposit tokens by purchasing in your
+                            local currency and access a new way to pay with our Merchants.
+                        </p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 banner_bottom_grid help">
+                        <!---728x90--->
+                        <div class="signin-form">
+                            <h2 style="text-align: start">Open a wallet</h2>
+                            <p style="font-size: 11pt; text-align: start">
+                                Join thousands of customers and start paying in Fun Tokenz. 
+                                Opening an account is Free.
+                            </p>
+                            <form aspasp-controller="Access" asp-action="CustomersJoin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                                <input type="hidden" asp-for="JoinType" value="C">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="First Name" asp-for="FirstName">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="Last Name" asp-for="LastName">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <select asp-for="CountryCode" id="country_code">
+                                                <option value="+61">+61</option>
+                                                <option value="+692">+692</option>
+                                                <option value="+691">+691</option>
+                                                <option value="+685">+685</option>
+                                                <option value="+680">+680</option>
+                                                <option value="+679">+679</option>
+                                                <option value="+678">+678</option>
+                                                <option value="+677">+677</option>
+                                                <option value="+676">+676</option>
+                                                <option selected value="+675">+675</option>
+                                                <option value="+674">+674</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-9">
+                                                <input oninput="this.value = this.value.replace(/[^0-9+ -]/g, '').replace(/(\..*)\./g, '$1');" type="text" class="phonenumber" placeholder="Mobile Number" asp-for="Phone">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input type="email" asp-for="Email" placeholder="Enter your email address" required="">
+                                </div>
+
+                         
+                                <div class="form-group">
+                                    <input type="password" placeholder="Password" asp-for="Password" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Confirm Password" asp-for="ConfirmPassword">
+                                </div>
+
+                                <div style="text-align: start">
+                                    <input asp-for="Agree" class="form-check form-check-input" type="checkbox" value="true" id="defaultCheck1" checked>
+                                    <label class="form-check-label" for="defaultCheck1">By creating an account you agree to our Terms of Service</label>
+                                </div>
+
+                                <div class="tp" style="margin-top: 1em">
+                                    <button type="submit" class="btn btn-danger btn-block btn-outline-danger">Sign up</button>
+                                </div>
+                            </form>
+
+                            <p style="margin-top: 1em">
+                                <a href="~/customers/signin"> Or sign in</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section Scripts
+{
+    <script type="text/javascript" src="~/js/jquery.maskedinput.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#country_code").change(function(){
+                var code = $(this).val();
+
+                if(code === "+61"){
+                    $(".phonenumber").mask("999-999-999");
+                } else if (code === "+692" || code === "+691") {
+                    $(".phonenumber").mask("999-999-9");
+                }else if(code === "+691"){
+                    $(".phonenumber").mask("999-999");
+                }
+            });
+            $('.phonenumber').css("padding", '7.5px');
+            $('.phonenumber').css("font-size", '12pt');
+        });
+    </script>
+}*@

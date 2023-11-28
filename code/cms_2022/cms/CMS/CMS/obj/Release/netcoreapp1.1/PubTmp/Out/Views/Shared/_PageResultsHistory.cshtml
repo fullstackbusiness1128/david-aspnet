@@ -1,0 +1,44 @@
+﻿@model PageHistory
+
+<table class="table table-bordered table-hover table-striped" id="history-table" data-size="@Model.Results.pageSize">
+    <thead>
+        <tr>
+            <th class="btnsort" data-field="Name" data-order="asc">Records</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.History.Count > 0)
+        {
+            int i = 0;
+            foreach (var item in Model.History)
+            {
+        <tr>
+            @if (item.RecordStatus == true)
+            {
+                <td><a href="~/pages/details?page=@item.Id">Current Active Record</a></td>
+            }
+            else
+            {
+                if (item.DateCreated == item.DatetimeModified)
+                {
+                    <td><a href="~/pages/detailsarchive?page=@item.Id"><span class="linktag">DRAFT</span> @DateTime.ParseExact(item.DatetimeModified.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm:ss tt")</a></td>
+                }
+                else
+                {
+                    <td><a href="~/pages/detailsarchive?page=@item.Id"><span class="linktag">RELEASED</span> @DateTime.ParseExact(item.DatetimeModified.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm:ss tt")</a></td>
+                }
+            }
+        </tr>
+            i++;
+            }
+        }
+        else
+        {
+        <tr>
+            <td colspan="4">No records were found</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_PaginationHistory", Model.Results)

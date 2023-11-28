@@ -1,0 +1,135 @@
+﻿@model PageItemForm
+@{
+    ViewData["Title"] = "New | Pages | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/pages/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="Pages" asp-action="New" method="post" class="form-horizontal" name="FormPage">
+                <input type="hidden" id="IsDraft" name="IsDraft" value="false" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Create a new page</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label asp-for="Name" class="col-md-3 control-label"></label>
+                            <div class="col-md-9">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Title" class="col-md-3 control-label"></label>
+                            <div class="col-md-9">
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MetaTitle" class="col-md-3 control-label"></label>
+                            <div class="col-md-9">
+                                <input asp-for="MetaTitle" class="form-control" />
+                                <span asp-validation-for="MetaTitle" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MetaDescription" class="col-3 control-label"></label>
+                            <div class="col-md-9">
+                                <input asp-for="MetaDescription" class="form-control" />
+                                <span asp-validation-for="MetaDescription" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MetaKeywords" class="col-md-3 control-label"></label>
+                            <div class="col-md-9">
+                                <input asp-for="MetaKeywords" class="form-control" />
+                                <span asp-validation-for="MetaKeywords" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Page Content</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row m-0">
+                            <div class="col-md-12 p-0">
+                                <textarea id="summernote" name="ContentRaw"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manage page content
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Publish Options</div>
+                </div>
+                <div class="panel-body publish">
+                    <a onclick="PreviewDraft();" class="btn btn-default">Preview Draft and Save</a>
+                    <a onclick="document.FormPage.submit();" class="btn btn-default">Publish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="~/lib/summernote/summernote-bs4.css" rel="stylesheet">
+}
+
+@section Scripts {
+    <script src="~/lib/summernote/summernote-bs4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 400,
+                followingToolbar: false,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['view', ['fullscreen', 'codeview']]
+                ],
+                styleTags: ['p', 'h1', 'h2', 'h3'],
+                callbacks: {
+                    onPaste: function (e) {
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        document.execCommand('insertText', false, bufferText);
+                    }
+                }
+            });
+        });
+
+        function PreviewDraft() {
+            $("#IsDraft").val("true");
+            document.FormPage.submit();
+        }
+    </script>
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

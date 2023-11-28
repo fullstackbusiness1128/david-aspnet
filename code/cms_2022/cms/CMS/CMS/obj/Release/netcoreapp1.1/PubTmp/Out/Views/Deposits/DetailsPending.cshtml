@@ -1,0 +1,176 @@
+﻿@model DepositPendingView
+@{
+    ViewData["Title"] = "Details | Deposit Pending | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/deposits/pending" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Manual Deposit Information</div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">User Id: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.UserId</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Email: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.Email</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Full Name: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.Firstname @Model.DepositPendingItem.Lastname</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Deposit Id: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.Id</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Date Created: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.DatetimeCreated</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Currency: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.Currency</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Amount: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.Value</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Charge Currency: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.ChargeCurrency</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Charge Rate: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.ChargeRate</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Promo Code: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.PromoCode</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Promo Bonus Amount: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.PromoAmountToAdd</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Exchange Currency: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.ChargeCurrency</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Exchange Rate: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.ChargeRate</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Card Name: </label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.CardName</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Card Number:</label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.CardNumber</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Card Expiry Month:</label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.CardExipryMonth </p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Card Expiry Year:</label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.CardExpiryYear</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Card CCV:</label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.CardCCV</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Billing Address:</label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.BillingAddress</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Billing City:</label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.BillingAddress City </p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">Billing Zip:</label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.BillingZip</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">BillingCountry:</label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.BillingCountry</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Name" class="col-md-3 control-label">AUD Amount To Charge (Inc 3% Surcharge):</label>
+                        <div class="col-md-9">
+                            <p>@Model.DepositPendingItem.AmountToCharge</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

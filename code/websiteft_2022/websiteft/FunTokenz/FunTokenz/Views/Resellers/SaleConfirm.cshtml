@@ -1,0 +1,142 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+@{
+    ViewData["Title"] = "Step 2";
+}
+
+@model CustomerSaleForm
+
+@section Styles
+{
+    
+    <link href="~/css/stripe.css" rel="stylesheet" type="text/css" media="all">
+
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 0em;
+        }
+
+        .breadcrumb-1 {
+            background: #F4F9FE;
+        }
+
+        .token-name {
+            background-color: #F4F5F7;
+            text-align: center;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .card-payment {
+            flex-direction: column;
+        }
+
+        .example.example2 * {
+            font-family: Source Code Pro, Consolas, Menlo, monospace;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .payment-form ul {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .btn-danger {
+            margin-top: 20px;
+            background-color: rgba(233,72,89,1);
+            text-align: center;
+            color: #fff;
+            padding: 15px;
+        }
+
+    </style>
+}
+
+@section ScriptsTop
+{
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript" src="~/js/stripemain.js" data-rel-js></script>
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/js/stripe.js" data-rel-js></script>
+}
+
+
+<div class="container-fluid breadcrumb-1" style="margin-top: 8.1em">
+    <div class="row">
+        <p style="padding: 0.5em 0 0 1em"><a href="~/">Home</a> . <a href="~/resellers/home">Resellers Home</a> . Reseller Bulk Purchase</p>
+    </div>
+</div>
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="inner_sec_info_wthree_agile">
+            <div class="help_full">
+                <div class="col-md-3 col-xs-12 banner_bottom_grid help"></div>
+
+                <div class="col-md-6 col-xs-12 banner_bottom_grid help">
+                    <h2 class="text-left">Fun Tokenz Sale</h2>
+                    <p>Confirm the sale of tokenz.</p>
+                    <div class="token-name">
+                        <h3>@Context.Session.GetString("SaleValue")</h3>
+                        <span>in Fun Tokenz</span>
+                    </div>
+                    <p>Your customer is to be charged <b>@Context.Session.GetString("ResellerCurrency") @Context.Session.GetString("SaleAmount")</b>.<br /><br /><b>Congrats on your sale!</b>, this sale earns you <b>@(((Convert.ToDecimal(Context.Session.GetString("SaleAmount")) - Convert.ToDecimal(Context.Session.GetString("SaleValue"))) / Convert.ToDecimal(Context.Session.GetString("SaleValue"))) * 100)%</b> profit.</p>
+                    <div class="justify-content-center">
+                        <img src="images/slide_swipe.svg" alt="">
+                    </div>
+                    <p class="text-left">
+                        Upon confirmation the tokens will be sent to your customer.
+                        <br />Customer Name: @Model.FirstName @Model.LastName
+                        <br />Phone: @Model.CountryCode @Model.SentToPhone
+                        <br />Email: @Model.SentToEmail
+                    </p>
+
+
+                    <div class="card-payment">
+                        <h3 class="text-left">Collect the payment from your customer and confirm.</h3>
+                        <div class="payment-form">
+                            <div class="cell example example2" id="example-2">
+                                <form asp-controller="Resellers" asp-action="SaleProcess" method="post" class="form-horizontal">
+                                    <input type="hidden" asp-for="UserId" />
+                                    <input type="hidden" asp-for="Amount" value="@Model.Amount" />
+                                    <input type="hidden" asp-for="FirstName" value="@Model.FirstName" />
+                                    <input type="hidden" asp-for="LastName" value="@Model.LastName" />
+                                    <input type="hidden" asp-for="CountryCode" value="@Model.CountryCode" />
+                                    <input type="hidden" asp-for="SentToPhone" value="@Model.SentToPhone" />
+                                    <input type="hidden" asp-for="SentToEmail" value="@Model.SentToEmail" />
+                                    @Html.AntiForgeryToken()
+                                    <ul>
+                                        <li>
+                                            <button type="submit" class="btn" data-tid="elements_examples.form.pay_button">Confirm &amp; Complete Sale</button>
+                                            <div class="error" role="alert">
+                                                <span class="message"></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="~/resellers/sale" class="btn btn-block btn-danger mt-4">Or Go back</a>                    
+
+                </div>
+
+                <div class="col-md-3 col-xs-12 banner_bottom_grid help"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

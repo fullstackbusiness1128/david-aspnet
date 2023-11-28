@@ -1,0 +1,71 @@
+﻿@model FilesModel
+
+@{
+    var header = "Document";
+    if (Model.ValidationType == "Cards")
+    {
+        header = "Card";
+    }
+}
+
+<div class="col-xs-12 col-sm-12 col-md-10">
+    <table class="PNGTable" style="width: 100%">
+        <thead>
+            <tr>
+                <th>@header</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var files = Model.files.Where(w => !string.IsNullOrEmpty(w.URL)).ToList();
+
+                if (Model != null && files.Count >= 1)
+                {
+                    @foreach (var item in files)
+                    {
+                        <tr>
+                            @if (header == "Card")
+                            {
+                                <td><a href="https://sdn.pngbet.com/@item.URL" target="_blank">@item.MaskedPan</a></td>
+                            }
+                            else
+                            {
+                                <td><a href="https://sdn.pngbet.com/@item.URL" target="_blank">@item.Category</a></td>
+                            }
+                            <td>
+                                @{
+                                    if (item.Status == 1)
+                                    {
+                                        <p>Approved</p>
+                                    }
+                                    else if (item.Status == 2)
+                                    {
+                                        <p>Declined</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Pending</p>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        @if (header == "Card")
+                        {
+                            <td colspan="2">You have not uploaded any cards as yet.</td>
+                        }
+                        else
+                        {
+                            <td colspan="2">You have not uploaded any verification documents as yet.</td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

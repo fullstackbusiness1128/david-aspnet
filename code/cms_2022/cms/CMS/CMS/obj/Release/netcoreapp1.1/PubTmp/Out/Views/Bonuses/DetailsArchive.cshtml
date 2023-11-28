@@ -1,0 +1,225 @@
+﻿@model BonusView
+@{
+    ViewData["Title"] = "Details Archived | Bonuses | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/bonuses/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="bonuses" asp-action="revert" method="post" class="form-horizontal" name="FormBonus">
+                <input type="hidden" name="Id" value="@Model.BonusItem.Id" />
+                <input type="hidden" name="Identifier" value="@Model.BonusItem.Identifier" />
+                <input type="hidden" id="IsDraft" name="IsDraft" value="false" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Update Bonus</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="Name" class="col-md-3 control-label">Name: </label>
+                            <div class="col-md-9">
+                                <input for="Name" name="Name" class="form-control" value="@Model.BonusItem.Name" />
+                                <span data-valmsg-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Code" class="col-md-3 control-label">Type: </label>
+                            <div class="col-md-9">
+                                <select for="BonusPool" name="BonusPool" class="form-control">
+                                    @if (Model.BonusItem.BonusPool == "Sports")
+                                    {
+                                        <option selected value="Sports">Sports</option>
+                                        <option value="Racing">Racing</option>
+                                        <option value="ReferSports">Refer a Friend - Sports</option>
+                                        <option value="ReferRacing">Refer a Friend - Racing</option>
+                                    }
+                                    else if (Model.BonusItem.BonusPool == "Racing")
+                                    {
+                                        <option value="Sports">Sports</option>
+                                        <option selected value="Racing">Racing</option>
+                                        <option value="ReferSports">Refer a Friend - Sports</option>
+                                        <option value="ReferRacing">Refer a Friend - Racing</option>
+                                    }
+                                    else if (Model.BonusItem.BonusPool == "ReferSports")
+                                    {
+                                        <option value="Sports">Sports</option>
+                                        <option value="Racing">Racing</option>
+                                        <option selected value="ReferSports">Refer a Friend - Sports</option>
+                                        <option value="ReferRacing">Refer a Friend - Racing</option>
+                                    }
+                                    else if (Model.BonusItem.BonusPool == "ReferRacing")
+                                    {
+                                        <option value="Sports">Sports</option>
+                                        <option value="Racing">Racing</option>
+                                        <option value="ReferSports">Refer a Friend - Sports</option>
+                                        <option selected value="ReferRacing">Refer a Friend - Racing</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Sports">Sports</option>
+                                        <option value="Racing">Racing</option>
+                                        <option value="ReferSports">Refer a Friend - Sports</option>
+                                        <option value="ReferRacing">Refer a Friend - Racing</option>
+                                    }
+                                </select>
+                                <span data-valmsg-for="BonusPool" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="MinBet" class="col-md-3 control-label">Min Amount (Bet / Deposit)</label>
+                            <div class="col-md-9">
+                                <input for="MinBet" name="MinBet" class="form-control" value="@Model.BonusItem.MinBet" />
+                                <span data-valmsg-for="MinBet" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Amount" class="col-md-3 control-label">Bonus Amount</label>
+                            <div class="col-md-9">
+                                <input for="Amount" name="Amount" class="form-control" value="@Model.BonusItem.Amount" />
+                                <span data-valmsg-for="Amount" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="MaxUsePerUser" class="col-md-3 control-label">Max Use Per User</label>
+                            <div class="col-md-9">
+                                <input for="MaxUsePerUser" name="MaxUsePerUser" class="form-control" value="@Model.BonusItem.MaxUsePerUser" />
+                                <span data-valmsg-for="MaxUsePerUser" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="StartDate" class="col-3 control-label">Start Time</label>
+                            <div class="input-group date col-9" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#StartDate" name="StartDate" for="StartDate" id="StartDate" />
+                                <div class="input-group-append" data-target="#StartDate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <span data-valmsg-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="EndDate" class="col-3 control-label">End Time</label>
+                            <div class="input-group date col-9" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#EndDate" name="EndDate" for="EndDate" id="EndDate" />
+                                <div class="input-group-append" data-target="#EndDate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <span data-valmsg-for="EndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manage bonus content
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Publish Options</div>
+                </div>
+                <div class="panel-body publish text-right">
+                    <a onclick="document.FormBonus.submit();" class="btn btn-default">Make Current and Publish</a>
+                </div>
+                <br />
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Change History</div>
+                </div>
+                <div class="panel-body historypanel" data-searchvalue="@Model.BonusItem.Identifier">
+                    @Html.Partial("_BonusResultsHistory", Model.BonusHistory)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles
+{
+    <link rel="stylesheet" href="/css/tempus.css" />
+}
+
+@section Scripts
+{
+    <script src="/js/moment.js"></script>
+    <script src="/js/tempus.js"></script>
+    <script>
+        $(document).ready(function () {
+            @{
+                    //Prepare Convertion to AEST/AEDT
+                    //var zn = TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time");
+                    //var currentoffset = zn.GetUtcOffset(DateTime.Now);
+                    //var SecondsToAdd = TimeSpan.FromTicks(currentoffset.Ticks).TotalSeconds;
+                    DateTime DatetimeStartUTC;
+                    string DatetimeStartAEST = "";
+                    DateTime DatetimeEndUTC;
+                    string DatetimeEndAEST = "";
+                    if (Model.BonusItem.StartDate > 0)
+                    {
+                        DatetimeStartUTC = DateTime.ParseExact(Model.BonusItem.StartDate.ToString(), "yyyyMMddHHmmssffff", null).ToUniversalTime();
+                        DatetimeStartAEST = DatetimeStartUTC.ToString("yyyyMMddHHmmss");
+                    }
+                    if (Model.BonusItem.EndDate> 0)
+                    {
+                        DatetimeEndUTC = DateTime.ParseExact(Model.BonusItem.EndDate.ToString(), "yyyyMMddHHmmssffff", null).ToUniversalTime();
+                        DatetimeEndAEST = DatetimeEndUTC.ToString("yyyyMMddHHmmss");
+                    }
+                }
+
+                @{if (Model.BonusItem.StartDate != 0)
+                    {
+                    <text>
+                    $('#StartDate').datetimepicker({
+                        format: 'YYYYMMDDHHmmss',
+                        defaultDate: moment(@DatetimeStartAEST, 'YYYYMMDDHHmmss')
+                    });
+                    </text>
+                    }
+                    else
+                    {
+                    <text>
+                    $('#StartDate').datetimepicker({
+                        format: 'YYYYMMDDHHmmss'
+                    });
+                    </text>
+                    }
+                  }
+
+                  @{if (Model.BonusItem.EndDate != 0)
+                      {
+                    <text>
+                    $('#EndDate').datetimepicker({
+                        format: 'YYYYMMDDHHmmss',
+                        defaultDate: moment(@DatetimeEndAEST, 'YYYYMMDDHHmmss')
+                    });
+                    </text>
+                    }
+                    else
+                    {
+                    <text>
+                    $('#EndDate').datetimepicker({
+                        format: 'YYYYMMDDHHmmss'
+                    });
+                    </text>
+                    }
+                  }
+        });
+    </script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

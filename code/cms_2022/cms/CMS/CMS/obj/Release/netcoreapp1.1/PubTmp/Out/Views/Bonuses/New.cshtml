@@ -1,0 +1,128 @@
+﻿@model BonusItemForm
+@{
+    ViewData["Title"] = "New | Bonuses | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/bonuses/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="Bonuses" asp-action="New" method="post" class="form-horizontal" name="FormBonus">
+                <input type="hidden" id="IsDraft" name="IsDraft" value="false" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Create a new bonus</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label asp-for="Name" class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="BonusPool" class="col-md-3 control-label">Type</label>
+                            <div class="col-md-9">
+                                <select asp-for="BonusPool" class="form-control">
+                                    <option value="Sports">Sports</option>
+                                    <option value="Racing">Racing</option>
+                                    <option value="ReferSports">Refer a Friend - Sports</option>
+                                    <option value="ReferRacing">Refer a Friend - Racing</option>
+                                </select>
+                                <span asp-validation-for="BonusPool" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MinBet" class="col-md-3 control-label">Min Amount (Bet / Deposit)</label>
+                            <div class="col-md-9">
+                                <input asp-for="MinBet" class="form-control" placeholder="0.00" />
+                                <span asp-validation-for="MinBet" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Amount" class="col-md-3 control-label">Bonus Amount</label>
+                            <div class="col-md-9">
+                                <input asp-for="Amount" class="form-control" placeholder="0.00" />
+                                <span asp-validation-for="Amount" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MaxUsePerUser" class="col-md-3 control-label">Max Use Per User</label>
+                            <div class="col-md-9">
+                                <input asp-for="MaxUsePerUser" class="form-control" />
+                                <span asp-validation-for="MaxUsePerUser" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="StartDate" class="col-3 control-label">Start Time</label>
+                            <div class="input-group date col-9" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#StartDate" name="StartDate" for="StartDate" id="StartDate" />
+                                <div class="input-group-append" data-target="#StartDate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <span data-valmsg-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="EndDate" class="col-3 control-label">End Time</label>
+                            <div class="input-group date col-9" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#EndDate" name="EndDate" for="EndDate" id="EndDate" />
+                                <div class="input-group-append" data-target="#EndDate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <span data-valmsg-for="EndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manage Bonus content
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Publish Options</div>
+                </div>
+                <div class="panel-body publish">
+                    <a onclick="document.FormBonus.submit();" class="btn btn-default">Publish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles
+{
+    <link rel="stylesheet" href="/css/tempus.css" />
+}
+
+@section Scripts
+{
+    <script src="/js/moment.js"></script>
+    <script src="/js/tempus.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#StartDate,#EndDate').datetimepicker({
+                format: 'YYYYMMDDHHmmss'
+            });
+        });
+    </script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

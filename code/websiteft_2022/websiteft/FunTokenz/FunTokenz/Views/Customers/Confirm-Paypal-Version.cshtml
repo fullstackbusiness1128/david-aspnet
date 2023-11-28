@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Step 2";
+}
+
+@model PurchaseForm
+
+@section Scripts{
+
+    @*Staging*@
+    @*<script src="https://www.paypal.com/sdk/js?client-id=Ae-lNt9InPWN_9FeMOvSTCgQ268eoGGIogcbWEYfFkgM1u_AXmQ8wOLsAzQ6XLgJPKueAB7Y7j0LocWs&currency=EUR"></script>*@
+    <script src="https://www.paypal.com/sdk/js?client-id=AdUz2eOEfgJhfEMYy3lQsYk-NNxtayuBn9sythrcefN9H5MFVxr_ZfROSJeYyATWoZEXpjvMwy4ds-gp&currency=EUR"></script>
+
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    intent: "capture",
+                    purchase_units: [{
+                        amount: {
+                            value: '@Model.ChargeAmount',
+                            currency_code: 'EUR'
+                        }
+                    }],
+                    application_context: {
+                        shipping_preference: 'NO_SHIPPING',
+                        user_action: 'PAY_NOW'
+                    }
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (orderData) {
+
+                    var forgeryId = $('[name="__RequestVerificationToken"]').val();
+                    var datax = { "JSON": JSON.stringify(orderData, null, 2), "Ref" : orderData.id };
+
+                    $.ajax("/finalise", {
+                        method: "POST",
+                        timeout: 4000,
+                        data: JSON.stringify(datax),
+                        contentType: 'application/json; charset=utf-8',
+                        headers: {
+                            'RequestVerificationToken': forgeryId
+                        },
+                        beforeSend: function () {
+                        },
+                        success: function (datax) {
+                            $("#PurchaseResult").html(datax);
+                        },
+                        error: function () {
+                            console.log("error");
+                        }
+                    });
+
+
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+}
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 p-0 desktop-visual">
+                <img src="images/payment.png" alt="payment" class="hero-img">
+            </div>
+            <div class="col-12 d-flex justify-content-center py-4 only-mobile">
+                <img src="images/step4_screen.png" alt="">
+            </div>
+            <div class="col-md-5 d-flex align-items-start flex-column justify-content-center content-section content-section-bg text-center" id="PurchaseResult">
+                <h1 class="text-left w-100">Fun Tokenz Purchase</h1>
+                <p class="my-3 page-mobile-title">Confirm your purchase of tokens.</p>
+                <div class="token-name mt-2 mt-md-3">
+                    <h3>@Model.Amount</h3>
+                    <span>in Fun Tokenz</span>
+                </div>
+                <p class="my-4 font-23">You will be charged <b>@Model.ChargeAmount EURO</b>  inc 2.50% surcharge</p>
+                <div class="d-flex justify-content-center w-100 mb-4 only-mobile">
+                    <img src="images/slide_swipe.svg" alt="">
+                </div>
+                <p class="my-4 w-100 text-left">Upon purchase your tokens will be sent to:<br /> <span class="mobile">@Model.CountryCode @Model.Phone</span></p>
+
+                <div id="paypal-button-container" class="w-100"></div>
+                <a href="~/buy" class="btn btn-block btn-danger mt-4">Or Go back</a>
+
+            </div>
+        </div>
+    </div>
+</main>

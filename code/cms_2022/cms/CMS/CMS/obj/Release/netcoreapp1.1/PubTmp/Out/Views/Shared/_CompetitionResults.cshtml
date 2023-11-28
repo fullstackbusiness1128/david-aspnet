@@ -1,0 +1,34 @@
+﻿@model CompetitionsView
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.Competitions.Results.PageSize">
+    <thead>
+        <tr>
+            <th class="btnsort" data-field="Name" data-order="asc">Name</th>
+            <th class="btnsort" data-field="Name" data-order="asc">Sport</th>
+            <th class="btnsort" data-field="Name" data-order="asc">Season</th>
+            <th class="tw-large btnsort" data-field="Published" data-order="asc">Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Competitions.Competitions.Count > 0)
+        {
+            foreach (var item in Model.Competitions.Competitions)
+            {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.SportIdentifier</td>
+            <td>@item.SeasonIdentifier</td>
+            <td><a href="~/competitions/details?competition=@item.Id">@item.DateCreated</a></td>
+        </tr>
+            }
+        }
+        else
+        {
+        <tr>
+            <td colspan="4">No competitions were found</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_PaginationTC", Model.Competitions.Results)

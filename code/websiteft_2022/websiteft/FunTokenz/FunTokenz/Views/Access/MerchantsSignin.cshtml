@@ -1,0 +1,86 @@
+﻿@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@model SignInView
+
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+@section Styles
+    {
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 7em;
+        }
+
+        .banner_bottom {
+            padding-bottom: 0;
+        }
+
+        /*.banner_bottom {
+            background: #F6FAFF;
+        }*/
+    </style>
+}
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="row">
+            <div class="inner_sec_info_wthree_agile">
+                <div class="help_full">
+
+                    <div class="col-md-6 col-sm-6 banner_bottom_left">
+                        <h1>ACCEPT FUN TOKENZ</h1>
+                        <p>
+                            Expand your services to new customers by becoming a Fun Tokenz merchant. 
+                            Our secure wallet and payment system can be easily integrated into your business, 
+                            simply express your interest with us to become a participating Merchant.
+                        </p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 banner_bottom_grid help">
+
+                        <!---728x90--->
+                        <div class="signin-form">
+                            <h2 style="text-align: start">Sign In</h2>
+                            <p style="font-size: 11pt; text-align: start">Access your Merchant Account</p>
+                            <form asp-controller="Access" asp-action="MerchantsSignin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                                <input type="hidden" asp-for="JoinType" value="M">
+
+                                <div asp-validation-summary="All" class="text-danger"></div>
+
+                                <input type="email" asp-for="Email" placeholder="Enter your email address" required="">
+                                <input type="password" asp-for="Password" placeholder="Enter your password" required="">
+
+                                <div style="text-align: start">
+                                    <input asp-for="RememberMe" class="form-check form-check-input" type="checkbox" value="true" id="defaultCheck1" checked>
+                                    <label class="form-check-label" for="defaultCheck1">Remember Me</label>
+                                </div>
+
+                                <div class="tp" style="margin-top: 1em">
+                                    <button type="submit" class="btn btn-danger btn-block btn-outline-danger">Signin</button>
+                                </div>
+                            </form>
+
+                            <p style="margin-top: 1em">
+                                <a href="~/merchants/join"> Or express interest to open a Merchant account</a>
+                            </p>
+
+                            <p>
+                                <a  style="color: #D9534F" href="~/reset"> Forgot your password?</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

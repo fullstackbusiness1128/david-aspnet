@@ -1,0 +1,47 @@
+﻿@model PostHistory
+@using System.Text.RegularExpressions
+
+<table class="table table-bordered table-hover table-striped" id="history-table" data-size="@Model.Results.pageSize">
+    <thead>
+        <tr>
+            <th class="btnsort" data-field="Name" data-order="asc">Records</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.History.Count > 0)
+        {
+            Regex rgx = new Regex("[^a-zA-Z0-9 -]");
+
+            int i = 0;
+            foreach (var item in Model.History)
+            {
+                <tr>
+                    @if (item.RecordStatus == true)
+                    {
+                        <td><a href="~/posts/details?post=@item.Id">Current Active Record</a></td>
+                    }
+                    else
+                    {
+                        if (item.DateCreated == item.DatetimeModified)
+                        {
+                            <td><a href="~/posts/detailsarchive?post=@item.Id"><span class="linktag">DRAFT</span>@DateTime.ParseExact(item.DatetimeModified.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm:ss tt")</a> (<a href="https://www.pngbet.com./news/@item.Furl/preview-@item.Id" target="_blank">Preview</a>)</td>
+                        }
+                        else
+                        {
+                            <td><a href="~/posts/detailsarchive?post=@item.Id"><span class="linktag">RELEASED</span>@DateTime.ParseExact(item.DatetimeModified.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm:ss tt")</a> (<a href="https://www.pngbet.com/news/@item.Furl/preview-@item.Id" target="_blank">Preview</a>)</td>
+                        }
+                    }
+                </tr>
+                i++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No records were found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_PaginationHistory", Model.Results)

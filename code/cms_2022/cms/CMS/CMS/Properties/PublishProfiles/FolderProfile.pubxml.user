@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Wolf\Desktop\Published\Performance Crew\Clients\Misterio Vacio\PNG BET\CMS</_PublishTargetUrl>
+    <History>True|2022-08-08T01:48:54.3617364Z;True|2022-08-05T00:01:41.9268540+10:00;True|2022-08-04T22:40:00.2605658+10:00;True|2022-05-30T22:29:46.2331111+10:00;True|2022-05-30T22:27:44.0901651+10:00;True|2022-05-30T21:36:58.4379071+10:00;True|2022-05-30T21:33:24.1514908+10:00;True|2022-05-29T23:01:34.1321941+10:00;True|2022-05-29T22:45:36.1134304+10:00;True|2022-05-29T22:43:30.2263756+10:00;True|2022-05-29T22:37:56.8165526+10:00;True|2022-05-15T19:49:12.7515791+10:00;True|2022-05-15T19:44:39.6149064+10:00;True|2022-05-15T19:42:44.2520093+10:00;True|2022-05-15T19:38:36.4480865+10:00;True|2022-05-15T19:36:40.5256300+10:00;True|2022-05-15T19:35:02.5128269+10:00;True|2022-05-15T19:31:07.6391999+10:00;True|2022-05-15T19:29:10.7049469+10:00;True|2022-05-15T19:25:03.7326478+10:00;True|2022-05-15T19:21:46.6792751+10:00;True|2022-05-15T19:19:25.1657381+10:00;True|2022-05-15T19:16:31.3825117+10:00;True|2022-05-15T19:13:25.8517544+10:00;True|2022-05-15T19:06:01.3479645+10:00;True|2022-05-15T19:01:42.0387383+10:00;True|2022-05-15T19:01:01.5570830+10:00;True|2022-05-15T18:55:04.1532582+10:00;True|2022-05-15T18:52:53.1775798+10:00;True|2022-05-15T18:47:59.5260892+10:00;True|2022-05-15T18:46:31.3541975+10:00;True|2022-05-15T18:30:29.5947766+10:00;True|2022-05-15T18:28:22.8650403+10:00;True|2022-05-15T18:24:22.0382787+10:00;True|2022-05-15T18:18:19.0039074+10:00;True|2022-05-15T17:47:24.9921895+10:00;True|2022-05-15T17:46:05.0304188+10:00;True|2022-05-15T17:30:25.5471718+10:00;True|2022-05-15T17:20:09.4954787+10:00;True|2022-05-15T17:18:42.3147440+10:00;True|2022-05-15T17:17:00.9206605+10:00;True|2022-05-15T17:16:10.3019567+10:00;True|2022-05-15T17:11:34.6047059+10:00;True|2022-05-15T16:59:52.0123303+10:00;True|2022-05-15T16:53:53.8356506+10:00;True|2022-05-15T16:53:39.1194467+10:00;False|2022-05-15T16:52:58.9195695+10:00;True|2022-05-15T16:49:34.4122883+10:00;True|2022-05-15T16:48:15.4185666+10:00;True|2022-05-15T16:45:28.8198442+10:00;True|2022-05-15T16:31:59.9734627+10:00;True|2022-05-15T16:28:40.0510135+10:00;True|2022-05-15T16:25:42.0472707+10:00;True|2022-05-15T16:12:56.1231375+10:00;True|2022-05-15T16:12:23.0699159+10:00;True|2022-05-15T16:08:04.6109112+10:00;True|2022-05-15T16:00:29.0312143+10:00;False|2022-05-15T15:59:05.2500635+10:00;False|2022-05-15T15:54:00.5462937+10:00;False|2022-05-15T15:52:53.6743602+10:00;False|2022-05-15T15:45:44.0377787+10:00;False|2022-05-15T15:43:59.4710896+10:00;False|2022-05-15T15:15:29.4416839+10:00;False|2022-05-15T15:13:32.5564463+10:00;True|2022-05-13T18:26:58.2326205+10:00;True|2022-05-13T18:23:18.1908342+10:00;True|2022-05-13T18:22:16.2612282+10:00;True|2022-05-13T18:16:17.0158140+10:00;True|2022-05-13T18:06:09.8651875+10:00;True|2022-05-13T18:04:41.2669199+10:00;True|2022-05-13T17:59:11.1355295+10:00;True|2022-05-13T17:48:15.5538816+10:00;True|2022-05-13T17:44:36.2048312+10:00;True|2022-05-13T17:37:49.8574816+10:00;True|2022-05-13T17:33:29.1751193+10:00;True|2022-05-13T16:57:45.2331740+10:00;True|2022-05-13T16:53:19.6521719+10:00;True|2022-05-13T15:48:40.1648764+10:00;True|2022-05-13T15:02:02.0437245+10:00;True|2022-05-13T15:00:16.4234097+10:00;True|2022-05-13T14:52:09.7037459+10:00;True|2022-05-13T14:48:15.2674731+10:00;True|2022-05-13T13:57:50.7055284+10:00;True|2022-05-13T13:55:20.8775810+10:00;True|2022-05-13T13:47:32.2020977+10:00;True|2022-05-13T13:43:04.0503007+10:00;False|2022-05-13T13:42:41.4750022+10:00;True|2022-05-13T13:39:16.4496498+10:00;False|2022-05-13T13:38:53.6226795+10:00;False|2022-05-13T13:38:26.3773884+10:00;True|2022-05-13T13:34:38.6875797+10:00;True|2022-05-13T13:25:55.4264434+10:00;True|2022-05-13T13:20:41.4937030+10:00;True|2022-05-04T00:49:33.9342561+10:00;True|2022-05-04T00:44:42.4913131+10:00;True|2022-05-04T00:41:01.1207902+10:00;True|2022-05-04T00:22:14.1306244+10:00;True|2022-05-03T23:10:18.3707564+10:00;True|2022-04-18T22:34:18.5622689+10:00;True|2022-04-18T22:13:04.9912199+10:00;True|2022-04-06T21:48:33.1611963+10:00;True|2022-04-04T21:00:00.6580332+10:00;True|2022-04-04T20:16:58.6354451+10:00;True|2022-04-04T20:14:28.4597827+10:00;True|2022-02-09T19:29:13.1820071+11:00;False|2022-02-09T19:28:35.1403332+11:00;False|2022-02-09T19:28:05.3336738+11:00;False|2022-02-09T19:26:26.1412860+11:00;True|2021-12-31T10:12:12.2732574+11:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Views/Bonuses/Details.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Bonuses/DetailsArchive.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Bonuses/New.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Contents/Details.cshtml">
+      <publishTime>03/05/2022 22:15:04</publishTime>
+    </File>
+    <File Include="Views/Contents/DetailsArchive.cshtml">
+      <publishTime>03/05/2022 22:14:58</publishTime>
+    </File>
+    <File Include="Views/Dashboard/Index.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Deposits/Details.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Deposits/DetailsPending.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Deposits/Index.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Pages/Details.cshtml">
+      <publishTime>03/05/2022 22:16:34</publishTime>
+    </File>
+    <File Include="Views/Pages/DetailsArchive.cshtml">
+      <publishTime>03/05/2022 22:16:26</publishTime>
+    </File>
+    <File Include="Views/Pages/New.cshtml">
+      <publishTime>03/05/2022 22:16:11</publishTime>
+    </File>
+    <File Include="Views/PNG/Gaming.cshtml">
+      <publishTime>06/04/2020 23:15:15</publishTime>
+    </File>
+    <File Include="Views/PNG/Players.cshtml">
+      <publishTime>07/06/2020 21:43:45</publishTime>
+    </File>
+    <File Include="Views/PNG/PlayerStats.cshtml">
+      <publishTime>07/06/2020 22:16:36</publishTime>
+    </File>
+    <File Include="Views/PNG/UserStats.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Posts/Details.cshtml">
+      <publishTime>03/05/2022 22:17:56</publishTime>
+    </File>
+    <File Include="Views/Posts/DetailsArchive.cshtml">
+      <publishTime>03/05/2022 22:17:51</publishTime>
+    </File>
+    <File Include="Views/Posts/New.cshtml">
+      <publishTime>03/05/2022 22:17:45</publishTime>
+    </File>
+    <File Include="Views/Promos/Details.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Promos/DetailsArchive.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Promos/New.cshtml">
+      <publishTime>06/10/2020 20:16:49</publishTime>
+    </File>
+    <File Include="Views/Shared/_BonusResults.cshtml">
+      <publishTime>11/11/2021 15:25:20</publishTime>
+    </File>
+    <File Include="Views/Shared/_CompetitionResults.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Shared/_CompetitionResultsHistory.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Shared/_DepositPendingResults.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Shared/_DepositResults.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Shared/_Logs.cshtml">
+      <publishTime>11/11/2021 12:22:25</publishTime>
+    </File>
+    <File Include="Views/Shared/_PlayerResults.cshtml">
+      <publishTime>07/06/2020 20:57:30</publishTime>
+    </File>
+    <File Include="Views/Shared/_PlayerStatsResults.cshtml">
+      <publishTime>06/08/2020 21:32:53</publishTime>
+    </File>
+    <File Include="Views/Shared/_PlayerStatsResults_Account.cshtml">
+      <publishTime>11/11/2021 12:29:08</publishTime>
+    </File>
+    <File Include="Views/Shared/_PostResultsHistory.cshtml">
+      <publishTime>09/03/2021 10:48:59</publishTime>
+    </File>
+    <File Include="Views/Shared/_PromoResultsHistory.cshtml">
+      <publishTime>06/10/2020 17:04:10</publishTime>
+    </File>
+    <File Include="Views/Shared/_TierResults.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Shared/_UserResults2.cshtml">
+      <publishTime>06/04/2020 23:13:08</publishTime>
+    </File>
+    <File Include="Views/Shared/_ValidateResults.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Shared/_WithdrawalResults.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Tipping/CompetitionDetails.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Tipping/CompetitionDetailsArchive.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Tipping/CompetitionNew.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Tipping/Index.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Tipping/TierDetails.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Tipping/TierNew.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Views/Users/Index.cshtml">
+      <publishTime>03/05/2022 22:24:36</publishTime>
+    </File>
+    <File Include="Views/Users/Index2.cshtml">
+      <publishTime>03/05/2022 22:25:17</publishTime>
+    </File>
+    <File Include="Views/Validate/Index.cshtml">
+      <publishTime>04/07/2021 11:24:56</publishTime>
+    </File>
+    <File Include="Views/Validate/IndexCards.cshtml">
+      <publishTime>04/12/2021 08:39:33</publishTime>
+    </File>
+    <File Include="Views/Withdrawals/Details.cshtml">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/css/site.css">
+      <publishTime>08/23/2022 18:51:17</publishTime>
+    </File>
+    <File Include="wwwroot/css/site.min.css">
+      <publishTime>09/03/2021 10:41:12</publishTime>
+    </File>
+    <File Include="wwwroot/js/resultsfilter.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

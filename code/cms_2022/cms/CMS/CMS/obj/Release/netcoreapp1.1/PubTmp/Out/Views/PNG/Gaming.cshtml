@@ -1,0 +1,541 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model GamingViews
+@{
+    ViewData["Title"] = "Gaming Activity | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                Gaming Activity
+                <span class="float-right">
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">
+                        <span class="sr-only">Loading...</span>
+                        All Activity<i class="fas fa-spinner" aria-hidden="true"></i>
+                    </div>
+                    <span class="text-success">@TempData["SuccessMessage"]</span>
+                    <div class="float-right btn-toolbar">
+                    </div>
+                </div>
+                <div class="panel-body resultspanel m-0 p-0">
+                    <table class="table table-hover table-striped m-0" id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th class="tw-medium">Deposited</th>
+                                <th class="tw-medium">Bonuses Awarded</th>
+                                <th class="tw-medium">Withdrawn</th>
+                                <th class="tw-medium">Bets Placed</th>
+                                <th class="tw-medium">Turnover</th>
+                                <th class="tw-medium">Paid Out</th>
+                                <th class="tw-medium">% Kept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Last 24 Hours</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Daily.Deposited.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Daily.DepositedBonus.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Daily.Withdrawn.ToString("N")</td>
+                                <td>@Model.All.Daily.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Daily.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Daily.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.All.Daily.Bet > 0)
+                                    {@Math.Round(((Model.All.Daily.Bet - Model.All.Daily.Won) / Model.All.Daily.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 7 Days</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Weekly.Deposited.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Weekly.DepositedBonus.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Weekly.Withdrawn.ToString("N")</td>
+                                <td>@Model.All.Weekly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Weekly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Weekly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.All.Weekly.Bet > 0)
+                                    {@Math.Round(((Model.All.Weekly.Bet - Model.All.Weekly.Won) / Model.All.Weekly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 30 Days</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Monthly.Deposited.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Monthly.DepositedBonus.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Monthly.Withdrawn.ToString("N")</td>
+                                <td>@Model.All.Monthly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Monthly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Monthly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.All.Monthly.Bet > 0)
+                                    {@Math.Round(((Model.All.Monthly.Bet - Model.All.Monthly.Won) / Model.All.Monthly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 365 Days</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Yearly.Deposited.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Yearly.DepositedBonus.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Yearly.Withdrawn.ToString("N")</td>
+                                <td>@Model.All.Yearly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Yearly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Yearly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.All.Yearly.Bet > 0)
+                                    {@Math.Round(((Model.All.Yearly.Bet - Model.All.Yearly.Won) / Model.All.Yearly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lifetime</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Lifetime.Deposited.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Lifetime.DepositedBonus.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Lifetime.Withdrawn.ToString("N")</td>
+                                <td>@Model.All.Lifetime.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Lifetime.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.All.Lifetime.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.All.Lifetime.Bet > 0)
+                                    {@Math.Round(((Model.All.Lifetime.Bet - Model.All.Lifetime.Won) / Model.All.Lifetime.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">
+                        <span class="sr-only">Loading...</span>
+                        Kiron Activity<i class="fas fa-spinner" aria-hidden="true"></i>
+                    </div>
+                    <span class="text-success">@TempData["SuccessMessage"]</span>
+                    <div class="float-right btn-toolbar">
+                    </div>
+                </div>
+                <div class="panel-body resultspanel m-0 p-0">
+                    <table class="table table-hover table-striped m-0" id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th class="tw-medium">Bets Placed</th>
+                                <th class="tw-medium">Turnover</th>
+                                <th class="tw-medium">Paid Out</th>
+                                <th class="tw-medium">% Kept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Last 24 Hours</td>
+                                <td>@Model.Kiron.Daily.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Daily.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Daily.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Kiron.Daily.Bet > 0)
+                                    {@Math.Round(((Model.Kiron.Daily.Bet - Model.Kiron.Daily.Won) / Model.Kiron.Daily.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 7 Days</td>
+                                <td>@Model.Kiron.Weekly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Weekly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Weekly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Kiron.Weekly.Bet > 0)
+                                    {@Math.Round(((Model.Kiron.Weekly.Bet - Model.Kiron.Weekly.Won) / Model.Kiron.Weekly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 30 Days</td>
+                                <td>@Model.Kiron.Monthly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Monthly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Monthly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Kiron.Monthly.Bet > 0)
+                                    {@Math.Round(((Model.Kiron.Monthly.Bet - Model.Kiron.Monthly.Won) / Model.Kiron.Monthly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 365 Days</td>
+                                <td>@Model.Kiron.Yearly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Yearly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Yearly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Kiron.Yearly.Bet > 0)
+                                    {@Math.Round(((Model.Kiron.Yearly.Bet - Model.Kiron.Yearly.Won) / Model.Kiron.Yearly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lifetime</td>
+                                <td>@Model.Kiron.Lifetime.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Lifetime.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Kiron.Lifetime.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Kiron.Lifetime.Bet > 0)
+                                    {@Math.Round(((Model.Kiron.Lifetime.Bet - Model.Kiron.Lifetime.Won) / Model.Kiron.Lifetime.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">
+                        <span class="sr-only">Loading...</span>
+                        Crazy Billions<i class="fas fa-spinner" aria-hidden="true"></i>
+                    </div>
+                    <span class="text-success">@TempData["SuccessMessage"]</span>
+                    <div class="float-right btn-toolbar">
+                    </div>
+                </div>
+                <div class="panel-body resultspanel m-0 p-0">
+                    <table class="table table-hover table-striped m-0" id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th class="tw-medium">Bets Placed</th>
+                                <th class="tw-medium">Turnover</th>
+                                <th class="tw-medium">Paid Out</th>
+                                <th class="tw-medium">% Kept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Last 24 Hours</td>
+                                <td>@Model.Marlipin.Daily.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Daily.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Daily.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Marlipin.Daily.Bet > 0)
+                                    {@Math.Round(((Model.Marlipin.Daily.Bet - Model.Marlipin.Daily.Won) / Model.Marlipin.Daily.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 7 Days</td>
+                                <td>@Model.Marlipin.Weekly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Weekly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Weekly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Marlipin.Weekly.Bet > 0)
+                                    {@Math.Round(((Model.Marlipin.Weekly.Bet - Model.Marlipin.Weekly.Won) / Model.Marlipin.Weekly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 30 Days</td>
+                                <td>@Model.Marlipin.Monthly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Monthly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Monthly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Marlipin.Monthly.Bet > 0)
+                                    {@Math.Round(((Model.Marlipin.Monthly.Bet - Model.Marlipin.Monthly.Won) / Model.Marlipin.Monthly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 365 Days</td>
+                                <td>@Model.Marlipin.Yearly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Yearly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Yearly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Marlipin.Yearly.Bet > 0)
+                                    {@Math.Round(((Model.Marlipin.Yearly.Bet - Model.Marlipin.Yearly.Won) / Model.Marlipin.Yearly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lifetime</td>
+                                <td>@Model.Marlipin.Lifetime.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Lifetime.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.Marlipin.Lifetime.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.Marlipin.Lifetime.Bet > 0)
+                                    {@Math.Round(((Model.Marlipin.Lifetime.Bet - Model.Marlipin.Lifetime.Won) / Model.Marlipin.Lifetime.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">
+                        <span class="sr-only">Loading...</span>
+                        Universal Race Activity<i class="fas fa-spinner" aria-hidden="true"></i>
+                    </div>
+                    <span class="text-success">@TempData["SuccessMessage"]</span>
+                    <div class="float-right btn-toolbar">
+                    </div>
+                </div>
+                <div class="panel-body resultspanel m-0 p-0">
+                    <table class="table table-hover table-striped m-0" id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th class="tw-medium">Bets Placed</th>
+                                <th class="tw-medium">Turnover</th>
+                                <th class="tw-medium">Paid Out</th>
+                                <th class="tw-medium">% Kept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Last 24 Hours</td>
+                                <td>@Model.UniversalRace.Daily.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Daily.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Daily.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.UniversalRace.Daily.Bet > 0)
+                                    {@Math.Round(((Model.UniversalRace.Daily.Bet - Model.UniversalRace.Daily.Won) / Model.UniversalRace.Daily.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 7 Days</td>
+                                <td>@Model.UniversalRace.Weekly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Weekly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Weekly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.UniversalRace.Weekly.Bet > 0)
+                                    {@Math.Round(((Model.UniversalRace.Weekly.Bet - Model.UniversalRace.Weekly.Won) / Model.UniversalRace.Weekly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 30 Days</td>
+                                <td>@Model.UniversalRace.Monthly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Monthly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Monthly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.UniversalRace.Monthly.Bet > 0)
+                                    {@Math.Round(((Model.UniversalRace.Monthly.Bet - Model.UniversalRace.Monthly.Won) / Model.UniversalRace.Monthly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 365 Days</td>
+                                <td>@Model.UniversalRace.Yearly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Yearly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Yearly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.UniversalRace.Yearly.Bet > 0)
+                                    {@Math.Round(((Model.UniversalRace.Yearly.Bet - Model.UniversalRace.Yearly.Won) / Model.UniversalRace.Yearly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lifetime</td>
+                                <td>@Model.UniversalRace.Lifetime.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Lifetime.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.UniversalRace.Lifetime.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.UniversalRace.Lifetime.Bet > 0)
+                                    {@Math.Round(((Model.UniversalRace.Lifetime.Bet - Model.UniversalRace.Lifetime.Won) / Model.UniversalRace.Lifetime.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">
+                        <span class="sr-only">Loading...</span>
+                        Bet Construct Activity<i class="fas fa-spinner" aria-hidden="true"></i>
+                    </div>
+                    <span class="text-success">@TempData["SuccessMessage"]</span>
+                    <div class="float-right btn-toolbar">
+                    </div>
+                </div>
+                <div class="panel-body resultspanel m-0 p-0">
+                    <table class="table table-hover table-striped m-0" id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th class="tw-medium">Bets Placed</th>
+                                <th class="tw-medium">Turnover</th>
+                                <th class="tw-medium">Paid Out</th>
+                                <th class="tw-medium">% Kept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Last 24 Hours</td>
+                                <td>@Model.BetConstruct.Daily.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Daily.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Daily.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstruct.Daily.Bet > 0)
+                                    {@Math.Round(((Model.BetConstruct.Daily.Bet - Model.BetConstruct.Daily.Won) / Model.BetConstruct.Daily.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 7 Days</td>
+                                <td>@Model.BetConstruct.Weekly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Weekly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Weekly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstruct.Weekly.Bet > 0)
+                                    {@Math.Round(((Model.BetConstruct.Weekly.Bet - Model.BetConstruct.Weekly.Won) / Model.BetConstruct.Weekly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 30 Days</td>
+                                <td>@Model.BetConstruct.Monthly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Monthly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Monthly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstruct.Monthly.Bet > 0)
+                                    {@Math.Round(((Model.BetConstruct.Monthly.Bet - Model.BetConstruct.Monthly.Won) / Model.BetConstruct.Monthly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 365 Days</td>
+                                <td>@Model.BetConstruct.Yearly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Yearly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Yearly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstruct.Yearly.Bet > 0)
+                                    {@Math.Round(((Model.BetConstruct.Yearly.Bet - Model.BetConstruct.Yearly.Won) / Model.BetConstruct.Yearly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lifetime</td>
+                                <td>@Model.BetConstruct.Lifetime.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Lifetime.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstruct.Lifetime.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstruct.Lifetime.Bet > 0)
+                                    {@Math.Round(((Model.BetConstruct.Lifetime.Bet - Model.BetConstruct.Lifetime.Won) / Model.BetConstruct.Lifetime.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">
+                        <span class="sr-only">Loading...</span>
+                        Bet Construct Casino Activity<i class="fas fa-spinner" aria-hidden="true"></i>
+                    </div>
+                    <span class="text-success">@TempData["SuccessMessage"]</span>
+                    <div class="float-right btn-toolbar">
+                    </div>
+                </div>
+                <div class="panel-body resultspanel m-0 p-0">
+                    <table class="table table-hover table-striped m-0" id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th class="tw-medium">Bets Placed</th>
+                                <th class="tw-medium">Turnover</th>
+                                <th class="tw-medium">Paid Out</th>
+                                <th class="tw-medium">% Kept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Last 24 Hours</td>
+                                <td>@Model.BetConstructCasino.Daily.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Daily.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Daily.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstructCasino.Daily.Bet > 0)
+                                    {@Math.Round(((Model.BetConstructCasino.Daily.Bet - Model.BetConstructCasino.Daily.Won) / Model.BetConstructCasino.Daily.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 7 Days</td>
+                                <td>@Model.BetConstructCasino.Weekly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Weekly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Weekly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstructCasino.Weekly.Bet > 0)
+                                    {@Math.Round(((Model.BetConstructCasino.Weekly.Bet - Model.BetConstructCasino.Weekly.Won) / Model.BetConstructCasino.Weekly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 30 Days</td>
+                                <td>@Model.BetConstructCasino.Monthly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Monthly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Monthly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstructCasino.Monthly.Bet > 0)
+                                    {@Math.Round(((Model.BetConstructCasino.Monthly.Bet - Model.BetConstructCasino.Monthly.Won) / Model.BetConstructCasino.Monthly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last 365 Days</td>
+                                <td>@Model.BetConstructCasino.Yearly.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Yearly.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Yearly.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstructCasino.Yearly.Bet > 0)
+                                    {@Math.Round(((Model.BetConstructCasino.Yearly.Bet - Model.BetConstructCasino.Yearly.Won) / Model.BetConstructCasino.Yearly.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lifetime</td>
+                                <td>@Model.BetConstructCasino.Lifetime.Bets.ToString("N0")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Lifetime.Bet.ToString("N")</td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@Model.BetConstructCasino.Lifetime.Won.ToString("N")</td>
+                                <td>
+                                    @if (Model.BetConstructCasino.Lifetime.Bet > 0)
+                                    {@Math.Round(((Model.BetConstructCasino.Lifetime.Bet - Model.BetConstructCasino.Lifetime.Won) / Model.BetConstructCasino.Lifetime.Bet) * 100, 2);
+                                }%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+                            //var endpoint = "/contents/UpdateResults";
+    </script>
+
+    @{ await Html.RenderPartialAsync("_ResultsScriptsPartialFilter"); }
+}

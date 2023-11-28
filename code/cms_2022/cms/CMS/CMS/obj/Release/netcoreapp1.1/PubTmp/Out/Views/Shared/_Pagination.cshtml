@@ -1,0 +1,44 @@
+﻿@model Results
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination current">
+
+        @if (Model.pageNumber > 1)
+        {
+            <li class="page-item"><a class="page-link current" data-page="@(Model.pageNumber-1)">Previous</a></li>
+        }
+        @if ((Model.pageNumber >= 1 || (Model.totalResults > Model.pageNumber * Model.pageSize)))
+        {
+
+            double startingpage = Model.pageNumber;
+            if (Math.Ceiling(Model.totalResults / Model.pageSize) - startingpage < 3 && Model.totalResults / Model.pageSize > 3)
+            {
+                startingpage = startingpage - (6 - (Math.Ceiling(Model.totalResults / Model.pageSize) - startingpage));
+            }
+            else if (startingpage > 3)
+            {
+                startingpage = startingpage - 3;
+            }
+            else
+            {
+                startingpage = 1;
+            }
+
+            if (startingpage < 1)
+            {
+                startingpage = 1;
+            }
+            double count = startingpage;
+
+            while (count < startingpage + 7 && count <= Math.Ceiling(Model.totalResults / Model.pageSize))
+            {
+                <li class="page-item pagelink_@count current"><a class="page-link current" data-page="@count">@count</a></li>
+                count += 1;
+            }
+        }
+        @if (Model.totalResults > ((Model.pageNumber) * Model.pageSize))
+        {
+            <li class="page-item"><a class="page-link current" data-page="@(Model.pageNumber+1)">Next</a></li>
+        }
+    </ul>
+</nav>

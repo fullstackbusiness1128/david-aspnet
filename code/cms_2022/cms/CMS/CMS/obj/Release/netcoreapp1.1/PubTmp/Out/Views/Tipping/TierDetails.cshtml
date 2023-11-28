@@ -1,0 +1,113 @@
+﻿@model CompetitionRewardTierView
+@{
+    ViewData["Title"] = "Details | Comp Tiers | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/tipping/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="Tipping" asp-action="CompetitionTierDetails" method="post" class="form-horizontal" name="FormTier">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="CompetitionIdentifier" id="CompetitionIdentifier" value="@Model.CompetitionRewardTier.CompetitionIdentifier" />
+                <input type="hidden" name="CompetitionRewardTierIdentifier" id="CompetitionRewardTierIdentifier" value="@Model.CompetitionRewardTier.Identifier" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Create a new tier</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="RewardFor" class="col-md-3 control-label">Reward For</label>
+                            <div class="col-md-9">
+                                <select name="RewardFor" class="form-control">
+                                    @if (Model.CompetitionRewardTier.RewardFor == "S")
+                                    {
+                                        <option value="R">Round</option>
+                                        <option selected value="S">Season</option>
+                                    }
+                                    else
+                                    {
+                                        <option selected value="R">Round</option>
+                                        <option value="S">Season</option>
+                                    }
+                                </select>
+                                <span data-valmsg-for="RewardFor" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="Position" class="col-md-3 control-label">Position</label>
+                            <div class="col-md-9">
+                                <input name="Position" class="form-control" value="@Model.CompetitionRewardTier.Position" />
+                                <span data-valmsg-for="Position" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="PositionValue" class="col-md-3 control-label">Position Value</label>
+                            <div class="col-md-9">
+                                <input name="PositionValue" class="form-control" value="@Model.CompetitionRewardTier.PositionValue" />
+                                <span data-valmsg-for="PositionValue" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="PositionPercentage" class="col-md-3 control-label">Position %</label>
+                            <div class="col-md-9">
+                                <input name="PositionPercentage" class="form-control" value="@Model.CompetitionRewardTier.PositionPercentage" />
+                                <span data-valmsg-for="PositionPercentage" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manage Tier Content
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Publish Options</div>
+                </div>
+                <div class="panel-body publish">
+                    <a onclick="document.FormTier.submit();" class="btn btn-default">Publish</a>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Change History</div>
+                </div>
+                <div class="panel-body historypanel">
+                    
+                </div>
+            </div>
+            <form asp-controller="tipping" asp-action="tierremove" method="post" class="form-horizontal" name="FormRemove">
+                <input type="hidden" name="Id" value="@Model.CompetitionRewardTier.Id" />
+                <a href="#" onclick="document.FormRemove.submit();" style="font-size:12px;">Remove Tier</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,180 @@
+﻿@using System.Globalization
+
+
+@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+@model PurchasesView
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+@section Styles
+    {
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 0em;
+        }
+
+        .banner_bottom {
+            padding-bottom: 0;
+        }
+
+        .breadcrumb-1 {
+            background: #F4F9FE;
+        }
+
+        .panel1 {
+            padding: 28px;
+            margin: 20px 0px 30px 0px;
+            border: 1px solid rgba(150, 200, 250, 0.1);
+            background: rgba(150, 200, 250, 0.1);
+            box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
+            border: 10px solid #FFF;
+            border-radius: 10px;
+        }
+
+        .panel {
+            margin: 20px 0px 30px 0px;
+            padding: 14px;
+            border: 1px solid rgba(150, 200, 250, 0.1);
+        }
+
+        .total {
+            text-align: right;
+            color: #303030;
+            padding: 16px 36px;
+            background: #f1f1f1;
+            font-weight: 600;
+        }
+
+        .tokens-list {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .text-left {
+            text-align: left !important;
+        }
+
+        .each-token {
+            width: 100%;
+            flex-direction: row;
+            padding: 20px 28px;
+            background-color: #F4F5F7;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+
+        .text-danger {
+            color: #dc3545 !important;
+        }
+
+        .each-token h5.price {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .token-info span {
+            text-align: left;
+            color: #868a9a;
+        }
+
+        .token-info h5 {
+            text-align: left;
+            color: #15294b;
+            margin-bottom: 10px;
+        }
+
+        .each-token h5.price span {
+            font-size: 14px;
+            font-weight: 600;
+            background: #FFF;
+            border-radius: 3px;
+            padding: 2px;
+            color: #15294b;
+        }
+
+        .mt-4, .my-4 {
+            margin-top: 1.5rem !important;
+        }
+
+        .align-items-center {
+            -ms-flex-align: center !important;
+            align-items: center !important;
+        }
+
+        .d-flex {
+            display: -ms-flexbox !important;
+            display: flex !important;
+        }
+
+        .mr-2, .mx-2 {
+            margin-right: 0.5rem !important;
+        }
+
+        .d-md-none {
+            display: none !important;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+
+        .mt-3, .my-3 {
+            margin-top: 1rem !important;
+        }
+
+        .w-100 {
+            width: 100% !important;
+        }
+    </style>
+}
+
+
+<div class="container-fluid breadcrumb-1" style="margin-top: 8.1em">
+    <div class="row">
+        <p style="padding: 0.5em 0 0 1em"><a href="~/">Home</a> . Merchants Home</p>
+    </div>
+</div>
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="inner_sec_info_wthree_agile">
+            <div class="help_full">
+                <div class="col-md-6 col-xs-12 banner_bottom_grid help">
+                    <h2>Merchant Expression of Interest</h2>
+                    <div class="panel1">
+                        <p>
+                            <b>Thank you for expressing your interest to accept FunTokenz.</b><br /><br />One of our team representives will be in contact with you shortly to discuss your application and assist in onboarding your brand as our newest FunTokenz Merchant.
+                        </p>
+                        <a href="~/signout" class="btn btn-block btn-danger font-weight-bold">Sign Out</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12 banner_bottom_left">
+                    <h2>API Documentation</h2>
+                    <div class="panel resultspanel">
+                        <p>API documentation will be available to you once your account is approved as a FunTokenz Merchant.</p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+        var endpoint = "/customers/home";
+    </script>
+
+    @{ await Html.RenderPartialAsync("_ResultsScriptsPartial"); }
+}

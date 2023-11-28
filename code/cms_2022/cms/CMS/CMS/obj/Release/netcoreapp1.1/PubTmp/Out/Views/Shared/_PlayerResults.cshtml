@@ -1,0 +1,60 @@
+﻿@model PlayerViewModel
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.Options.Results.pageSize" data-sortfield="@Model.Options.Results.sortField" data-sortorder="@Model.Options.Results.sortOrder" data-searchfield="@Model.Options.Results.searchField" data-searchvalue="@Model.Options.Results.searchValue" data-groupby="@Model.Options.Filter.GroupBy">
+    <thead>
+        <tr>
+            <th class="" data-field="Id" data-order="asc">Player <i class="fa fa-sort"></i></th>
+            <th class="tw-small " >Deposited </th>
+            <th class="tw-large " data-field="Balance" data-order="asc">Balance <i class="fa fa-sort"></i></th>
+            <th class="tw-small " >Turnover </th>
+            <th class="tw-small " >Paid Out </th>
+            <th class="tw-small">% Kept</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="highlighted"></td>
+            <td class="highlighted">$@Model.Totals.Deposited</td>
+            <td class="highlighted">$@Model.Totals.Balance</td>
+            <td class="highlighted">$@Model.Totals.Bet</td>
+            <td class="highlighted">$@Model.Totals.Won</td>
+            <td class="highlighted">-</td>
+        </tr>
+        @if (Model.PlayerSnap.Count > 0)
+        {
+            var symbol = "K";
+            @foreach (var item in Model.PlayerSnap)
+            {
+                if (item.Currency == "PGK")
+                {
+                    symbol = "K";
+                }
+                else if (item.Currency == "USD")
+                {
+                    symbol = "US$";
+                }
+                else if (item.Currency == "FJD")
+                {
+                    symbol = "FJ$";
+                }
+
+                <tr>
+                    <td><a href="~/players/@item.PlayerId">@item.PlayerName</a><br/><sub>ID: @item.PlayerGamingId | Email: @item.PlayerEmail</sub></td>
+                    <td>@symbol@item.Deposited</td>
+                    <td>@symbol@item.Balance (<a href="~/deposits/new/@item.PlayerId">deposit</a>)</td>
+                    <td>@symbol@item.Bet</td>
+                    <td>@symbol@item.Won</td>
+                    <td>@if (item.Bet > 0) { @Math.Round(((item.Bet - item.Won) / item.Bet) * 100, 2); }%</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">No players were found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.Partial("_Pagination", Model.Options.Results)

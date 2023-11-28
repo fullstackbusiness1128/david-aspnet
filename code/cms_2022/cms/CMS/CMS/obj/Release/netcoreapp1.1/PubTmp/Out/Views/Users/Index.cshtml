@@ -1,0 +1,83 @@
+﻿@model UserListing
+
+@{
+    ViewData["Title"] = "Users | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                Users
+                <span class="float-right">
+                    <a href="~/users/new" class="btn btn-primary">New User</a>
+                    <a href="#" class="btn btn-primary export">Export All Results</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">
+                        <span class="sr-only">Loading...</span>
+                        Users <i class="fas fa-spinner" aria-hidden="true"></i>
+                    </div>
+                    <span class="text-success">@TempData["SuccessMessage"]</span>
+                    <div class="float-right btn-toolbar">
+                        <div class="btn-group dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="info">50</span>&nbsp;<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu small">
+                                <li>
+                                    <a href="#">25</a>
+                                    <a href="#">50</a>
+                                    <a href="#">100</a>
+                                    <a href="#">200</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body resultspanel">
+                    @Html.Partial("_UserResults", Model)
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-9 -->
+        <div class="col-3 pr-0">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="title">
+                        <i class="fa fa-search fa-fw"></i>Search
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Email Address ..." id="search-email">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var endpoint = "/users/UpdateResults";
+        var endpointExp = "/users/ExportResults";
+    </script>
+
+    @{ await Html.RenderPartialAsync("_ResultsScriptsPartial"); }
+}

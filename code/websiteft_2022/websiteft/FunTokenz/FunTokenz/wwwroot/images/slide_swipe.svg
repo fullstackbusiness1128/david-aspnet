@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="77" height="5" viewBox="0 0 77 5">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="77" height="5" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="slide_swipe" clip-path="url(#clip-path)">
+    <g id="slide_swipe-2" data-name="slide_swipe" transform="translate(1929 -705)">
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="23" height="5" rx="2.5" transform="translate(-1929 705)" fill="#fff"/>
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="12" height="5" rx="2.5" transform="translate(-1900 705)" fill="#fff"/>
+      <rect id="Rectangle_4" data-name="Rectangle 4" width="12" height="5" rx="2.5" transform="translate(-1882 705)" fill="#fff"/>
+      <rect id="Rectangle_2915" data-name="Rectangle 2915" width="12" height="5" rx="2.5" transform="translate(-1864 705)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

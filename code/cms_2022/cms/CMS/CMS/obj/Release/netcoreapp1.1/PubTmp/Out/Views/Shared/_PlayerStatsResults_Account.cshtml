@@ -1,0 +1,144 @@
+﻿@model PlayerStatsViewModel
+
+@using Microsoft.AspNetCore.Http;
+@using System.Globalization;
+@using Newtonsoft.Json;
+@using CMS.Models.BusinessModels;
+
+<table class="table table-bordered table-hover" id="results-table" data-size="@Model.Options.Results.pageSize" data-sortfield="@Model.Options.Results.sortField" data-sortorder="@Model.Options.Results.sortOrder" data-searchfield="@Model.Options.Results.searchField" data-searchvalue="@Model.Options.Results.searchValue">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th class="tw-small">Event Date (UTC)</th>
+            <th class="tw-small">Account Debit</th>
+            <th class="tw-small">Account Credit</th>
+            <th class="tw-small">Account Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.PlayerStats.Count >= 1)
+        {
+            var counter = 1;
+            foreach (var item in Model.PlayerStats)
+            {
+
+                if (((item.DatetimeCreated == item.MostRecentAdjustment || item.MostRecentAdjustment == 0) && item.Type == 1) || item.Type == 0 || item.Type == 2 || item.Type == 3 || item.Type == 4)
+                {
+                    if (item.EnteredFor != "BetConstruct Loss")
+                    {
+                        <tr>
+                            <td>
+                                @item.EnteredFor.Replace("Tipping BuyIn", "Tipping Buy In").Replace("Kiron Debit", "Virtuals - Bet Placed").Replace("Kiron Credit", "Virtuals - Winnings Paid").Replace("BetConstruct Debit", "Sports Bet Placed").Replace("BetConstruct Win", "Sports Bet Winnings Paid").Replace("BetConstruct Cashed Out", "Sports Bet Cashed Out").Replace("BetConstruct Returned", "Sports Bet Returned").Replace("BetConstruct Credit", "Sports Bet Winnings Paid").Replace("Marlipin Credit", "Slots / Scatchcard / Lottery Winnings Paid").Replace("Marlipin Debit", "Slots / Scatchcard / Lottery Bet Placed").Replace("Marlipin Win", "Slots / Scatchcard / Lottery Winnings Paid").Replace("BetConstruct Casino Debit", "Casino Bet Placed").Replace("BetConstruct Casino Refund", "Casino Bet Refund").Replace("BetConstruct Casino Credit", "Casino Winnings Paid").Replace("UniversalRace Debit", "Racing Bet Placed").Replace("UniversalRace Credit", "Racing Winnings Paid").Replace("UniversalRace Refund", "Racing Bet Returned")
+
+                                @if (item.EnteredFor.Contains("Kiron Debit") || item.EnteredFor.Contains("Kiron Credit") || item.EnteredFor.Contains("BetConstruct Debit") || item.EnteredFor.Contains("BetConstruct Win") || item.EnteredFor.Contains("BetConstuct Cashed Out") || item.EnteredFor.Contains("BetConstruct Returned") || item.EnteredFor.Contains("BetConstruct Credit"))
+                                {
+                                    <p style="font-size:0.7em;">Bet Reference: @item.BetCommonId</p>
+                                }
+                                else if (item.EnteredFor.Contains("UniversalRace") && !string.IsNullOrEmpty(item.DisplayReference))
+                                {
+                                    <p style="font-size:0.7em;">Bet Reference: @item.DisplayReference</p>
+                                }
+                            </td>
+                            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss")</td>
+
+                            @if (item.Type == 2)
+                            {
+                                <td>-</td>
+                                <td>
+                                    @Html.Raw(Context.Session.GetString("CurrencySymbol"))@item.Amount
+                                    @if (!string.IsNullOrEmpty(item.Bonus) && item.Bonus != "0" && item.Bonus != "0.00")
+                                    {<br /><sub>+ Bonus @Html.Raw(Context.Session.GetString("CurrencySymbol"))@item.Bonus</sub>}
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.EndingBalance.ToString()))
+                                    {@Html.Raw("K" + item.EndingBalance.ToString("0.00"))}
+                                </td>
+                            }
+                            else if (item.Type == 3)
+                            {
+                                <td>@Html.Raw(Context.Session.GetString("CurrencySymbol"))@item.Amount.ToString("0.00")</td>
+                                <td></td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.EndingBalance.ToString()))
+                                    {@Html.Raw("K" + item.EndingBalance.ToString("0.00"))}
+                                </td>
+                            }
+                            else if (item.Type == 1)
+                            {
+
+                                if (!string.IsNullOrEmpty(item.BetJsonAll))
+                                {
+                                    var bet = JsonConvert.DeserializeObject<JsonBet>(item.BetJsonAll);
+                                    if (bet != null)
+                                    {
+                                        <td>-</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(bet.WinValue.ToString()))
+                                            {@Html.Raw("K" + bet.WinValue.ToString("0.00"))}
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(item.EndingBalance.ToString()))
+                                            {@Html.Raw("K" + item.EndingBalance.ToString("0.00"))}
+                                        </td>
+                                    }
+                                }
+                                else if (item.EnteredFor.StartsWith("Tipping Comp - "))
+                                {
+                                    <td>-</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.Amount.ToString()))
+                                        {@Html.Raw("K" + item.Amount.ToString("0.00"))}
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.EndingBalance.ToString()))
+                                        {@Html.Raw("K" + item.EndingBalance.ToString("0.00"))}
+                                    </td>
+                                }
+                            }
+                            else
+                            {
+
+                                if (!string.IsNullOrEmpty(item.BetJsonAll))
+                                {
+                                    var bet = JsonConvert.DeserializeObject<JsonBet>(item.BetJsonAll);
+                                    if (bet != null)
+                                    {
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(bet.BetValue.ToString()))
+                                            {@Html.Raw("K" + bet.BetValue.ToString("0.00"))}
+                                        </td>
+                                        <td>-</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(item.EndingBalance.ToString()))
+                                            {@Html.Raw("K" + item.EndingBalance.ToString("0.00"))}
+                                        </td>
+                                    }
+                                }
+                            }
+                        </tr>
+                        @if (item.EnteredFor == "Kiron Debit" || item.EnteredFor == "Kiron Credit" || item.EnteredFor == "BetConstruct Debit" || item.EnteredFor == "BetConstruct Win" || item.EnteredFor == "BetConstruct Cashed Out" || item.EnteredFor == "BetConstruct Returned" || item.EnteredFor == "BetConstruct Credit" || item.EnteredFor == "Marlipin Credit" || item.EnteredFor == "Slots / Scatchcard / Lottery Winnings Paid" || item.EnteredFor == "Marlipin Win" || item.EnteredFor == "Slots / Scatchcard / Lottery Winnings Paid" || item.EnteredFor == "BetConstruct Casino Debit" || item.EnteredFor == "BetConstruct Casino Refund" || item.EnteredFor == "BetConstruct Casino Credit" || item.EnteredFor == "UniversalRace Debit" || item.EnteredFor == "UniversalRace Credit" || item.EnteredFor == "UniversalRace Refund")
+                        {
+                            <tr id="logs_@counter">
+                                <td colspan="5" style="background:#F1F1F1;margin:0px;padding:4px 10px;"><label style="font-size:12px;" id="show_@counter" data-counter="@counter" data-betcommonid="@item.BetCommonId" data-displayreference="@item.DisplayReference" data-datetimecreated="@item.DatetimeCreated">Show logs</label></td>
+                            </tr>
+                        }
+                    }
+                }
+                else
+                {
+
+                }
+
+                counter = counter + 1;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">There are no records to display</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.Partial("_Pagination", Model.Options.Results)

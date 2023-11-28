@@ -1,0 +1,36 @@
+﻿@model ListCompetitionRewardTiers
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.Results.PageSize">
+    <thead>
+        <tr>
+            <th class="btnsort" data-field="Name" data-order="asc">For</th>
+            <th class="btnsort tw-small" data-field="Name" data-order="asc">Position</th>
+            <th class="btnsort tw-small" data-field="Name" data-order="asc">Position Value</th>
+            <th class="btnsort tw-small" data-field="Name" data-order="asc">Position %</th>
+            <th class="tw-large btnsort" data-field="Created" data-order="asc">Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.CompetitionRewardTiers.Count > 0)
+        {
+            foreach (var item in Model.CompetitionRewardTiers)
+            {
+            <tr>
+                <td>@item.RewardFor</td>
+                <td>@item.Position</td>
+                <td>@item.PositionValue</td>
+                <td>@item.PositionPercentage</td>
+                <td><a href="~/competitions/@item.CompetitionIdentifier/@item.Identifier">@DateTime.ParseExact(item.DateCreated.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</a></td>
+            </tr>
+            }
+        }
+        else
+        {
+        <tr>
+            <td colspan="5">No rewards tiers for this comp were found</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", new Results() {pageNumber = Model.Results.PageSize, pageSize = Model.Results.PageNumber })

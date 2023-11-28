@@ -1,0 +1,123 @@
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.config
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.Development.config
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\bower.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\bundleconfig.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.deps.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.dev.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.dll
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.pdb
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.AssemblyReference.cache
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfoInputs.cache
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfo.cs
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.CoreCompileInputs.cache
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.dll
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.pdb
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\PNGBet\CMS\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.genruntimeconfig.cache
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.AssemblyReference.cache
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfoInputs.cache
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfo.cs
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.CoreCompileInputs.cache
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.dll
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.pdb
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.config
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.Development.config
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\bower.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\bundleconfig.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.deps.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.dev.json
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.dll
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.pdb
+C:\Users\Wolf\Desktop\Repos\Performance Crew\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.genruntimeconfig.cache
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.config
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.Development.config
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\bower.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\bundleconfig.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.deps.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.dev.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.dll
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.pdb
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.AssemblyReference.cache
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfoInputs.cache
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfo.cs
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.CoreCompileInputs.cache
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.dll
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.pdb
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\PNG Bet\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.genruntimeconfig.cache
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfoInputs.cache
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfo.cs
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.CoreCompileInputs.cache
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.dll
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.pdb
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.config
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.Development.config
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\bower.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\bundleconfig.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.deps.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.dev.json
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.dll
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.pdb
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.genruntimeconfig.cache
+C:\Users\Wolf\Desktop\Repos\PC\Clients\Misterio Vacio\Fun Tokenz\Console\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.AssemblyReference.cache
+E:\works\asp\20220901\code\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.deps.json
+E:\works\asp\20220901\code\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.json
+E:\works\asp\20220901\code\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.dev.json
+E:\works\asp\20220901\code\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.dll
+E:\works\asp\20220901\code\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.pdb
+E:\works\asp\20220901\code\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csprojResolveAssemblyReference.cache
+E:\works\asp\20220901\code\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.CoreCompileInputs.cache
+E:\works\asp\20220901\code\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfoInputs.cache
+E:\works\asp\20220901\code\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfo.cs
+E:\works\asp\20220901\code\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.dll
+E:\works\asp\20220901\code\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.pdb
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.config
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.Development.config
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.json
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\bower.json
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\bundleconfig.json
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.deps.json
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.json
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.dev.json
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.dll
+D:\works\aspnet\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.pdb
+D:\works\aspnet\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.AssemblyReference.cache
+D:\works\aspnet\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfoInputs.cache
+D:\works\aspnet\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfo.cs
+D:\works\aspnet\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.CoreCompileInputs.cache
+D:\works\aspnet\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.dll
+D:\works\aspnet\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.pdb
+D:\works\aspnet\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.genruntimeconfig.cache
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.config
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\nlog.Development.config
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.Development.json
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\appsettings.json
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\bower.json
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\bundleconfig.json
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.deps.json
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.json
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.runtimeconfig.dev.json
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.dll
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\bin\Debug\netcoreapp2.2\CMS.pdb
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.AssemblyReference.cache
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfoInputs.cache
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.AssemblyInfo.cs
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.csproj.CoreCompileInputs.cache
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.dll
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.pdb
+E:\works\asp\20220901\code\cms_2022\cms\CMS\CMS\obj\Debug\netcoreapp2.2\CMS.genruntimeconfig.cache

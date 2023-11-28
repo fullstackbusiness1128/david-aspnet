@@ -1,0 +1,227 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Step 1";
+}
+
+@model CustomerRedeemView
+
+@section Styles
+    {
+
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 0em;
+        }
+
+        .breadcrumb-1 {
+            background: #F4F9FE;
+        }
+
+        .form-group.custom-bg {
+            background-color: #F4F5F7;
+            width: 100%;
+       
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        input[type='number'].digitinput {
+            font-size: 1.3em;
+            padding: 0px;
+            min-width: 20px;
+            min-height: 60px;
+            font-weight: bold;
+            border-radius: 0px;
+            border: 0px;
+            margin: 1px;
+            text-align: center;
+        }
+
+        .btn-danger {
+            margin-top: 20px;
+            background-color: rgba(233,72,89,1);
+            text-align: center;
+            color: #fff;
+            padding: 15px;
+        }
+
+        .form-group.custom-bg {
+            background-color: #F4F5F7;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .form-group.custom-bg select {
+            text-align: left;
+            color: #000;
+            font-weight: 500;
+            background-color: transparent;
+            border: 0;
+     
+            background: #FFF;
+            padding: 15px;
+        }
+
+        .form-group.custom-bg input, .form-group.text-left input {
+            
+            border: 0px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            background-color: #F4F5F7;
+            text-align: left;
+            color: #15294b;
+            padding: 14px 28px;
+            min-height: 60px;
+            border: 0;
+            border-radius: 0px;
+        }
+
+            .form-control:focus {
+                color: #495057;
+                background-color: #F4F5F7;
+                border-color: #80bdff !important;
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+
+            
+    </style>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $("#UserId").on("change", function () {
+            if ($("#UserId option").filter(':selected').val().length <= 1) {
+                $(".new-contact").show();
+            } else {
+                $(".new-contact").hide();
+            }
+        });
+
+        $(".digitinput").on("input", function () {
+            $(this).next('.digitinput').focus();
+        });
+
+    </script>
+}
+
+
+
+<div class="container-fluid breadcrumb-1" style="margin-top: 8.1em">
+    <div class="row">
+        <p style="padding: 0.5em 0 0 1em"><a href="~/">Resellers Home</a> . New Tokenz Sale</p>
+    </div>
+</div>
+
+
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="inner_sec_info_wthree_agile">
+            <div class="help_full">
+                <div class="col-md-3 col-xs-12 banner_bottom_grid help"></div>
+
+                <div class="col-md-6 col-xs-12 banner_bottom_grid help">
+                    <h2>Buy back FunTokenz</h2>
+                    <p class="text-md-left">Your sale currency is: <b>@Context.Session.GetString("ResellerCurrency")</b>.<br /><br />Enter the amount of tokens the customer wishes to redeem, their Token Code and their Phone Number or Email Address.</p>
+                    <h1 class="text-center text-md-left justify-content-center">Enter An Amount</h1>
+                    <form asp-controller="Resellers" asp-action="RedeemConfirm" method="post">
+                        <div asp-validation-summary="All" class="text-danger text-left"></div>
+                        <div class="form-group custom-bg">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-12">
+                                    <label>How Many Fun Tokens: <sub><br />Minimum of: 20.00</sub></label>
+                                </div>
+                                <div class="col-md-7 col-sm-12">
+                                    <input type="text" name="Amount" value="1000.00" style="width: 100%; margin-top: 5px"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Enter the customers 8 Digit Token Number:</label>
+                        </div>
+                        <div class="form-group custom-bg" style="display: flex">
+                            <input type="number" class="digitinput" min="0" maxlength="1" max="9" name="FunTokenzCode1" placeholder="" />
+                            <input type="number" class="digitinput" min="0" maxlength="1" max="9" name="FunTokenzCode2" placeholder="" />
+                            <input type="number" class="digitinput" min="0" maxlength="1" max="9" name="FunTokenzCode3" placeholder="" />
+                            <input type="number" class="digitinput" min="0" maxlength="1" max="9" name="FunTokenzCode4" placeholder="" />
+                            <input type="number" class="digitinput" min="0" maxlength="1" max="9" name="FunTokenzCode5" placeholder="" />
+                            <input type="number" class="digitinput" min="0" maxlength="1" max="9" name="FunTokenzCode6" placeholder="" />
+                            <input type="number" class="digitinput" min="0" maxlength="1" max="9" name="FunTokenzCode7" placeholder="" />
+                            <input type="number" class="digitinput" min="0" maxlength="1" max="9" name="FunTokenzCode8" placeholder="" />
+                        </div>
+
+                        <div class="form-group custom-bg">
+
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <label style="font-size: 9pt">Customer Withdrawing:</label>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <select id="UserId" name="UserId" style=" width: 100%;overflow-x: hidden">
+                                        <option value="">Enter in a new customer</option>
+                                        @foreach (var customer in Model.CustomerRecords.Customers)
+                                        {
+                                            <option value="@customer.UserId">@customer.Lastname, @customer.Firstname  (@customer.Mobile | @customer.Email)</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="new-contact">
+                            <div class="form-group">
+                                <label>Or enter there details:</label>
+                            </div>
+                            <div class="form-group text-left" style="display: flex">
+                                <select name="CountryCode" class="form-control" style="width: 45%; display:inline-block">
+                                    <option value="+692">+692</option>
+                                    <option value="+691">+691</option>
+                                    <option value="+685">+685</option>
+                                    <option value="+680">+680</option>
+                                    <option value="+679">+679</option>
+                                    <option value="+678">+678</option>
+                                    <option value="+677">+677</option>
+                                    <option value="+676">+676</option>
+                                    <option selected value="+675">+675</option>
+                                    <option value="+674">+674</option>
+                                </select>
+                                <input oninput="this.value = this.value.replace(/[^0-9+ -]/g, '').replace(/(\..*)\./g, '$1');" type="text" placeholder="Mobile Number" name="Phone" class="form-control" style="width: 55%; display: inline">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email" name="Email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center w-100 mb-5 only-mobile">
+                            <img src="images/slide_swipe.svg" alt="">
+                        </div>
+
+                        <button type="submit" class="btn btn-block btn-danger font-weight-bold">Collect Customer Payment</button>
+                    </form>
+                </div>
+
+                <div class="col-md-3 col-xs-12 banner_bottom_grid help"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

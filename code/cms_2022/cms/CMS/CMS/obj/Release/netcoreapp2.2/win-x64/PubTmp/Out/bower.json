@@ -1,0 +1,19 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "v4.3.1",
+    "jquery": "3.3.1",
+    "jquery-validation": "1.19.0",
+    "jquery-validation-unobtrusive": "v3.2.11",
+    "summernote": "v0.8.11"
+  },
+  "resolutions": {
+    "summernote": "v0.8.11",
+    "jquery-validation": "1.19.0",
+    "font-awesome": "5.8.0",
+    "jquery": "3.3.1",
+    "bootstrap": "v4.3.1",
+    "jquery-validation-unobtrusive": "v3.2.11"
+  }
+}

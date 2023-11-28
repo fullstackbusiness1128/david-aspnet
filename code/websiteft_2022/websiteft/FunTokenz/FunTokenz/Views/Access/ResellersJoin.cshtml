@@ -1,0 +1,154 @@
+﻿@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@model JoinView
+
+@{
+    ViewData["Title"] = "Join";
+}
+
+@section Styles
+    {
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 7em;
+        }
+
+        .banner_bottom {
+            padding-bottom: 0;
+        }
+
+
+        .signin-form select {
+            background: none;
+            display: block;
+            width: 100%;
+            padding: 0.6em;
+            font-size: 1em;
+            margin: 0.5em 0;
+            outline: none;
+            color: #212121;
+            border: none;
+            border: 1px solid #ccc;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+
+        .banner_bottom {
+            background: #FFFFB2;
+        }
+    </style>
+}
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="row">
+            <div class="inner_sec_info_wthree_agile">
+                <div class="help_full">
+
+                    <div class="col-md-6 col-sm-6 banner_bottom_left">
+                        <h1>HELP US GROW</h1>
+                        <p>
+                            We're looking for resellers and businesses to help us expand. We have a variety of solutions 
+                            for resellers to earn and grow with us along the way. 
+                            To become an authorised Reseller of Fun Tokenz express your interest with us below.
+                        </p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 banner_bottom_grid help">
+                        <!---728x90--->
+                        <div class="signin-form">
+                            <h2 style="text-align: start">Join For Freet</h2>
+                            
+                            <form asp-controller="Access" asp-action="ResellersJoin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                                <input type="hidden" asp-for="JoinType" value="R">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="First Name" asp-for="FirstName">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="Last Name" asp-for="LastName">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <select asp-for="CountryCode">
+                                                <option value="+61">+61</option>
+                                                <option value="+692">+692</option>
+                                                <option value="+691">+691</option>
+                                                <option value="+685">+685</option>
+                                                <option value="+680">+680</option>
+                                                <option value="+679">+679</option>
+                                                <option value="+678">+678</option>
+                                                <option value="+677">+677</option>
+                                                <option value="+676">+676</option>
+                                                <option selected value="+675">+675</option>
+                                                <option value="+674">+674</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-9">
+                                                <input oninput="this.value = this.value.replace(/[^0-9+ -]/g, '').replace(/(\..*)\./g, '$1');" type="text" placeholder="Mobile Number" asp-for="Phone">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label><b>Select Account Currency</b></label>
+                                    <select asp-for="Currency" style="width:100%;font-size:16px;">
+                                        <option value="PGK">PGK</option>
+                                        <option value="FJD">FJD</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input type="email" asp-for="Email" placeholder="Enter your email address" required="">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" placeholder="Company Name" asp-for="CompanyName">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Company / Tax Number" asp-for="CompanyNumber">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Password" asp-for="Password" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Confirm Password" asp-for="ConfirmPassword">
+                                </div>
+
+                                <div style="text-align: start">
+                                    <input asp-for="Agree" class="form-check form-check-input" type="checkbox" value="true" id="defaultCheck1" checked>
+                                    <label class="form-check-label" for="defaultCheck1">By creating an account you agree to our Terms of Service</label>
+                                </div>
+
+                                <div class="tp" style="margin-top: 1em">
+                                    <button type="submit" class="btn btn-danger btn-block btn-outline-danger">Sign up</button>
+                                </div>
+                            </form>
+
+                            <p style="margin-top: 1em">
+                                <a href="~/merchants/signin"> Or sign in</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,142 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using System.Globalization
+
+@model ActivityViewModel
+
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.Options.Results.pageSize" data-sortfield="@Model.Options.Results.sortField" data-sortorder="@Model.Options.Results.sortOrder" data-filtera="@Model.Options.Filter.FilterA" data-filterb="@Model.Options.Filter.FilterB" data-filterc="@Model.Options.Filter.FilterC">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th class="tw-medium">User</th>
+            <th class="tw-medium">Type</th>
+            <th class="tw-large">Transaction</th>
+            <th class="tw-small">Amount</th>
+            <th class="tw-small">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Options.Results.totalResults >= 0)
+        {
+            foreach (var item in Model.Items)
+            {
+                if (item.UserType == "R")
+                {
+                    if (item.Type == "Credit" && item.FTDebitsId == 0)
+                    {
+        <tr>
+            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss.ffff")</td>
+            <td><a href="~/activity/@item.UserId">@item.UserName</a></td>
+            <td><span class="pastel-yellow p-2">Reseller</span></td>
+            <td>Bulk Purchase</td>
+            <td>@Html.Raw("K" + item.Amount)</td>
+            <td></td>
+        </tr>
+                    }
+                    else if (item.Type == "Credit" && item.FTDebitsId > 0)
+                    {
+                        <tr>
+                            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss.ffff")</td>
+                            <td><a href="~/activity/@item.UserId">@item.UserName</a></td>
+                            <td><span class="pastel-yellow p-2">Reseller</span></td>
+                            <td>Buy Back</td>
+                            <td>@Html.Raw("K" + item.Amount)</td>
+                            <td></td>
+                        </tr>
+                    }
+                    else if (item.Type == "Debit" && item.FTPurchasesId == 0)
+                    {
+                        <tr>
+                            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss.ffff")</td>
+                            <td><a href="~/activity/@item.UserId">@item.UserName</a></td>
+                            <td><span class="pastel-yellow p-2">Reseller</span></td>
+                            <td>Customer Sale</td>
+                            <td>@Html.Raw("K" + item.Amount)</td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+                else if (item.UserType == "C")
+                {
+                    if (item.Type == "Credit" && (item.ResellerUserId != null && item.ResellerUserId != "0" && item.ResellerUserId != ""))
+                    {
+                        <tr>
+                            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss.ffff")</td>
+                            <td><a href="~/activity/@item.UserId">@item.UserName</a></td>
+                            <td><span class="pastel-blue p-2">Customer</span></td>
+                            <td>Purchase from Reseller | @item.ResellerUserId</td>
+                            <td>@Html.Raw("K" + item.Amount)</td>
+                            <td></td>
+                        </tr>
+                    }
+                    else if (item.Type == "Credit" && (string.IsNullOrEmpty(item.ResellerUserId) || item.ResellerUserId == "0"))
+                    {
+                        <tr>
+                            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss.ffff")</td>
+                            <td><a href="~/activity/@item.UserId">@item.UserName</a></td>
+                            <td><span class="pastel-blue p-2">Customer</span></td>
+                            <td>Purchase from FunTokenz</td>
+                            <td>@Html.Raw("K" + item.Amount)</td>
+                            <td>@if (item.Activated == false) { <span class="bg-danger text-white p-2">Failed</span> }</td>
+                        </tr>
+                    }
+                    else if (item.Type == "Debit" && item.FTPurchasesId > 0)
+                    {
+                        <tr>
+                            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss.ffff")</td>
+                            <td><a href="~/activity/@item.UserId">@item.UserName</a></td>
+                            <td><span class="pastel-blue p-2">Customer</span></td>
+                            <td>Redemption from Reseller</td>
+                            <td>@Html.Raw("K" + item.Amount)</td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+                else if (item.UserType == null)
+                {
+                    if (item.Type == "Debit" && item.FTPurchasesId > 0 && !string.IsNullOrEmpty(item.ResellerUserId))
+                    {
+                        <tr>
+                            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss.ffff")</td>
+                            <td><a href="~/activity/@item.UserId">@item.UserName</a></td>
+                            <td><span class="pastel-blue p-2">Customer</span></td>
+                            <td>Withdrawl from Reseller</td>
+                            <td>@Html.Raw("K" + item.Amount)</td>
+                            <td></td>
+                        </tr>
+                    }
+                    else if (item.Type == "Debit" && item.FTPurchasesId > 0)
+                    {
+                        <tr>
+                            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss.ffff")</td>
+                            <td><a href="~/activity/@item.UserId">@item.UserName</a></td>
+                            <td><span class="pastel-blue p-2">Customer</span></td>
+                            <td>Spend with Merchant</td>
+                            <td>@Html.Raw("K" + item.Amount)</td>
+                            <td></td>
+                        </tr>
+                    }
+                    else if (item.Type == "Debit" && item.FTPurchasesId == 0)
+                    {
+                        <tr>
+                            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss.ffff")</td>
+                            <td><a href="~/activity/@item.UserId">@item.UserName</a></td>
+                            <td><span class="pastel-yellow p-2">Reseller</span></td>
+                            <td>Sale to Customer</td>
+                            <td>@Html.Raw("K" + item.Amount)</td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No activity was found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.Partial("_Pagination", Model.Options.Results)

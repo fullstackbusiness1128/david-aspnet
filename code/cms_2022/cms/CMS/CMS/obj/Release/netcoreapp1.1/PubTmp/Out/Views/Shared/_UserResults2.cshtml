@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model PlayerUserViewModel
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.Options.Results.pageSize" data-sortfield="@Model.Options.Results.sortField" data-sortorder="@Model.Options.Results.sortOrder">
+    <thead>
+        <tr>
+            <th class="tw-medium " data-field="Firstname" data-order="asc">Full Name @*<i class="fa fa-sort"></i>*@</th>
+            <th class="btnsort" data-field="Email" data-order="asc">Email @*<i class="fa fa-sort"></i>*@</th>
+            <th class="tw-small " data-field="Level" data-order="asc">Level @*<i class="fa fa-sort"></i>*@</th>
+            <th class="tw-large " data-field="Balance" data-order="asc">Balance @*<i class="fa fa-sort"></i>*@</th>
+            <th class="tw-small " data-field="Bet" data-order="asc">Turnover @*<i class="fa fa-sort"></i>*@</th>
+            <th class="tw-small " data-field="Won" data-order="asc">Paid Out @*<i class="fa fa-sort"></i>*@</th>
+            <th class="tw-small">% Kept</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.UserSnapShot != null && Model.UserSnapShot.Count > 0)
+        {
+
+            var symbol = "K";
+
+            foreach (var item in Model.UserSnapShot)
+            {
+
+                if(item.Currency == "PGK")
+                {
+                    symbol = "K";
+                }
+                else if (item.Currency == "USD")
+                {
+                    symbol = "US$";
+                }
+                else if (item.Currency == "FJD")
+                {
+                    symbol = "FJ$";
+                }
+
+                <tr>
+                    <td>
+                        @{ if (!string.IsNullOrEmpty(item.Fullname))
+                            {
+                                @item.Fullname
+                            }
+                            else
+                            {
+                                @item.Firstname<text>&nbsp;</text>@item.Lastname
+                            }
+                        }
+                    </td>
+                    <td><a href="~/users/details?Id=@item.Id">@item.Email</a></td>
+                    <td>
+                        @{
+                            if (item.Level == "1")
+                            {
+                                <text>Administrator</text>
+                            }
+                            else if (item.Level == "2")
+                            {
+                                <text>Manager</text>
+                            }
+                            else
+                            {
+                                <text>Member</text>
+                            }
+                        }
+                    </td>
+                    <td>@symbol@item.Balance (<a href="~/deposits/new/@item.Id">deposit</a>)</td>
+                    <td>@symbol@item.Bet</td>
+                    <td>@symbol@item.Won</td>
+                    <td>@if (item.Bet > 0)
+                    {@Math.Round(((item.Bet - item.Won) / item.Bet) * 100, 2);
+                }%</td>
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No users were found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.Options.Results)

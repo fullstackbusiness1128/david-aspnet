@@ -1,0 +1,201 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using System.Globalization;
+@using Newtonsoft.Json;
+@using System.Security.Claims;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fun Tokenz are the perfect alternative to paying online without a credit card. This payment method helps you to maximise your online security." />
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#e94859">
+
+    <title>@ViewData["Title"] - Fun Tokenz</title>
+
+    <!-- icon -->
+    <link rel="icon" href="~/images/fun-tokenz-logo.svg" sizes="any" type="image/svg+xml">
+
+    <!-- libraries -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/pretty-checkbox/dist/pretty-checkbox.css" />
+    </environment>
+
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" crossorigin="anonymous" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        <link rel="stylesheet" href="~/lib/pretty-checkbox/dist/pretty-checkbox.min.css" />
+    </environment>
+
+    <link rel="stylesheet" href="~/css/main.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+    @RenderSection("Styles", required: false)
+
+    @RenderSection("ScriptsTop", required: false)
+
+</head>
+<body>
+
+    <header>
+        <div class="announcement">
+            <p><a href="~/resellers/join">Become a FunTokenz Reseller</a></p>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <nav class="navbar navbar-expand-lg">
+                                    <a class="navbar-brand" href="~/">
+                                        <img src="~/images/Fun-Tokenz-New-Full-Logo.svg" alt="Fun Tokenz" width="208">
+                                    </a>
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                        <i class="fa fa-bars"></i>
+                                    </button>
+                                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                                        @if (Context.User.Identity.IsAuthenticated == true)
+                                        {
+                                        <ul class="navbar-nav">
+                                            @if (Context.Session.GetString("Type") == "C")
+                                            {
+                                                <li class="nav-item">
+                                                    <a href="~/customers/home" class="nav-link">Welcome @Context.Session.GetString("FirstName")</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="~/customers/home">My Tokens</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="~/signout">Sign Out</a>
+                                                </li>
+                                            }
+                                            else if (Context.Session.GetString("Type") == "R")
+                                            {
+                                                <li class="nav-item">
+                                                    @if (!string.IsNullOrEmpty(Context.Session.GetString("ResellerBalance")))
+                                                    {
+                                                        <a href="~/resellers/home" class="nav-link">Balance <span>@Context.Session.GetString("ResellerCurrency") @Context.Session.GetString("ResellerBalance")</span></a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="~/resellers/home" class="nav-link">Balance <span>@Context.Session.GetString("ResellerCurrency") 0.00</span></a>
+                                                    }
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="~/settings/home">Settings</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="~/signout">Sign Out</a>
+                                                </li>
+                                            }
+                                            else if (Context.Session.GetString("Type") == "M")
+                                            {
+                                                <li class="nav-item">
+                                                    <a href="~/merchants/home" class="nav-link">Welcome @Context.Session.GetString("FirstName")</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="~/signout">Sign Out</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                        }
+                                        else
+                                        {
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="~/customers/signin">Customers</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="~/resellers/signin">Resellers</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="~/merchants/join">Merchants</a>
+                                            </li>
+                                        </ul>
+                                        }
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main>
+    @RenderBody()
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row pb-3">
+                <div class="col-12 col-lg-6 text-left">
+                    <h5>What We're About</h5>
+                    <p class="short">We're simplifying the payment industry for digital payments in emerging countries. Fast, secure and instant payment solution for companies looking to extend their market reach.</p>
+                    <ul>
+                        <li><a href="~/terms">Terms and Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 text-left">
+                    <h5>Customers</h5>
+                    <ul>
+                        <li><a href="~/customers/join">Open a wallet</a></li>
+                        <li><a href="~/customers/signin">Top up wallet</a></li>
+                        @*<li><a href="~/customers/signin">Send Fun Tokenz</a></li>*@
+                    </ul>   
+                </div>
+                <div class="col-6 col-lg-2 text-left">
+                    <h5>Resellers</h5>
+                    <ul>
+                        <li><a href="~/resellers/join">Become a reseller</a></li>
+                        <li><a href="~/resellers/signin">Access your account</a></li>
+                        @*<li><a href="~/resellers/faq">Reseller FAQ</a></li>*@
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 text-left">
+                    <h5>Merchants</h5>
+                    <ul>
+                        <li><a href="~/merchants/join">Become a merchant</a></li>
+                        @*<li><a href="~/merchants/signin">Access your account</a></li>
+                        <li><a href="~/merchants/api">Developers</a></li>*@
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center pt-4 pb-3 copyright">
+                    <p class="small">Copyright &copy; @DateTime.Now.Year Fun Tokenz . All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" asp-fallback-src="~/lib/jquery/dist/jquery.min.js" asp-fallback-test="window.jQuery" crossorigin="anonymous" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal" crossorigin="anonymous" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"></script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

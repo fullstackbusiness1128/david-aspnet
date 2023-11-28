@@ -1,0 +1,32 @@
+﻿@model PostsView
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.PostListing.Options.Results.pageSize" data-sortfield="@Model.PostListing.Options.Results.sortField" data-sortorder="@Model.PostListing.Options.Results.sortOrder">
+    <thead>
+        <tr>
+            <th class="btnsort" data-field="Name" data-order="asc">Post Name</th>
+            <th class="tw-large btnsort" data-field="Created" data-order="asc">Date Created</th>
+            <th class="tw-large btnsort" data-field="Published" data-order="asc">Date Published</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.PostListing.Post.Count > 0)
+        {
+            foreach (var item in Model.PostListing.Post)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@DateTime.ParseExact(item.DateCreated.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</td>
+                    <td><a href="~/posts/details?post=@item.Id">@DateTime.ParseExact(item.PostedDate.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</a></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No posts were found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.PostListing.Options.Results)

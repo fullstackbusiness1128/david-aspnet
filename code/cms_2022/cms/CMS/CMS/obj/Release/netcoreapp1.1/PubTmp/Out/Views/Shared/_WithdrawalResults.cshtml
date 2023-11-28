@@ -1,0 +1,57 @@
+﻿@model WithdrawalsView
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.WithdrawalListing.Options.Results.pageSize" data-sortfield="@Model.WithdrawalListing.Options.Results.sortField" data-sortorder="@Model.WithdrawalListing.Options.Results.sortOrder" data-searchfield="@Model.WithdrawalListing.Options.Results.searchField" data-searchvalue="@Model.WithdrawalListing.Options.Results.searchValue" data-groupby="@Model.WithdrawalListing.Options.Filter.GroupBy" data-datefrom="@Model.WithdrawalListing.Options.Filter.DateFrom" data-dateto="@Model.WithdrawalListing.Options.Filter.DateTo" data-filtera="@Model.WithdrawalListing.Options.Filter.FilterA" data-filterb="@Model.WithdrawalListing.Options.Filter.FilterB" data-filterc="@Model.WithdrawalListing.Options.Filter.FilterC">
+    <thead>
+        <tr>
+            <th class="tw-small">Id</th>
+            <th>User Id</th>
+            <th class="tw-large">Member Name</th>
+            <th class="tw-large btnsort" data-field="Created" data-order="asc">Date Created</th>
+            <th class="tw-medium btnsort" data-field="Value" data-order="asc">Amount</th>
+            <th class="tw-medium btnsort" data-field="Value" data-order="asc">Balance Starting</th>
+            <th class="tw-medium btnsort" data-field="Value" data-order="asc">Balance Ending</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.WithdrawalListing.Withdrawal.Count > 0)
+        {
+
+            var symbol = "K";
+
+            foreach (var item in Model.WithdrawalListing.Withdrawal)
+            {
+
+                if (item.Currency == "PGK")
+                {
+                    symbol = "K";
+                }
+                else if (item.Currency == "USD")
+                {
+                    symbol = "US$";
+                }
+                else if (item.Currency == "FJD")
+                {
+                    symbol = "FJ$";
+                }
+
+        <tr>
+            <td><a href="~/withdrawals/details?withdrawal=@item.Id">@item.Id</a></td>
+            <td>@item.UserId</td>
+            <td>@item.Fullname</td>
+            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</td>
+            <td>@symbol@item.Amount</td>
+            <td>@symbol@item.AccountBalanceStarting</td>
+            <td>@symbol@item.AccountBalanceEnding</td>
+        </tr>
+            }
+        }
+        else
+        {
+        <tr>
+            <td colspan="7">No withdrawals were found</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.WithdrawalListing.Options.Results)

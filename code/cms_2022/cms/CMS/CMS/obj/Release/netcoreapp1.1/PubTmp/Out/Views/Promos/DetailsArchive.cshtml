@@ -1,0 +1,225 @@
+﻿@model PromoView
+@{
+    ViewData["Title"] = "Details Archived | Promos | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/promos/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="promos" asp-action="revert" method="post" class="form-horizontal" name="FormPromo">
+                <input type="hidden" name="Id" value="@Model.PromoItem.Id" />
+                <input type="hidden" name="Identifier" value="@Model.PromoItem.Identifier" />
+                <input type="hidden" id="IsDraft" name="IsDraft" value="false" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Update Promo</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="Name" class="col-md-3 control-label">Name: </label>
+                            <div class="col-md-9">
+                                <input for="Name" name="Name" class="form-control" value="@Model.PromoItem.Name" />
+                                <span data-valmsg-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Code" class="col-md-3 control-label">Code: </label>
+                            <div class="col-md-9">
+                                <input for="Code" name="Code" class="form-control" value="@Model.PromoItem.Code" />
+                                <span data-valmsg-for="Code" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="BonusPool" class="col-md-3 control-label">Award To</label>
+                            <div class="col-md-9">
+                                <select for="BonusPool" name="BonusPool" class="form-control">
+                                    @if (Model.PromoItem.BonusPool == "Sports")
+                                    {
+                                        <option selected value="Sports">Sports Bonus</option>
+                                        <option value="Racing">Racing Bonus</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Sports">Sports Bonus</option>
+                                        <option selected value="Racing">Racing Bonus</option>
+                                    }
+                                </select>
+                                <span data-valmsg-for="BonusPool" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="AwardedAmount" class="col-md-3 control-label">Awarded Amount: </label>
+                            <div class="col-md-9">
+                                <input for="AwardedAmount" name="AwardedAmount" class="form-control" value="@Model.PromoItem.AwardedAmount" />
+                                <span data-valmsg-for="AwardedAmount" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="MinimumAmount" class="col-md-3 control-label">Minimum Amount: </label>
+                            <div class="col-md-9">
+                                <input for="MinimumAmount" name="MinimumAmount" class="form-control" value="@Model.PromoItem.MinimumAmount" />
+                                <span data-valmsg-for="MinimumAmount" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="MaxUse" class="col-md-3 control-label">Max Use: </label>
+                            <div class="col-md-9">
+                                <input for="MaxUse" name="MaxUse" class="form-control" value="@Model.PromoItem.MaxUse" />
+                                <span data-valmsg-for="MaxUse" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="OneTimeUse" class="col-3 control-label">One Time Use</label>
+                            <div class="col-md-9">
+                                <select for="OneTimeUse" name="OneTimeUse" class="form-control">
+                                    @if (Model.PromoItem.OneTimeUse == true)
+                                    {
+                                        <option selected value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="true">Yes</option>
+                                        <option selected value="false">No</option>
+                                    }
+                                </select>
+                                <span data-valmsg-for="OneTimeUse" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="DatetimeStart" class="col-3 control-label">Start Time</label>
+                            <div class="input-group date col-9" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#DatetimeStart" name="DatetimeStart" for="DatetimeStart" id="DatetimeStart" />
+                                <div class="input-group-append" data-target="#DatetimeStart" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <span data-valmsg-for="DatetimeStart" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="DatetimeEnd" class="col-3 control-label">End Time</label>
+                            <div class="input-group date col-9" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#DatetimeEnd" name="DatetimeEnd" for="DatetimeEnd" id="DatetimeEnd" />
+                                <div class="input-group-append" data-target="#DatetimeEnd" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <span data-valmsg-for="DatetimeEnd" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manage promo content
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Publish Options</div>
+                </div>
+                <div class="panel-body publish text-right">
+                    <a onclick="document.FormPromo.submit();" class="btn btn-default">Make Current and Publish</a>
+                </div>
+                <br />
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Change History</div>
+                </div>
+                <div class="panel-body historypanel" data-searchvalue="@Model.PromoItem.Identifier">
+                    @Html.Partial("_PromoResultsHistory", Model.PromoHistory)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles
+{
+    <link rel="stylesheet" href="/css/tempus.css" />
+}
+
+@section Scripts
+{
+    <script src="/js/moment.js"></script>
+    <script src="/js/tempus.js"></script>
+    <script>
+        $(document).ready(function () {
+            @{
+                    //Prepare Convertion to AEST/AEDT
+                    //var zn = TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time");
+                    //var currentoffset = zn.GetUtcOffset(DateTime.Now);
+                    //var SecondsToAdd = TimeSpan.FromTicks(currentoffset.Ticks).TotalSeconds;
+                    DateTime DatetimeStartUTC;
+                    string DatetimeStartAEST = "";
+                    DateTime DatetimeEndUTC;
+                    string DatetimeEndAEST = "";
+                    if (Model.PromoItem.DatetimeStart > 0)
+                    {
+                        DatetimeStartUTC = DateTime.ParseExact(Model.PromoItem.DatetimeStart.ToString(), "yyyyMMddHHmmssffff", null).ToUniversalTime();
+                        DatetimeStartAEST = DatetimeStartUTC.ToString("yyyyMMddHHmmss");
+                    }
+                    if (Model.PromoItem.DatetimeEnd> 0)
+                    {
+                        DatetimeEndUTC = DateTime.ParseExact(Model.PromoItem.DatetimeEnd.ToString(), "yyyyMMddHHmmssffff", null).ToUniversalTime();
+                        DatetimeEndAEST = DatetimeEndUTC.ToString("yyyyMMddHHmmss");
+                    }
+                }
+
+                @{if (Model.PromoItem.DatetimeStart != 0)
+                    {
+                    <text>
+                    $('#DatetimeStart').datetimepicker({
+                        format: 'YYYYMMDDHHmmss',
+                        defaultDate: moment(@DatetimeStartAEST, 'YYYYMMDDHHmmss')
+                    });
+                    </text>
+                    }
+                    else
+                    {
+                    <text>
+                    $('#DatetimeStart').datetimepicker({
+                        format: 'YYYYMMDDHHmmss'
+                    });
+                    </text>
+                    }
+                  }
+
+                  @{if (Model.PromoItem.DatetimeEnd!= 0)
+                    {
+                    <text>
+                    $('#DatetimeEnd').datetimepicker({
+                        format: 'YYYYMMDDHHmmss',
+                        defaultDate: moment(@DatetimeEndAEST, 'YYYYMMDDHHmmss')
+                    });
+                    </text>
+                    }
+                    else
+                    {
+                    <text>
+                    $('#DatetimeEnd').datetimepicker({
+                        format: 'YYYYMMDDHHmmss'
+                    });
+                    </text>
+                    }
+                  }
+        });
+    </script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

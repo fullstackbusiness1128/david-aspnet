@@ -1,0 +1,151 @@
+﻿@model AddCompetitionView
+@{
+    ViewData["Title"] = "New | Comps | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/competitions/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="Tipping" asp-action="CompetitionNew" method="post" class="form-horizontal" name="FormComp">
+                <input type="hidden" name="ClientId" value="1" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Create a new comp</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="SportIdentifier" class="col-md-3 control-label">Sport</label>
+                            <div class="col-md-9">
+                                <select name="SportIdentifier" class="form-control">
+                                    @{
+                                        foreach (var item in Model.Sports.Sports.OrderBy(o => o.Name))
+                                        {
+                                            <option value="@item.Identifier">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <span data-valmsg-for="SportIdentifier" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="SeasonIdentifier" class="col-md-3 control-label">Season</label>
+                            <div class="col-md-9">
+                                <select name="SeasonIdentifier" class="form-control">
+                                    @{
+                                        foreach (var item in Model.Seasons.Seasons.OrderBy(o => o.Year))
+                                        {
+                                            <option value="@item.Identifier">@item.Year</option>
+                                        }
+                                    }
+                                </select>
+                                <span data-valmsg-for="SeasonIdentifier" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Title" class="col-md-3 control-label">Title</label>
+                            <div class="col-md-9">
+                                <input name="Title" class="form-control" />
+                                <span data-valmsg-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Description" class="col-md-3 control-label">Description</label>
+                            <div class="col-md-9">
+                                <input name="Description" class="form-control" />
+                                <span data-valmsg-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="PrizeType" class="col-md-3 control-label">Prize Type</label>
+                            <div class="col-md-9">
+                                <select name="PrizeType" class="form-control">
+                                    <option value="0">No Prizes (Free Comps Only)</option>
+                                    <option value="1">Round Winners (Paid Comps Only)</option>
+                                    <option value="2">Round Winners + Comp Winners (Paid Comps Only)</option>
+                                </select>
+                                <span data-valmsg-for="PrizeType" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="EntryType" class="col-md-3 control-label">Entry Type</label>
+                            <div class="col-md-9">
+                                <select name="EntryType" class="form-control">
+                                    <option value="0">Free</option>
+                                    <option value="1">Paid</option>
+                                </select>
+                                <span data-valmsg-for="EntryType" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Currency" class="col-md-3 control-label">Currency</label>
+                            <div class="col-md-9">
+                                <select name="Currency" class="form-control">
+                                    <option value="AUD">AUD</option>
+                                    <option value="PGK">PGK</option>
+                                </select>
+                                <span data-valmsg-for="Currency" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="EntryFeePerRound" class="col-md-3 control-label">Entry Fee Per Round (i.e. $5.00)</label>
+                            <div class="col-md-9">
+                                <input name="EntryFeePerRound" class="form-control" />
+                                <span data-valmsg-for="EntryFeePerRound" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="EntryFeePerComp" class="col-md-3 control-label">Entry Fee Per Comp (i.e. $50.00)</label>
+                            <div class="col-md-9">
+                                <input name="EntryFeePerComp" class="form-control" />
+                                <span data-valmsg-for="EntryFeePerComp" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ServiceFeeValue" class="col-md-3 control-label">Service Fee Value (i.e. 5%)</label>
+                            <div class="col-md-9">
+                                <input name="ServiceFeeValue" class="form-control" />
+                                <span data-valmsg-for="ServiceFeeValue" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manage comp content
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Publish Options</div>
+                </div>
+                <div class="panel-body publish">
+                    <a onclick="document.FormComp.submit();" class="btn btn-default">Publish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

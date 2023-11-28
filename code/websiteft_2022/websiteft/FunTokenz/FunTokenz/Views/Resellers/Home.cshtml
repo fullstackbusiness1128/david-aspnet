@@ -1,0 +1,207 @@
+﻿@using System.Globalization
+
+
+@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@model ResellerTransactionsView
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+@section Styles
+{
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 0em;
+        }
+
+        .breadcrumb-1 {
+            background: #F4F9FE;
+        }
+
+        .panel1 {
+            padding: 28px;
+            margin: 20px 0px 30px 0px;
+            border: 1px solid rgba(150, 200, 250, 0.1);
+            background: rgba(150, 200, 250, 0.1);
+            box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
+            border: 10px solid #FFF;
+            border-radius: 10px;
+        }
+
+        .panel {
+            margin: 20px 0px 30px 0px;
+            padding: 14px;
+            border: 1px solid rgba(150, 200, 250, 0.1);
+        }
+
+        .total {
+            text-align: right;
+            color: #303030;
+            padding: 16px 36px;
+            background: #f1f1f1;
+            font-weight: 600;
+        }
+
+        .tokens-list {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .text-left {
+            text-align: left !important;
+        }
+
+        .each-token {
+            width: 100%;
+            flex-direction: row;
+            padding: 20px 28px;
+            background-color: #F4F5F7;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+
+        .text-danger {
+            color: #dc3545 !important;
+        }
+
+        .each-token h5.price {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .token-info span {
+            text-align: left;
+            color: #868a9a;
+        }
+
+        .token-info h5 {
+            text-align: left;
+            color: #15294b;
+            margin-bottom: 10px;
+        }
+
+        .each-token h5.price span {
+            font-size: 14px;
+            font-weight: 600;
+            background: #FFF;
+            border-radius: 3px;
+            padding: 2px;
+            color: #15294b;
+        }
+
+        .mt-4, .my-4 {
+            margin-top: 1.5rem !important;
+        }
+
+        .align-items-center {
+            -ms-flex-align: center !important;
+            align-items: center !important;
+        }
+
+        .d-flex {
+            display: -ms-flexbox !important;
+            display: flex !important;
+        }
+
+        .mr-2, .mx-2 {
+            margin-right: 0.5rem !important;
+        }
+
+        .d-md-none {
+            display: none !important;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+
+        .mt-3, .my-3 {
+            margin-top: 1rem !important;
+        }
+
+        .w-100 {
+            width: 100% !important;
+        }
+
+        .token-info h5{
+            font-weight: bold
+        }
+
+        .code-title{
+            font-size: 9pt;
+        }
+    </style>
+}
+
+
+<div class="container-fluid breadcrumb-1" style="margin-top: 8.1em">
+    <div class="row">
+        <p style="padding: 0.5em 0 0 1em"><a href="~/">Home</a> . Resellers Home</p>
+    </div>
+</div>
+
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="inner_sec_info_wthree_agile">
+            <div class="help_full">
+                <div class="col-md-7 col-xs-12 banner_bottom_grid help">
+                    <h2>Transaction History</h2>
+                    <div class="panel resultspanel">
+                        @if (Model.TransactionRecords.ResellerTransactionItems.Count == 0)
+                        {
+                            <p>You have no transaction history to show.</p>
+                        }
+                        else
+                        {
+                            @await Html.PartialAsync("_Transactions", Model.TransactionRecords)
+                        }
+                    </div>
+                </div>
+                <div class="col-md-5 col-xs-12 banner_bottom_left">
+                    <h2>Transact</h2>
+                    <div class="panel1">
+                        <h3>Bulk Buy Tokens</h3>
+                        <p>Bulk purchase FunTokenz to sell to your customer Base. All FunTokenz bought as a Bulk Purchase have an expiry of 10 years, during which time you may sell to your Customer Base.</p>
+                        <a href="~/resellers/buy/" class="btn btn-block btn-danger font-weight-bold">Bulk Buy</a>
+                    </div>
+
+                    <div class="panel1">
+                        <h3>Customer Purchase</h3>
+                        <div asp-validation-summary="All" class="text-danger text-left"></div>
+                        <p>
+                            Sell FunTokenz to your customers at a marked up price of your choosing (Maximum mark up fee is 5% of the purchase value).<br /><br />FunTokenz sold to customers will be available within your customers account and emailed or sent in a SMS to them instantly upon your sale. They can then be redeemed by your customer with any of our supported partners.
+                        </p>
+                        <a href="~/resellers/sale/" class="btn btn-block btn-danger font-weight-bold">Customer Sale</a>
+                    </div>
+
+                    <div class="panel1">
+                        <h3>Customer Withdrawal</h3>
+                        <p>
+                            Buy back FunTokenz from your customers at a marked up price of your choosing (Maximum mark up fee is 5% of the purchase value).
+                        </p>
+                        </p>
+                        <a href="~/resellers/redeem/" class="btn btn-block btn-danger font-weight-bold">Buy Back</a>
+                    </div>
+                   </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        var endpoint = "/resellers/home";
+    </script>
+
+    @{ await Html.RenderPartialAsync("_ResultsScriptsPartial"); }
+}

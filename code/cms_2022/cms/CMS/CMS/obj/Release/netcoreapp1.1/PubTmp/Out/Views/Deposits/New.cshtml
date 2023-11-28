@@ -1,0 +1,86 @@
+﻿@model DepositItemForm
+@{
+    ViewData["Title"] = "New | Deposits | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/deposits/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="Deposits" asp-action="New" method="post" class="form-horizontal" name="FormDeposit">
+                <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Create a new deposit</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label asp-for="UserId" class="col-md-3 control-label">User Id:</label>
+                            <div class="col-md-9">
+                                <p>Paying User: @Model.UserId</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="For" class="col-md-3 control-label">For:</label>
+                            <div class="col-md-9">
+                                <select asp-for="For" class="form-control">
+                                    <option value="Normal">Normal</option>
+                                    <option value="SportsBonus">Sports Bonus</option>
+                                    <option value="RacingBonus">Racing Bonus</option>
+                                </select>
+                                <span asp-validation-for="Value" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Value" class="col-md-3 control-label">Amount:</label>
+                            <div class="col-md-9">
+                                <input asp-for="Value" class="form-control" value="@Model.Value" placeholder="0.00" />
+                                <span asp-validation-for="Value" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Comment" class="col-md-3 control-label">Comment:</label>
+                            <div class="col-md-9">
+                                <textarea asp-for="Comment" class="form-control">@Model.Comment</textarea>
+                                <span asp-validation-for="Comment" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manually add a deposit 
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Deposit Options</div>
+                </div>
+                <div class="panel-body publish">
+                    <a onclick="document.FormDeposit.submit();" class="btn btn-default">Deposit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

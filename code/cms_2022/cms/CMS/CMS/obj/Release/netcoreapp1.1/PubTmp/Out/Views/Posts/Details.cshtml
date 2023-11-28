@@ -1,0 +1,546 @@
+﻿@using Newtonsoft.Json;
+
+@model PostView
+@{
+    ViewData["Title"] = "Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/posts/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="posts" asp-action="details" method="post" class="form-horizontal" name="FormPost">
+                <input type="hidden" name="Id" value="@Model.PostItem.Id" />
+                <input type="hidden" name="Identifier" value="@Model.PostItem.Identifier" />
+                <input type="hidden" id="IsDraft" name="IsDraft" value="false" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Update Post</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="Name" class="col-md-3 control-label">Post Name</label>
+                            <div class="col-md-9">
+                                <input for="Name" name="Name" class="form-control" value="@Model.PostItem.Name" />
+                                <span data-valmsg-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Title" class="col-md-3 control-label">Post Title</label>
+                            <div class="col-md-9">
+                                <input for="Title" name="Title" class="form-control" value="@Model.PostItem.Title" />
+                                <span data-valmsg-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Furl" class="col-md-3 control-label">Friendly URL</label>
+                            <div class="col-md-9">
+                                <input for="Furl" name="Furl" class="form-control" value="@Model.PostItem.Furl" />
+                                <span data-valmsg-for="Furl" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Tag" class="col-md-3 control-label">Post Tag</label>
+                            <div class="col-md-9">
+                                <input for="Tag" name="Tag" class="form-control" value="@Model.PostItem.Tag" />
+                                <span data-valmsg-for="Tag" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Author" class="col-md-3 control-label">Post Author</label>
+                            <div class="col-md-9">
+                                <input for="Author" name="Author" class="form-control" value="@Model.PostItem.Author" />
+                                <span data-valmsg-for="Author" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="PostedDate" class="col-md-3 control-label">Post Date (AEST/AEDT)</label>
+                            <div class="col-md-9">
+                                <div class="input-group date" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" data-target="#PostedDate" for="PostedDate" name="PostedDate" id="PostedDate" value="" />
+                                    <div class="input-group-append" data-target="#PostedDate" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                    <span data-valmsg-for="PostedDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="DatetimeLiveFrom" class="col-md-3 control-label">Post Visibility Date (AEST/AEDT)</label>
+                            <div class="col-md-9">
+                                <div class="input-group date" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" data-target="#DatetimeLiveFrom" for="DatetimeLiveFrom" name="DatetimeLiveFrom" id="DatetimeLiveFrom" value="" />
+                                    <div class="input-group-append" data-target="#DatetimeLiveFrom" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                    <span data-valmsg-for="DatetimeLiveFrom" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Post Content</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row m-0">
+                            <div class="col-md-12 p-0">
+                                <textarea id="summernote" for="ContentRaw" name="ContentRaw">@Model.PostItem.ContentRaw</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--IMAGES-->
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Post Hero Images</div>
+                    </div>
+                    <div class="panel-body p-0">
+                        <div class="form-group row m-0">
+                            <div class="col-md-12 p-0">
+                                <div class="picture-box">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="hidden" name="PhotoData" id="PhotoData" />
+                                            <input type="hidden" name="PhotoName" id="PhotoName" />
+                                            <input type="hidden" name="PhotoWidth" id="PhotoWidth" />
+                                            <input type="hidden" name="PhotoHeight" id="PhotoHeight" />
+                                            <div class="profilePanel avatar">
+                                                <div class="post-container text-center">
+                                                    <img src="@Url.Content("~")/images/upload-icon.jpg" alt="Picture" id="thei1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center">
+                                            <label class="btn btn-default btn-choose" title="Upload image file" for="PhotoSelection">
+                                                <input type="file" id="PhotoSelection" name="PhotoSelection" accept=".jpg,.jpeg,.png,.gif," style="display:none;">
+                                                <span class="docs-tooltip" data-toggle="tooltip" title="Post a new photo">Choose Photo</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 upload">
+                                            <label class="btn btn-default btn-upload" style="display:none;">Upload Photo <i id="upload-spinner" class="fas fa-spinner" aria-hidden="true"></i></label>
+                                            <label class="btn btn-default btn-cancel" style="display:none;">Reset</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="photo-panel">
+                                    @{
+                                        if (!string.IsNullOrEmpty(Model.PostItem.ImageUrlJSON))
+                                        {
+                                            var x = JsonConvert.DeserializeObject<Photos>(Model.PostItem.ImageUrlJSON);
+                                            foreach (var photo in x.PhotoUrl)
+                                            {
+                                                if (!string.IsNullOrEmpty(photo.Url))
+                                                {
+                                                    <div class="img-item" id="img-@photo.Url.Substring(1, 18)"><input type="hidden" value="@photo.Url" name="PhotoName" /><img src="http://cdn.pngbet.com/@photo.Url"><span data-id="img-@photo.Url.Substring(1, 18)">x</span></div>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manage post articles
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Page URL</div>
+                </div>
+                <div class="panel-body">
+                    <p>/news/@Model.PostItem.Furl</p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Publish Options</div>
+                </div>
+                <div class="panel-body publish">
+                    <a onclick="PreviewDraft();" class="btn btn-default">Save Draft</a>
+                    <a onclick="ProcessForm();" class="btn btn-default">Publish</a>
+                    <form asp-controller="posts" asp-action="remove" method="post" class="form-horizontal" name="FormRemove">
+                        <input type="hidden" name="Id" value="@Model.PostItem.Id" />
+                        <a href="#" onclick="document.FormRemove.submit();" style="font-size:12px;">Remove Post</a>
+                    </form>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Change History</div>
+                </div>
+                <div class="panel-body historypanel" data-searchvalue="@Model.PostItem.Identifier">
+                    @Html.Partial("_PostResultsHistory", Model.PostHistory)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="~/lib/summernote/summernote-bs4.css" rel="stylesheet">
+    <link href="~/css/cropper.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/tempus.css" />
+}
+
+@section Scripts {
+    <script src="~/lib/summernote/summernote-bs4.min.js"></script>
+    <script type="text/javascript" src="~/js/cropper.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/tempus.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 650,
+                followingToolbar: false,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['insert', ['picture', 'link']],
+                    ['view', ['fullscreen', 'codeview']]
+                ],
+                styleTags: ['p', 'h1', 'h2', 'h3'],
+
+                callbacks: {
+                    onPaste: function (e) {
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        document.execCommand('insertText', false, bufferText);
+                    },
+                    onImageUpload: function (files) {
+                        if (files && files.length) {
+                            var file = files[0];
+                            var imagename = file.name;
+
+                            var base64 = getBase64(file);
+                            base64.then(function (result) {
+
+                                // Send Via Ajax
+                                var forgeryId = $('[name="__RequestVerificationToken"]').val();
+                                var datax = { "PhotoData": result, "PhotoName": imagename };
+
+                                $.ajax("/posts/summerphoto", {
+                                    method: "POST",
+                                    data: JSON.stringify(datax),
+                                    contentType: 'application/json; charset=utf-8',
+                                    headers: {
+                                        'RequestVerificationToken': forgeryId
+                                    },
+                                    beforeSend: function () {
+                                    },
+                                    success: function (datax) {
+                                        // Insert the image
+                                        $('#summernote').summernote("insertImage", "https://cdn.pngbet.com/" + datax);
+
+                                    },
+                                    error: function () {
+                                        console.log("error");
+                                    }
+                                });
+                            });
+                        }
+                    }
+                }
+            });
+
+                @{
+                    //Prepare Convertion to AEST/AEDT
+                    var zn = TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time");
+                    var currentoffset = zn.GetUtcOffset(DateTime.Now);
+                    var SecondsToAdd = TimeSpan.FromTicks(currentoffset.Ticks).TotalSeconds;
+                    DateTime PostedDateUTC;
+                    string PostedDateAEST = "";
+                    DateTime DatetimeLiveFromUTC;
+                    string DatetimeLiveFromAEST = "";
+                    if (Model.PostItem.PostedDate > 0)
+                    {
+                        PostedDateUTC = DateTime.ParseExact(Model.PostItem.PostedDate.ToString(), "yyyyMMddHHmmssffff", null).ToUniversalTime();
+                        PostedDateAEST = PostedDateUTC.AddSeconds(SecondsToAdd).ToString("yyyyMMddHHmmss");
+                    }
+                    if (Model.PostItem.DatetimeLiveFrom > 0)
+                    {
+                        DatetimeLiveFromUTC = DateTime.ParseExact(Model.PostItem.DatetimeLiveFrom.ToString(), "yyyyMMddHHmmssffff", null).ToUniversalTime();
+                        DatetimeLiveFromAEST = DatetimeLiveFromUTC.AddSeconds(SecondsToAdd).ToString("yyyyMMddHHmmss");
+                    }
+                }
+
+                @{if (Model.PostItem.PostedDate != 0)
+                    {
+                    <text>
+                        $('#PostedDate').datetimepicker({
+                                format: 'YYYYMMDDHHmmss',
+                            defaultDate: moment(@PostedDateAEST, 'YYYYMMDDHHmmss')
+                        });
+                    </text>
+                    }
+                }
+
+                @{if (Model.PostItem.DatetimeLiveFrom != 0)
+                    {
+                    <text>
+                    $('#DatetimeLiveFrom').datetimepicker({
+                        format: 'YYYYMMDDHHmmss',
+                        defaultDate: moment(@DatetimeLiveFromAEST, 'YYYYMMDDHHmmss')
+                    });
+                    </text>
+                    }
+                    else
+                    {
+                    <text>
+                    $('#DatetimeLiveFrom').datetimepicker({
+                        format: 'YYYYMMDDHHmmss'
+                    });
+                    </text>
+                    }
+                  }
+
+            $('.btn-upload').on('click', function () {
+                ProcessPhoto();
+            });
+
+            $('.btn-cancel').on('click', function () {
+                configure_cancel();
+            });
+
+            $('#photo-panel .img-item span').on('click', function () {
+                $('#' + $(this).data("id")).remove();
+            });
+
+            initialise_c();
+
+        });
+
+        var extension = "";
+        var imgurl = "";
+        var rWidth = 400;
+        var rHeight = 300;
+        var mWidth = 800;
+        var mHeight = 600;
+
+        function getBase64(file, onLoadCallback) {
+            return new Promise(function (resolve, reject) {
+                var reader = new FileReader();
+                reader.onload = function () { resolve(reader.result); };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function initialise_c() {
+            // Select image
+            var inputImage = document.getElementById('PhotoSelection');
+            var URL = window.URL || window.webkitURL;
+            var container = document.querySelector('.post-container');
+            var image = container.getElementsByTagName('img').item(0);
+
+            inputImage.onchange = function () {
+                var files = this.files;
+                var file;
+
+                if (files && files.length) {
+                    file = files[0];
+
+                    $('.picture-box .btn-default').hide();
+
+                    if (/^image\/\w+/.test(file.type)) {
+                        //if (Modernizr.canvas) {
+                        image.src = URL.createObjectURL(file);
+                        inputImage.value = null;
+                        $('.post-container').css('visibility', 'visible');
+                        $('.post-container').css('opacity', '1.0');
+                        $('.post-container').css('height', '360px');
+
+                        setupCrop(image, file.name);
+                        $('.btn-cancel').show();
+                        $('.btn-upload').show();
+
+
+                        //}
+                    } else {
+                        $(".notification").html('The item selected was not an allowable image.');
+                    }
+                }
+            };
+        }
+
+        function setupCrop(image, imagename) {
+
+            'use strict';
+            var Cropper = window.Cropper;
+            var actions = document.getElementById('actions');
+            var dataRotate = document.getElementById('dataRotate');
+            var cropper = new Cropper(image, {
+                viewMode: 1,
+                background: false,
+                //minCanvasWidth: rWidth + (rWidth * 1.1),
+                //minCanvasHeight: rHeight + (rHeight * 1.1),
+                minCropBoxWidth: rWidth,
+                minCropBoxHeight: rHeight,
+                autoCropArea: 1,
+                aspectRatio: 4 / 3,
+                autoCrop: true,
+                dragMode: 'move',
+                zoomable: true,
+                scalable: true,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                responsive: true,
+                ready: function () {
+                    var dataObject = image.cropper.getData(false);
+                    var dataObjectContainer = image.cropper.getContainerData();
+                    var dataObjectImage = image.cropper.getImageData();
+
+                    //If smallest size is larger than rwidth than zoom out to fit
+                    if (dataObjectImage.naturalWidth >= rWidth && dataObjectImage.naturalWidth <= dataObjectImage.naturalHeight) {
+                        cropper.zoomTo(rWidth / dataObjectImage.naturalWidth);
+                        cropper.setCropBoxData({ height: rHeight, left: ((dataObjectContainer.width / 2) - (rWidth / 2)), top: ((dataObjectContainer.height / 2) - (rHeight / 2)) });
+                        console.log("Scaled Large Y");
+                    } else if (dataObjectImage.naturalHeight >= rHeight && dataObjectImage.naturalHeight <= dataObjectImage.naturalWidth) {
+                        cropper.zoomTo(rHeight / dataObjectImage.naturalHeight);
+                        cropper.setCropBoxData({ width: rWidth, left: ((dataObjectContainer.width / 2) - (rWidth / 2)), top: ((dataObjectContainer.height / 2) - (rHeight / 2)) });
+                        console.log('Scaled Large X');
+                    }
+
+                    //Image Format
+                    extension = "jpg";
+                    imgurl = image.cropper.getCroppedCanvas().toDataURL("image/jpeg", 100);
+                    if (imagename.toLowerCase().substr(imagename.lastIndexOf(".") + 1) === "png") {
+                        extension = "png";
+                        imgurl = image.cropper.getCroppedCanvas().toDataURL("image/png", 100);
+                    } else if (imagename.toLowerCase().substr(imagename.lastIndexOf(".") + 1) === "gif") {
+                        extension = "gif";
+                        imgurl = image.cropper.getCroppedCanvas().toDataURL("image/gif", 100);
+                    }
+
+                    //Get Cropped Data
+                    var dataObjectCanvas = image.cropper.getCanvasData();
+                    var filesize = parseInt((imgurl).replace(/=/g, "").length * 0.75);
+
+                    if (dataObjectCanvas.naturalWidth < mWidth || dataObjectCanvas.naturalHeight < mHeight) {
+                        configure_cancel();
+                        $("#btn-label").append("<p>Minimum Size: " + mWidth + "px x " + mHeight + "px</p>");
+                    } else if (filesize > 52428800) {
+                        configure_cancel();
+                        $("#btn-label").append("<p>Maximum Size: 50mb</p>");
+                    } else {
+                        $("#PhotoData").val(imgurl);
+                        $("#PhotoName").val(imagename);
+                        $("#PhotoWidth").val(dataObjectCanvas.naturalWidth);
+                        $("#PhotoHeight").val(dataObjectCanvas.naturalHeight);
+                    }
+                }
+            });
+            var originalImageURL = image.src;
+
+        };
+
+        function configure_cancel() {
+
+            var container = document.querySelector('.post-container');
+            var image = container.getElementsByTagName('img').item(0);
+
+            image.src = '/images/upload-icon.jpg';
+            if ($(image).hasClass('cropper-hidden')) {
+                image.cropper.reset().destroy();
+            }
+            $("#PhotoData").val('');
+            $("#PhotoName").val('');
+            $("#PhotoWidth").val('');
+            $("#PhotoHeight").val('');
+            $('.btn-upload').hide();
+            $('.btn-cancel').hide();
+            $('.btn-choose').show();
+
+            initialise_c();
+        }
+
+        function ProcessPhoto() {
+
+            var container = document.querySelector('.post-container');
+            var image = container.getElementsByTagName('img').item(0);
+
+            if (extension === "png") {
+                imgurl = image.cropper.getCroppedCanvas().toDataURL("image/png", 100);
+            } else if (extension === "gif") {
+                imgurl = image.cropper.getCroppedCanvas().toDataURL("image/gif", 100);
+            } else {
+                imgurl = image.cropper.getCroppedCanvas().toDataURL("image/jpeg", 100);
+            }
+
+            var dataObjectCanvas = image.cropper.getCanvasData();
+
+            // Send Via Ajax
+            var forgeryId = $('[name="__RequestVerificationToken"]').val();
+            var datax = { "PhotoData": imgurl, "PhotoName": $("#PhotoName").val(), "PhotoWidth": dataObjectCanvas.naturalWidth, "PhotoHeight": dataObjectCanvas.naturalHeight };
+
+            $.ajax("/posts/upload", {
+                method: "POST",
+                data: JSON.stringify(datax),
+                contentType: 'application/json; charset=utf-8',
+                headers: {
+                    'RequestVerificationToken': forgeryId
+                },
+                beforeSend: function () {
+                    $('#upload-spinner').toggle().addClass("fa-spin");
+                },
+                success: function (datax) {
+                    $('#photo-panel').append(datax);
+
+                    $('#photo-panel .img-item:last-child span').on('click', function () {
+                        $('#' + $(this).data("id")).remove();
+                    });
+
+                    $('#upload-spinner').toggle().removeClass("fa-spin");
+                    configure_cancel();
+                },
+                error: function () {
+                    console.log("error");
+                    configure_cancel();
+                }
+            });
+        }
+
+        function ProcessForm() {
+            document.FormPost.submit();
+        }
+
+        function PreviewDraft() {
+            $("#IsDraft").val("true");
+            document.FormPost.submit();
+        }
+    </script>
+
+    <script type="text/javascript">
+        var endpointhistory = "/posts/UpdateHistoryResults";
+    </script>
+    @{ await Html.RenderPartialAsync("_ResultsScriptsPartialFilter"); }
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

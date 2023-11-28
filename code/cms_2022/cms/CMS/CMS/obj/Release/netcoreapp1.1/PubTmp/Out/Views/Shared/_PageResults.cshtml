@@ -1,0 +1,32 @@
+﻿@model PagesView
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.PageListing.Options.Results.pageSize" data-sortfield="@Model.PageListing.Options.Results.sortField" data-sortorder="@Model.PageListing.Options.Results.sortOrder" data-searchfield="@Model.PageListing.Options.Results.searchField" data-searchvalue="@Model.PageListing.Options.Results.searchValue">
+    <thead>
+        <tr>
+            <th class="btnsort" data-field="Name" data-order="asc">Page Name</th>
+            <th class="tw-large btnsort" data-field="Created" data-order="asc">Date Created</th>
+            <th class="tw-large btnsort" data-field="Published" data-order="asc">Last Published</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.PageListing.Page.Count > 0)
+        {
+            foreach (var item in Model.PageListing.Page)
+            {
+            <tr>
+                <td>@item.Name</td>
+                <td>@DateTime.ParseExact(item.DateCreated.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</td>
+                <td><a href="~/pages/details?page=@item.Id">@DateTime.ParseExact(item.DatetimeModified.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm tt")</a></td>
+            </tr>
+            }
+        }
+        else
+        {
+        <tr>
+            <td colspan="3">No pages were found</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.PageListing.Options.Results)

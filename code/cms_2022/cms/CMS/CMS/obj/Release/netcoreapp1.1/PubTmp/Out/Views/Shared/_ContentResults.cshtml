@@ -1,0 +1,32 @@
+﻿@model ContentsView
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.ContentListing.Options.Results.pageSize" data-sortfield="@Model.ContentListing.Options.Results.sortField" data-sortorder="@Model.ContentListing.Options.Results.sortOrder" data-searchfield="@Model.ContentListing.Options.Results.searchField" data-searchvalue="@Model.ContentListing.Options.Results.searchValue">
+    <thead>
+        <tr>
+            <th class="btnsort" data-field="Name" data-order="asc">Content Name</th>
+            <th class="tw-large btnsort" data-field="Published" data-order="asc">Created</th>
+            <th class="tw-large btnsort" data-field="Modified" data-order="asc">Modified</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ContentListing.Content.Count > 0)
+        {
+            foreach (var item in Model.ContentListing.Content)
+            {
+        <tr>
+            <td>@item.Name</td>
+            <td>@DateTime.ParseExact(item.DateCreated.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm")</td>
+            <td><a href="~/contents/details?content=@item.Id">@DateTime.ParseExact(item.DatetimeModified.ToString(), "yyyyMMddHHmmssffff", null).ToString("dd-MM-yyyy HH:mm")</a></td>
+        </tr>
+            }
+        }
+        else
+        {
+        <tr>
+            <td colspan="3">No contents were found</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!-- /.table-responsive -->
+@Html.Partial("_Pagination", Model.ContentListing.Options.Results)

@@ -1,0 +1,80 @@
+﻿@model PlayerStatsViewModel
+
+@using System.Globalization;
+@using Newtonsoft.Json;
+@using CMS.Models.BusinessModels;
+
+<table class="table table-bordered table-hover table-striped" id="results-table" data-size="@Model.Options.Results.pageSize" data-sortfield="@Model.Options.Results.sortField" data-sortorder="@Model.Options.Results.sortOrder" data-searchfield="@Model.Options.Results.searchField" data-searchvalue="@Model.Options.Results.searchValue">
+    <thead>
+        <tr>
+            <th class="tw-medium">Event</th>
+            <th class="tw-medium btnsort" data-field="DateCreated" data-order="desc">Event Date (UTC) <i class="fa fa-sort"></i></th>
+            <th class="tw-small">Acc. Debit</th>
+            <th class="tw-small">Acc. Credit</th>
+            <th class="tw-small">Event Status</th>
+            <th class="tw-small">Acc. Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.PlayerStats.Count > 0)
+        {
+            @foreach (var item in Model.PlayerStats)
+            {
+        <tr>
+            <td>
+            @{
+                switch (item.Type)
+                {
+                    case 0 : @Html.Raw("Bet Placed - Pending"); break;
+                    case 1 : @Html.Raw("Bet Placed - Won"); break;
+                    case 2 : @Html.Raw("Account Deposit"); break;
+                    case 3 : @Html.Raw("Account Withdrawal"); break;
+                    case 4 : @Html.Raw("Bet Placed - Loss"); break;
+                    case 5 : @Html.Raw("Bet Accepted"); break;
+                }
+            }
+            </td>
+            <td>@DateTime.ParseExact(item.DatetimeCreated.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy HH:mm:ss")</td>
+
+            @if (item.Type == 2)
+            {
+                <td>-</td>
+                <td>$@item.Amount</td>
+                <td>Deposited</td>
+                <td>@if (!string.IsNullOrEmpty(item.EndingBalance.ToString())) {@Html.Raw("$" + item.EndingBalance)}</td>
+            }
+            else if (item.Type == 3)
+                            {
+                <td>$@item.Amount</td>
+                <td></td>
+                <td>Withdrawn</td>
+                <td>@if (!string.IsNullOrEmpty(item.EndingBalance.ToString())) {@Html.Raw("$" + item.EndingBalance)}</td>
+            }
+                            else
+                            {
+                                if (!string.IsNullOrEmpty(item.BetJsonAll))
+                                {
+                                    var bet = JsonConvert.DeserializeObject<JsonBet>(item.BetJsonAll);
+                                    if (bet != null)
+                                    {
+                        <td>@if (!string.IsNullOrEmpty(bet.BetValue.ToString())) {@Html.Raw("$" + bet.BetValue)}</td>
+                        <td>@if (!string.IsNullOrEmpty(bet.WinValue.ToString())) {@Html.Raw("$" + bet.WinValue)}</td>
+                        <td>@if (!string.IsNullOrEmpty(bet.Status)) {@bet.Status} </td>
+                        <td>@if (!string.IsNullOrEmpty(item.EndingBalance.ToString())) {@Html.Raw("$" + item.EndingBalance)}</td>
+                                    }
+                                }
+                            }
+
+        </tr>
+            }
+                    }
+        else
+        {
+            <tr>
+                <td colspan="6">No account records were found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.Partial("_Pagination", Model.Options.Results)

@@ -1,0 +1,230 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model DashboardModelView
+
+@{
+    ViewData["Title"] = "Dashboard | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page-wrapper" class="dashboard">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>Dashboard</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Last Active Player Activity Snapshot</div>
+                    <label class="float-right title"><a href="/players">see all</a></label>
+                </div>
+                <div class="panel-body p-0 m-0">
+                    <table class="table table-hover table-striped m-0" id="results-table">
+                        <thead>
+                            <tr>
+                                <th class="btnsort" data-field="Firstname" data-order="asc">Player</th>
+                                <th class="tw-medium btnsort" data-field="Deposited" data-order="desc">Deposited <i class="fa fa-sort"></i></th>
+                                <th class="tw-medium" data-field="Deposited" data-order="desc">Bonuses Awarded</th>
+                                <th class="tw-small btnsort" data-field="Balance" data-order="asc">Balance</th>
+                                <th class="tw-small">Turnover</th>
+                                <th class="tw-small">Paid Out</th>
+                                <th class="tw-medium">% Kept of Turnover</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.PlayerSnap.Count >= 1)
+                            {
+                                @foreach (var item in Model.PlayerSnap)
+                                {
+                                    <tr>
+                                        <td><a href="~/players/@item.PlayerId">@item.PlayerName</a><br /><sub>ID: @item.PlayerGamingId | Email: @item.PlayerEmail</sub></td>
+                                        <td>@Context.Session.GetString("CurrencySymbol")@item.Deposited</td>
+                                        <td>@Context.Session.GetString("CurrencySymbol")@item.DepositedBonus</td>
+                                        <td>@Context.Session.GetString("CurrencySymbol")@item.Balance</td>
+                                        <td>@Context.Session.GetString("CurrencySymbol")@item.Bet</td>
+                                        <td>@Context.Session.GetString("CurrencySymbol")@item.Won</td>
+                                        <!--Irrespecitve of losses or paid out - this figure shows % the Company is Keeping of Turnover-->
+                                        <td>
+                                            @if (item.Bet > 0 && item.Won > 0)
+                                            {@Math.Round(((item.Bet - item.Won) / item.Bet) * 100, 2);
+                                        }%
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else 
+                            {
+                                <tr>
+                                    <td colspan="7">There are no records to show</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 pl-0">
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Transaction Processing Metrics (Last 60 Mins)</div>
+                </div>
+                <div class="panel-body p-0 m-0">
+                    <table class="table table-hover m-0" id="results-table">
+                        <tbody>
+                            <tr>
+                                <td>Avg Time ms</td>
+                                <td>@Model.ProcessTime.AvgMS</td>
+                            </tr>
+                            <tr>
+                                <td>Over 4s</td>
+                                <td>@Model.ProcessTime.Over4</td>
+                            </tr>
+                            <tr class="bg-light">
+                                <td>Under 4s</td>
+                                <td>@Model.ProcessTime.Under4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Turnover Snapshot</div>
+                </div>
+                <div class="panel-body p-0 m-0">
+                    <table class="table table-hover m-0" id="results-table">
+                        <tbody>
+                            <tr>
+                                <td>Turnover (Total Bet Value Placed):</td>
+                                <td class="tw-medium">@Context.Session.GetString("CurrencySymbol")@Model.TotalBet.ToString("N")</td>
+                            </tr>
+                            <tr>
+                                <td><i>Paid Out (Total Win Value):</i></td>
+                                <td><i>@Context.Session.GetString("CurrencySymbol")@Model.TotalWon.ToString("N")</i></td>
+                            </tr>
+                            <tr class="bg-light">
+                                <td><b>Kept % Of Turnover</b></td>
+                                <td>
+                                    @if (Model.TotalBet > 0 && Model.TotalWon > 0)
+                                    {
+                                        @Math.Round(((Model.TotalBet - Model.TotalWon) / Model.TotalBet) * 100, 2);
+                                    }%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Transactional Snapshot</div>
+                </div>
+                <div class="panel-body p-0 m-0">
+                    <table class="table table-hover m-0" id="results-table">
+                        <tbody>
+                            <tr class="">
+                                <td>Total Player Balance:</td>
+                                <td class="tw-medium">@Context.Session.GetString("CurrencySymbol")@Model.TotalPlayerBalance.ToString("N")</td>
+                            </tr>
+                            <tr>
+                                <td><i>Total Deposited:</i></td>
+                                <td><i>@Context.Session.GetString("CurrencySymbol")@Model.TotalDeposited.ToString("N")</i></td>
+                            </tr>
+                            <tr>
+                                <td><i>Total Withdrawn:</td>
+                                <td><i>@Context.Session.GetString("CurrencySymbol")@Model.TotalWithdrawn.ToString("N")</i></td>
+                            </tr>
+                            <tr class="bg-light">
+                                <td><b>PNGBET Position:</b><br /><sub>Total Deposited - Total Withdrawn - Balance</sub></td>
+                                <td>@Context.Session.GetString("CurrencySymbol")@((Model.TotalDeposited - Model.TotalWithdrawn - Model.TotalPlayerBalance).ToString("N"))</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Bet Statistics</div>
+                </div>
+                <div class="panel-body p-0 m-0">
+                    <table class="table table-hover m-0" id="results-table">
+                        <tbody>
+                            <tr>
+                                <td>Total Bets:</td>
+                                <td class="tw-medium">@Model.TotalBets.ToString("N0")</td>
+                            </tr>
+                            <tr>
+                                <td>AVG Bet Value:</td>
+                                <td>
+                                    @if (Model.TotalBet > 0 && Model.TotalBets > 0)
+                                    {
+                                        @Context.Session.GetString("CurrencySymbol")@Math.Round((Model.TotalBet / Model.TotalBets), 2).ToString("N");
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Bonus Statistics</div>
+                </div>
+                <div class="panel-body p-0 m-0">
+                    <table class="table table-hover m-0" id="results-table">
+                        <tbody>
+                            <tr>
+                                <td>Total Bonus Value Awarded:</td>
+                                <td class="tw-medium">@Context.Session.GetString("CurrencySymbol")@Model.TotalDepositedBonus.ToString("N")</td>
+                            </tr>
+                            <tr>
+                                <td>Total Bonus Value Paid/Won to Balance:</td>
+                                <td class="tw-medium">@Context.Session.GetString("CurrencySymbol")@Model.TotalDepositedBonusWins.ToString("N")</td>
+                            </tr>
+                            <tr>
+                                <td>Reclaimed %:</td>
+                                <td>
+                                    @if (Model.TotalDepositedBonus > 0 && Model.TotalDepositedBonusWins > 0)
+                                    {
+                                        @Math.Round(((Model.TotalDepositedBonus - Model.TotalDepositedBonusWins) / Model.TotalDepositedBonus) * 100, 2);
+                                    }%
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Site Management</div>
+                </div>
+                <div class="panel-body p-0 m-0">
+                    <table class="table table-hover table-striped m-0" id="results-table">
+                        <tbody>
+                            <tr>
+                                <td><b>Active Users:</b></td>
+                                <td>@Model.TotalMembersActive</td>
+                            </tr>
+                            <tr>
+                                <td><b>Content:</b></td>
+                                <td class="tw-medium"><a href="~/contents">@Model.TotalContents</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Pages:</b></td>
+                                <td><a href="~/pages">@Model.TotalPages</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

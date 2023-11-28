@@ -1,0 +1,222 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@{
+    Layout = Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Step 1";
+}
+
+@model CustomerSaleView
+
+@section Styles
+    {
+    <style>
+        .inner_sec_info_wthree_agile {
+            margin-top: 0em;
+        }
+
+        .breadcrumb-1 {
+            background: #F4F9FE;
+        }
+
+        .form-group.custom-bg {
+            background-color: #F4F5F7;
+            width: 100%;
+            align-items: center;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .panel1 {
+            padding: 28px;
+            margin: 20px 0px 30px 0px;
+            border: 1px solid rgba(150, 200, 250, 0.1);
+            background: rgba(150, 200, 250, 0.1);
+            box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
+            border: 10px solid #FFF;
+            border-radius: 10px;
+        }
+
+        .form-group.custom-bg input, .form-group.text-left input {
+            padding: 16px;
+            width: 120px;
+            border: 0px;
+            font-weight: 600;
+        }
+
+        .form-group.custom-bg select {
+            text-align: left;
+            color: #000;
+            font-weight: 600;
+            background-color: transparent;
+            border: 0;
+            padding-right: 20px;
+            background: #FFF;
+            padding: 16px;
+        }
+
+        .form-control {
+            background-color: #F4F5F7;
+            text-align: left;
+            color: #15294b;
+            padding: 14px 28px;
+            min-height: 60px;
+            border: 0;
+            border-radius: 0px;
+        }
+
+        .form-control:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+    </style>
+}
+
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $("#UserId").on("change", function () {
+            if ($("#UserId option").filter(':selected').val().length <= 1) {
+                $(".new-contact").show();
+            } else {
+                $(".new-contact").hide();
+            }
+        });
+    </script>
+}
+
+
+
+<div class="container-fluid breadcrumb-1" style="margin-top: 8.1em">
+    <div class="row">
+        <p style="padding: 0.5em 0 0 1em"><a href="~/">Resellers Home</a> . New Tokenz Sale</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="banner_bottom">
+    <div class="container">
+        <div class="inner_sec_info_wthree_agile">
+            <div class="help_full">
+                <div class="col-md-3 col-xs-12 banner_bottom_grid help">
+
+
+                </div>
+
+                <div class="col-md-6 col-xs-12 banner_bottom_grid help">
+                    <h2>Sell to a customer</h2>
+                    <p class="text-md-left">Your sale currency is: <b>@Context.Session.GetString("ResellerCurrency")</b>.<br />
+                    Enter the amount of tokens the customer wishes to purchase.</p>
+                    
+                    <form asp-controller="Resellers" asp-action="SaleConfirm" method="post">
+                        <div asp-validation-summary="All" class="text-danger text-left"></div>
+                       
+                        <div class="form-group custom-bg">
+
+                            <div class="row">
+                                <div class="col-md-9 col-sm-9">
+                                    <label>How Many Fun Tokens: <sub><br />Minimum of: 20.00</sub></label>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <input type="text" name="Amount" value="1000.00" style="width: 100%; margin-top: 3px" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group custom-bg">
+                            <div class="row">
+                                <div class="col-md-3  col-sm-3">
+                                    <label>Send to:</label>
+                                </div>
+                                <div class="col-md-9 col-sm-9">
+                                    <select id="UserId" name="UserId" style="width: 100%">
+                                        <option value="">Enter in a new customer</option>
+                                        @foreach (var customer in Model.CustomerRecords.Customers)
+                                        {
+                                            <option value="@customer.UserId">@customer.Lastname, @customer.Firstname (@customer.Mobile | @customer.Email)</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="new-contact">
+                            <div class="form-group">
+                                <label>Or enter there details:</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" placeholder="First Name" name="FirstName" class="form-control">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" placeholder="Last Name" name="LastName" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3">
+                                        <select name="CountryCode" class="form-control flex-grow-1 mr-1">
+                                            <option value="+692">+692</option>
+                                            <option value="+691">+691</option>
+                                            <option value="+685">+685</option>
+                                            <option value="+680">+680</option>
+                                            <option value="+679">+679</option>
+                                            <option value="+678">+678</option>
+                                            <option value="+677">+677</option>
+                                            <option value="+676">+676</option>
+                                            <option selected value="+675">+675</option>
+                                            <option value="+674">+674</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9">
+                                        <input oninput="this.value = this.value.replace(/[^0-9+ -]/g, '').replace(/(\..*)\./g, '$1');" type="text" placeholder="Mobile Number" name="SentToPhone" class="form-control">
+                                    </div>
+                                </div>
+
+                                
+                               
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email" name="SentToEmail" class="form-control">
+                            </div>
+                        </div>
+                        <div class="">
+                            <img src="images/slide_swipe.svg" alt="">
+                        </div>
+
+                        <button type="submit" class="btn btn-block btn-danger mt-4 font-weight-bold">Collect Customer Payment</button>
+                    </form>
+                </div>
+
+      
+
+                <div class="col-md-3 col-xs-12 banner_bottom_grid help">
+
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

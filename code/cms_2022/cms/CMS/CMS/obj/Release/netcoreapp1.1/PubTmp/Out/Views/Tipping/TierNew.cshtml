@@ -1,0 +1,91 @@
+﻿@model AddCompetitionRewardTierPost
+@{
+    ViewData["Title"] = "New | Comp Tiers | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/tipping/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="Tipping" asp-action="CompetitionTierNew" method="post" class="form-horizontal" name="FormTier">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="CompetitionIdentifier" id="CompetitionIdentifier" value="@Model.CompetitionIdentifier" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Create a new tier</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label asp-for="RewardFor" class="col-md-3 control-label">Reward For</label>
+                            <div class="col-md-9">
+                                <select asp-for="RewardFor" class="form-control">
+                                    <option value="R">Round</option>
+                                    <option value="S">Season</option>
+                                </select>
+                                <span asp-validation-for="RewardFor" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label asp-for="Position" class="col-md-3 control-label">Position</label>
+                            <div class="col-md-9">
+                                <input asp-for="Position" class="form-control" />
+                                <span asp-validation-for="Position" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label asp-for="PositionValue" class="col-md-3 control-label">Position Value</label>
+                            <div class="col-md-9">
+                                <input asp-for="PositionValue" class="form-control" />
+                                <span asp-validation-for="PositionValue" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label asp-for="PositionPercentage" class="col-md-3 control-label">Position %</label>
+                            <div class="col-md-9">
+                                <input asp-for="PositionPercentage" class="form-control" />
+                                <span asp-validation-for="PositionPercentage" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manage tier content
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Publish Options</div>
+                </div>
+                <div class="panel-body publish">
+                    <a onclick="document.FormTier.submit();" class="btn btn-default">Publish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,97 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Globalization;
+@using Microsoft.AspNetCore.Http;
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FunTokenz Management System</title>
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/lib/bootstrap//dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        @if (SignInManager.IsSignedIn(User))
+        {
+
+
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-default sidebar" role="navigation">
+                    <a href="~/dashboard"><img src="~/images/logo-color.svg" style="width:140px;margin:37px 0px;" /></a>
+                    <div class="sidebar-nav text-center">
+                        <ul class="nav" id="side-menu">
+                            <li class="subhead"><p>MANAGEMENT</p></li>
+                            <li>
+                                <a href="~/activity">Activity</a>
+                            </li>
+                            <li>
+                                <a href="~/resellers">Resellers</a>
+                            </li>
+                            <li>
+                                <a href="~/merchants">Merchants</a>
+                            </li>
+                            <li>
+                                <a href="~/users">Customers</a>
+                            </li>
+                            @await Html.PartialAsync("_LoginPartial")
+                        </ul>
+                        <footer>
+                            <p>All times are stated in UTC (GMT)<br />This CMS is a custom FunTokenz solution, for technical support contact <a href="http://www.performancecrew.com.au" target="_blank">Performance Crew</a>.<br /><br />&copy; @DateTime.Now.Year FunTokenz</p>
+                        </footer>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+        }
+        else
+        {
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-default sidebar" role="navigation">
+                    <a href="~/"><img src="~/images/logo-color.svg" style="width:140px;margin:37px 0px;" /></a>
+                    <footer>
+                        <p>All times are stated in UTC (GMT)<br /> <br />&copy; @DateTime.Now.Year FunTokenz</p>
+                    </footer>
+                </div>
+            </nav>
+
+
+        }
+        <div class="fluid-container body-content">
+            @RenderBody()
+        </div>
+    </div>
+    <!-- /#wrapper -->
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

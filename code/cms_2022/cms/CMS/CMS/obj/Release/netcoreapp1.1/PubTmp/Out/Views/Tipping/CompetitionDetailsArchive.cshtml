@@ -1,0 +1,232 @@
+﻿@model CompetitionView
+@{
+    ViewData["Title"] = "Details Archived | Comps | Console";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12 page-header">
+            <h1>
+                @ViewData["Title"]
+                <span class="float-right">
+                    <a href="~/competitions/" class="btn btn-primary">Back</a>
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 pl-0">
+            <form asp-controller="tipping" asp-action="Competitiondetails" method="post" class="form-horizontal" name="FormCompetition">
+                <input type="hidden" name="CompetitionIdentifier" value="@Model.Competition.Identifier" />
+                <input type="hidden" name="ClientIdentifier" value="AngusRyals202103010000000000" />
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="title">Update Competition</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="SportIdentifier" class="col-md-3 control-label">Sport</label>
+                            <div class="col-md-9">
+                                <select for="SportIdentifier" name="SportIdentifier" class="form-control">
+                                    @{
+                                        foreach (var item in Model.Sports.Sports.OrderBy(o => o.Name))
+                                        {
+                                            if (item.Identifier == Model.Competition.SportIdentifier)
+                                            {
+                                                <option selected value="@item.Identifier">@item.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.Identifier">@item.Name</option>
+                                            }
+
+                                        }
+                                    }
+                                </select>
+                                <span data-valmsg-for="SportIdentifier" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="SeasonIdentifier" class="col-md-3 control-label">Season</label>
+                            <div class="col-md-9">
+                                <select for="SeasonIdentifier" name="SeasonIdentifier" class="form-control">
+                                    @{
+                                        foreach (var item in Model.Seasons.Seasons.OrderBy(o => o.Year))
+                                        {
+                                            if (item.Identifier == Model.Competition.SeasonIdentifier)
+                                            {
+                                                <option selected value="@item.Identifier">@item.Year</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.Identifier">@item.Year</option>
+                                            }
+
+                                        }
+                                    }
+                                </select>
+                                <span data-valmsg-for="SportIdentifier" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Title" class="col-md-3 control-label">Title</label>
+                            <div class="col-md-9">
+                                <input for="Year" name="Title" class="form-control" value="@Model.Competition.Title" />
+                                <span data-valmsg-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Description" class="col-md-3 control-label">Description</label>
+                            <div class="col-md-9">
+                                <input for="Year" name="Description" class="form-control" value="@Model.Competition.Description" />
+                                <span data-valmsg-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="PrizeType" class="col-md-3 control-label">Prize Type</label>
+                            <div class="col-md-9">
+                                <select for="PrizeType" name="PrizeType" class="form-control">
+                                    @{
+                                        if (Model.Competition.PrizeType == 0)
+                                        {
+                                            <option selected value="0">No Prizes</option>
+                                            <option value="1">Round Winners</option>
+                                            <option value="2">Round Winners + Comp Winners</option>
+                                        }
+                                        else if (Model.Competition.PrizeType == 1)
+                                        {
+                                            <option value="0">No Prizes</option>
+                                            <option selected value="1">Round Winners</option>
+                                            <option value="2">Round Winners + Comp Winners</option>
+                                        }
+                                        else if (Model.Competition.PrizeType == 2)
+                                        {
+                                            <option value="0">No Prizes</option>
+                                            <option value="1">Round Winners</option>
+                                            <option selected value="2">Round Winners + Comp Winners</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="0">No Prizes</option>
+                                            <option value="1">Round Winners</option>
+                                            <option value="2">Round Winners + Comp Winners</option>
+                                        }
+                                    }
+                                </select>
+                                <span data-valmsg-for="PrizeType" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="EntryType" class="col-md-3 control-label">Entry Type</label>
+                            <div class="col-md-9">
+                                <select for="EntryType" name="EntryType" class="form-control">
+                                    @{
+                                        if (Model.Competition.EntryType == 0)
+                                        {
+                                            <option selected value="0">Free</option>
+                                            <option value="1">Paid</option>
+                                        }
+                                        else if (Model.Competition.EntryType == 1)
+                                        {
+                                            <option value="0">Free</option>
+                                            <option selected value="1">Paid</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="0">Free</option>
+                                            <option value="1">Paid</option>
+                                        }
+                                    }
+                                </select>
+                                <span data-valmsg-for="EntryType" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Currency" class="col-md-3 control-label">Currency</label>
+                            <div class="col-md-9">
+                                <select for="Currency" name="Currency" class="form-control">
+                                    @{
+                                        if (Model.Competition.Currency == "AUD")
+                                        {
+                                            <option selected value="AUD">AUD</option>
+                                            <option value="PGK">PGK</option>
+                                        }
+                                        else if (Model.Competition.Currency == "PGK")
+                                        {
+                                            <option value="AUD">AUD</option>
+                                            <option selected value="PGK">PGK</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="AUD">AUD</option>
+                                            <option value="PGK">PGK</option>
+                                        }
+                                    }
+                                </select>
+                                <span data-valmsg-for="Currency" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="EntryFeePerRound" class="col-md-3 control-label">Entry Fee Per Round</label>
+                            <div class="col-md-9">
+                                <input for="Year" name="EntryFeePerRound" class="form-control" value="@Model.Competition.EntryFeePerRound" />
+                                <span data-valmsg-for="EntryFeePerRound" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="EntryFeePerComp" class="col-md-3 control-label">Entry Fee Per Comp</label>
+                            <div class="col-md-9">
+                                <input for="Year" name="EntryFeePerComp" class="form-control" value="@Model.Competition.EntryFeePerComp" />
+                                <span data-valmsg-for="EntryFeePerComp" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ServiceFeeValue" class="col-md-3 control-label">Service Fee Value</label>
+                            <div class="col-md-9">
+                                <input for="Year" name="ServiceFeeValue" class="form-control" value="@Model.Competition.ServiceFeeValue" />
+                                <span data-valmsg-for="ServiceFeeValue" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 pl-0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Information</div>
+                </div>
+                <div class="panel-body">
+                    Manage Comp Content
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Publish Options</div>
+                </div>
+                <div class="panel-body publish text-right">
+                    <a onclick="document.FormCompetition.submit();" class="btn btn-default">Make Current and Publish</a>
+                </div>
+                <br />
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="title">Change History</div>
+                </div>
+                <div class="panel-body historypanel" data-searchvalue="@Model.Competition.Identifier">
+                    @Html.Partial("_CompetitionResultsHistory", Model.History)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var endpointhistory = "/tipping/UpdateCompHistoryResults";
+    </script>
+    @{ await Html.RenderPartialAsync("_ResultsScriptsPartialFilter"); }
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

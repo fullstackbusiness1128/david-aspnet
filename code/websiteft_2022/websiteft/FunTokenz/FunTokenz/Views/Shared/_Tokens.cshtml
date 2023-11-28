@@ -1,0 +1,38 @@
+﻿@using System.Globalization
+
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@model PurchasesView
+
+<p class="total">@Model.PurchaseRecords.Options.Results.totalResults Results</p>
+<div class="tokens-list text-left" id="results-table" data-size="@Model.PurchaseRecords.Options.Results.pageSize" data-sortfield="@Model.PurchaseRecords.Options.Results.sortField" data-sortorder="@Model.PurchaseRecords.Options.Results.sortOrder" data-searchfield="@Model.PurchaseRecords.Options.Results.searchField" data-searchvalue="@Model.PurchaseRecords.Options.Results.searchValue">
+    @foreach (var token in Model.PurchaseRecords.Purchases)
+    {
+        <div class="each-token">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    @{
+                        if (String.Format("{0} {1}", HttpContextAccessor.HttpContext.Session.GetString("PhoneCode"), HttpContextAccessor.HttpContext.Session.GetString("PhoneNumber")) == token.SentToPhone)
+                        {
+                           <h5>@token.Code</h5>
+                        }
+                    }
+
+                        <span class="code-title">CODE</span><br />
+                        <span class="days-left mt-4 align-items-center"><img src="~/images/clock.svg" class="mr-2" style="width: 17px; margin-bottom: 4px">Expires @DateTime.ParseExact(token.DatetimeExpires.ToString(), "yyyyMMddHHmmssffff", CultureInfo.InvariantCulture).ToString("dd MMM yyyy")</span>
+                    
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <h5 class="price text-danger">
+                        @token.Currency @token.PurchaseAmount<br/><br/>
+                        <span>Credit Remaining: @(token.PurchaseAmount - token.DebitRecords.Debits.Sum(o => o.DebitAmount))</span>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="text-center">
+    @await Html.PartialAsync("_Pagination", Model.PurchaseRecords.Options.Results)
+</div>
